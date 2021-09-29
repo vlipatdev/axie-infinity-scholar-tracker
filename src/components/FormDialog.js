@@ -59,7 +59,7 @@ export default function FormDialog(props) {
 						fullWidth
 						name="manager_share"
 						id="manager-share"
-						label="Manager's Share"
+						label="Manager Share"
 						variant="outlined"
 						size="small"
 						sx={{

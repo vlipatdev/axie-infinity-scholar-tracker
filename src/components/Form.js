@@ -122,14 +122,14 @@ function Form(props) {
 					return {
 						...prevValid,
 						manager_share: false,
-						manager_error_message: `Manager's share is required`,
+						manager_error_message: `Manager share is required`,
 					};
 				} else {
 					if (value < 0 || value > 100) {
 						return {
 							...prevValid,
 							manager_share: false,
-							manager_error_message: `Manager's share must be 0 - 100`,
+							manager_error_message: `Manager share must be 0 - 100`,
 						};
 					}
 
@@ -155,7 +155,7 @@ function Form(props) {
 				id="name"
 				label="Name"
 				variant="outlined"
-				size="small"
+				// size="small"
 				sx={{
 					flexGrow: 1,
 					margin: 1,
@@ -171,7 +171,7 @@ function Form(props) {
 				id="ronin-address"
 				label="Ronin Address"
 				variant="outlined"
-				size="small"
+				// size="small"
 				sx={{
 					flexGrow: 1,
 					margin: 1,
@@ -188,7 +188,7 @@ function Form(props) {
 				id="manager-share"
 				label="Manager's Share"
 				variant="outlined"
-				size="small"
+				// size="small"
 				sx={{
 					flexGrow: 1,
 					margin: 1,
@@ -206,7 +206,7 @@ function Form(props) {
 						profile.ronin_address !== '' &&
 						profile.manager_share !== ''
 					) {
-						onUpdate([...localData, profile]);
+						onUpdate([...localData, profile], false);
 						setOpen(true);
 						setProfile({
 							name: '',
@@ -214,11 +214,12 @@ function Form(props) {
 							manager_share: '',
 						});
 					} else {
-						alert('Invalid form inputs.');
+						alert('Invalid form inputs');
 					}
 				}}
 				type="submit"
-				sx={{ alignSelf: 'flex-start', flexGrow: 1, margin: 1 }}
+				size="large"
+				sx={{ flexGrow: 1, margin: 1 }}
 				variant="contained"
 			>
 				Add Scholar

@@ -10,7 +10,8 @@ import BasicCard from './BasicCard';
 import Form from './Form';
 import DataTable from './DataTable';
 import ExportButton from './ExportButton';
-import BasicSelect from './BasicSelect';
+import SortSelect from './SortSelect';
+import SortTypeSelect from './SortTypeSelect';
 
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -34,6 +35,7 @@ import {
 	calculateScholarShare,
 	calculateTotal,
 	calculateScholarPercent,
+	sortArray,
 } from '../helpers';
 import { Typography } from '@mui/material';
 
@@ -45,9 +47,20 @@ function App() {
 	const [addresses, setAddresses] = useState([]);
 	const [data, setData] = useState([]);
 	const [localData, setLocalData] = useState([]);
+	const [localSettings, setLocalSettings] = useState({ sort_by: 'name', sort_type: 'ascending' });
 	const [slpPrice, setSlpPrice] = useState(0);
 
+	const [isDelete, setIsDelete] = useState(false);
+
 	const BASE_URL = 'https://game-api.axie.technology/api/v1/';
+
+	let sortedData;
+
+	if (localSettings.sort_type === 'ascending') {
+		sortedData = sortArray(data, localSettings.sort_by);
+	} else {
+		sortedData = sortArray(data, localSettings.sort_by).reverse();
+	}
 
 	// onload
 	useEffect(() => {
@@ -56,6 +69,11 @@ function App() {
 		if (localStorageData) {
 			setAddresses(localStorageData.map((item) => item.ronin_address));
 			setLocalData(localStorageData);
+		}
+
+		const localStorageSettings = JSON.parse(localStorage.getItem('settings'));
+		if (localStorageSettings) {
+			setLocalSettings(localStorageSettings);
 		}
 
 		console.log('useEffect get local storage');
@@ -73,69 +91,82 @@ function App() {
 	}, [localData]);
 
 	useEffect(() => {
+		localStorage.setItem('settings', JSON.stringify(localSettings));
+
+		console.log('useEffect update local settings');
+	}, [localSettings]);
+
+	useEffect(() => {
 		const finalUrl = BASE_URL + addresses.join('%2C');
 
 		if (addresses.length !== 0) {
-			// fetch slp data
-			axios
-				.get(finalUrl)
-				.then((response) => {
-					let dataArray;
+			if (!isDelete) {
+				console.log('fetching slp data...');
 
-					if (addresses.length === 1) {
-						dataArray = [response.data];
-					} else {
-						dataArray = Object.values(response.data);
-					}
-					const finalData = dataArray.map((dataItem, index) => {
-						return {
-							last_updated: processDate(dataItem.cache_last_updated),
-							name: localData[index].name,
+				// fetch slp data
+				axios
+					.get(finalUrl)
+					.then((response) => {
+						let dataArray;
 
-							ronin_address: localData[index].ronin_address,
-							average_slp: calculateAverageSlp(
-								dataItem.in_game_slp,
-								calculateLastClaimInDays(dataItem.last_claim)
-							),
-							unclaimed_slp: dataItem.in_game_slp,
-							claimed_slp: dataItem.total_slp - dataItem.in_game_slp,
-							total_slp: dataItem.total_slp,
-							last_claim_in_days: calculateLastClaimInDays(dataItem.last_claim),
-							last_claim_date: processDate(parseInt(`${dataItem.last_claim}000`)),
-							next_claim_in_days: calculateNextClaimInDays(dataItem.next_claim),
-							next_claim_date: processDate(parseInt(`${dataItem.next_claim}000`)),
-							next_claim_date_raw: dataItem.next_claim,
-							manager_percent: localData[index].manager_share,
-							scholar_percent: calculateScholarPercent(localData[index].manager_share),
-							manager_share: calculateManagerShare(
-								dataItem.total_slp,
-								localData[index].manager_share
-							),
-							scholar_share: calculateScholarShare(
-								dataItem.total_slp,
-								calculateScholarPercent(localData[index].manager_share)
-							),
-							mmr: dataItem.mmr,
-							rank: dataItem.rank,
-						};
+						if (addresses.length === 1) {
+							dataArray = [response.data];
+						} else {
+							dataArray = Object.values(response.data);
+						}
+						const finalData = dataArray.map((dataItem, index) => {
+							return {
+								last_updated: processDate(dataItem.cache_last_updated),
+								name: localData[index].name,
+
+								ronin_address: localData[index].ronin_address,
+								average_slp: calculateAverageSlp(
+									dataItem.in_game_slp,
+									calculateLastClaimInDays(dataItem.last_claim)
+								),
+								unclaimed_slp: dataItem.in_game_slp,
+								claimed_slp: dataItem.total_slp - dataItem.in_game_slp,
+								total_slp: dataItem.total_slp,
+								last_claim_in_days: calculateLastClaimInDays(dataItem.last_claim),
+								last_claim_date: processDate(parseInt(`${dataItem.last_claim}000`)),
+								last_claim_raw: parseInt(`${dataItem.last_claim}000`),
+								next_claim_in_days: calculateNextClaimInDays(dataItem.next_claim),
+								next_claim_date: processDate(parseInt(`${dataItem.next_claim}000`)),
+								next_claim_raw: dataItem.next_claim,
+								manager_percent: parseInt(localData[index].manager_share),
+								scholar_percent: calculateScholarPercent(localData[index].manager_share),
+								manager_share: calculateManagerShare(
+									dataItem.total_slp,
+									localData[index].manager_share
+								),
+								scholar_share: calculateScholarShare(
+									dataItem.total_slp,
+									calculateScholarPercent(localData[index].manager_share)
+								),
+								mmr: dataItem.mmr,
+								rank: dataItem.rank,
+							};
+						});
+						setData(finalData);
+					})
+					.catch((error) => {
+						alert('Could not connect to server. Please try again later.');
 					});
-					setData(finalData);
-				})
-				.catch((error) => {
-					alert('Could not connect to server. Please try again later.');
-				});
 
-			// fetch slp price
-			axios
-				.get(
-					'https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
-				)
-				.then((response) => {
-					setSlpPrice(response.data['smooth-love-potion'].php);
-				})
-				.catch((error) => {
-					alert('Error fetching SLP price. Please try again later.');
-				});
+				// fetch slp price
+				axios
+					.get(
+						'https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
+					)
+					.then((response) => {
+						setSlpPrice(response.data['smooth-love-potion'].php);
+					})
+					.catch((error) => {
+						alert('Error fetching SLP price. Please try again later.');
+					});
+			} else {
+				setData(data.filter((dataItem) => addresses.includes(dataItem.ronin_address)));
+			}
 		} else {
 			document.body.style.cursor = 'default';
 			setData([]);
@@ -144,8 +175,9 @@ function App() {
 		console.log('useEffect update addresses');
 	}, [addresses]);
 
-	function handleUpdate(data) {
+	function handleUpdate(data, isDelete) {
 		setLocalData(data);
+		setIsDelete(isDelete);
 	}
 
 	function handleJSONDownload(data) {
@@ -157,11 +189,12 @@ function App() {
 		FileSaver.saveAs(fileToSave, fileName);
 	}
 
-	function handleUpload(event) {
+	function handleJSONUpload(event) {
 		const fileReader = new FileReader();
 		if (event.target.files[0]) {
 			fileReader.readAsText(event.target.files[0], 'UTF-8');
 			fileReader.onload = (event) => {
+				setIsDelete(false);
 				setLocalData(JSON.parse(event.target.result));
 			};
 		}
@@ -204,6 +237,13 @@ function App() {
 				mmr,
 				rank,
 			};
+		});
+	}
+
+	function handleSortUpdate(event) {
+		const { name, value } = event.target;
+		setLocalSettings((prevSettings) => {
+			return { ...prevSettings, [name]: value };
 		});
 	}
 
@@ -266,22 +306,29 @@ function App() {
 						slpPrice={slpPrice}
 					/>
 					<BasicCard
-						label="Manager's Total"
+						label="Manager Total"
 						slp={calculateTotal(data, 'manager_share')}
 						slpPrice={slpPrice}
 					/>
 					<BasicCard
-						label="Scholar's Total"
+						label="Scholar Total"
 						slp={calculateTotal(data, 'scholar_share')}
 						slpPrice={slpPrice}
 					/>
 				</Box>
 				<Form localData={localData} onUpdate={handleUpdate} />
-				{/* <Box sx={{ display: 'flex' }}>
-					<BasicSelect />
-					<BasicSelect />
-				</Box> */}
-				<DataTable data={data} localData={localData} onDelete={handleUpdate} slpPrice={slpPrice} />
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
+					<Typography>Sort by</Typography>
+					<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+					<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+				</Box>
+				<DataTable
+					data={data}
+					localData={localData}
+					localSettings={localSettings}
+					onDelete={handleUpdate}
+					slpPrice={slpPrice}
+				/>
 				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 					<Button
 						sx={{ margin: 1 }}
@@ -295,7 +342,7 @@ function App() {
 					</Button>
 					<label htmlFor="contained-button-file">
 						<Input
-							onChange={handleUpload}
+							onChange={handleJSONUpload}
 							accept="application/JSON"
 							id="contained-button-file"
 							type="file"
@@ -312,7 +359,7 @@ function App() {
 					</label>
 					<CSVLink
 						filename={'scholars.csv'}
-						data={cleanData(data)}
+						data={cleanData(sortedData)}
 						style={{ textDecoration: 'none' }}
 					>
 						<ExportButton />

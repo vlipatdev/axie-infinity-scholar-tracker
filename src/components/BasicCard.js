@@ -7,7 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
-import { numberWithCommas } from '../helpers';
+import { addCommasToNumber } from '../helpers';
 
 import slpIcon from '../assets/images/slp.png';
 
@@ -33,12 +33,12 @@ function BasicCard(props) {
 				<Box sx={{ display: 'flex', margin: 1, alignItems: 'center' }}>
 					<Avatar alt="slp icon" src={slpIcon} sx={{ margin: 1, height: 25, width: 25 }} />
 					<Typography sx={{ fontSize: 30, fontWeight: 'bold' }} variant="h5" component="div">
-						{numberWithCommas(slp)}
+						{addCommasToNumber(slp)}
 					</Typography>
 				</Box>
 
 				<Typography sx={{ textAlign: 'center' }} color="text.secondary">
-					≈ ₱{numberWithCommas((slp * slpPrice).toFixed(0))}
+					≈ ₱{addCommasToNumber((slp * slpPrice).toFixed(0))}
 				</Typography>
 				{/* <Typography variant="body2">
 					well meaning and kindly.

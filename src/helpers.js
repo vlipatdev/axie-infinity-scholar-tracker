@@ -1,4 +1,4 @@
-export const numberWithCommas = (number) => {
+export const addCommasToNumber = (number) => {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
@@ -12,7 +12,7 @@ export const processDate = (dateInMilliseconds) => {
 };
 
 export const calculateAverageSlp = (inGameSlp, lastClaimInDays) => {
-	return (inGameSlp / lastClaimInDays).toFixed(0);
+	return parseInt((inGameSlp / lastClaimInDays).toFixed(0));
 };
 
 export const calculateLastClaimInDays = (lastClaim) => {
@@ -58,11 +58,11 @@ export const calculateScholarPercent = (managerPercent) => {
 };
 
 export const calculateManagerShare = (totalSlp, managerPercent) => {
-	return (totalSlp * (managerPercent / 100)).toFixed(0);
+	return parseInt((totalSlp * (managerPercent / 100)).toFixed(0));
 };
 
 export const calculateScholarShare = (totalSlp, scholarPercent) => {
-	return (totalSlp * (scholarPercent / 100)).toFixed(0);
+	return parseInt((totalSlp * (scholarPercent / 100)).toFixed(0));
 };
 
 export const limitString = (string) => {
@@ -71,6 +71,29 @@ export const limitString = (string) => {
 	} else {
 		return string;
 	}
+};
+
+export const sortArray = (array, sortBy) => {
+	// https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+	const compare = (a, b) => {
+		if (sortBy === 'name') {
+			if (a[sortBy].toLowerCase() < b[sortBy].toLowerCase()) {
+				return -1;
+			}
+			if (a[sortBy].toLowerCase() > b[sortBy].toLowerCase()) {
+				return 1;
+			}
+		} else {
+			if (a[sortBy] < b[sortBy]) {
+				return -1;
+			}
+			if (a[sortBy] > b[sortBy]) {
+				return 1;
+			}
+		}
+		return 0;
+	};
+	return array.sort(compare);
 };
 
 // const sampleLocalStorageArray = [
