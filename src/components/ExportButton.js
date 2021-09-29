@@ -1,11 +1,11 @@
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import DownloadIcon from '@mui/icons-material/Download';
 
 function ExportButton() {
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center', mb: 10 }}>
-			<Button variant="outlined">Export Excel CSV</Button>
-		</Box>
+		<Button sx={{ margin: 1 }} variant="outlined" color="success" startIcon={<DownloadIcon />}>
+			Export Excel CSV
+		</Button>
 	);
 }
 

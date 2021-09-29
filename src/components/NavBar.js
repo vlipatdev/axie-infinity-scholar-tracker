@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 import AboutDialog from './AboutDialog';
 
@@ -22,7 +23,7 @@ function NavBar() {
 	}
 
 	return (
-		<AppBar sx={{ mb: 4 }} position="static">
+		<AppBar sx={{ mb: 0 }} position="static">
 			<Toolbar>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
 					<Avatar alt="slp icon" src={slp} />
@@ -32,6 +33,7 @@ function NavBar() {
 				</Typography>
 				<Button onClick={handleClick} sx={{ color: '#FFFFFF' }}>
 					About
+					{/* <SettingsIcon /> */}
 				</Button>
 			</Toolbar>
 			<AboutDialog open={open} onClose={handleClose} />

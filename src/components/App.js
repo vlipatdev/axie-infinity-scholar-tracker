@@ -10,12 +10,20 @@ import BasicCard from './BasicCard';
 import Form from './Form';
 import DataTable from './DataTable';
 import ExportButton from './ExportButton';
+import BasicSelect from './BasicSelect';
 
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
+import Avatar from '@mui/material/Avatar';
+
+import UploadIcon from '@mui/icons-material/Upload';
+import DownloadIcon from '@mui/icons-material/Download';
+
+import axie from '../assets/images/axie.png';
+import profile from '../assets/images/profile.png';
 
 import {
 	calculateAverageSlp,
@@ -67,55 +75,71 @@ function App() {
 	useEffect(() => {
 		const finalUrl = BASE_URL + addresses.join('%2C');
 
-		// fetch slp data
-		axios.get(finalUrl).then((response) => {
-			let dataArray;
+		if (addresses.length !== 0) {
+			// fetch slp data
+			axios
+				.get(finalUrl)
+				.then((response) => {
+					let dataArray;
 
-			if (addresses.length === 1) {
-				dataArray = [response.data];
-			} else {
-				dataArray = Object.values(response.data);
-			}
-			const finalData = dataArray.map((dataItem, index) => {
-				return {
-					last_updated: processDate(dataItem.cache_last_updated),
-					name: localData[index].name,
+					if (addresses.length === 1) {
+						dataArray = [response.data];
+					} else {
+						dataArray = Object.values(response.data);
+					}
+					const finalData = dataArray.map((dataItem, index) => {
+						return {
+							last_updated: processDate(dataItem.cache_last_updated),
+							name: localData[index].name,
 
-					ronin_address: localData[index].ronin_address,
-					average_slp: calculateAverageSlp(
-						dataItem.in_game_slp,
-						calculateLastClaimInDays(dataItem.last_claim)
-					),
-					unclaimed_slp: dataItem.in_game_slp,
-					claimed_slp: dataItem.total_slp - dataItem.in_game_slp,
-					total_slp: dataItem.total_slp,
-					last_claim_in_days: calculateLastClaimInDays(dataItem.last_claim),
-					last_claim_date: processDate(parseInt(`${dataItem.last_claim}000`)),
-					next_claim_in_days: calculateNextClaimInDays(dataItem.next_claim),
-					next_claim_date: processDate(parseInt(`${dataItem.next_claim}000`)),
-					next_claim_date_raw: dataItem.next_claim,
-					manager_percent: localData[index].manager_share,
-					scholar_percent: calculateScholarPercent(localData[index].manager_share),
-					manager_share: calculateManagerShare(dataItem.total_slp, localData[index].manager_share),
-					scholar_share: calculateScholarShare(
-						dataItem.total_slp,
-						calculateScholarPercent(localData[index].manager_share)
-					),
-					mmr: dataItem.mmr,
-					rank: dataItem.rank,
-				};
-			});
-			setData(finalData);
-		});
+							ronin_address: localData[index].ronin_address,
+							average_slp: calculateAverageSlp(
+								dataItem.in_game_slp,
+								calculateLastClaimInDays(dataItem.last_claim)
+							),
+							unclaimed_slp: dataItem.in_game_slp,
+							claimed_slp: dataItem.total_slp - dataItem.in_game_slp,
+							total_slp: dataItem.total_slp,
+							last_claim_in_days: calculateLastClaimInDays(dataItem.last_claim),
+							last_claim_date: processDate(parseInt(`${dataItem.last_claim}000`)),
+							next_claim_in_days: calculateNextClaimInDays(dataItem.next_claim),
+							next_claim_date: processDate(parseInt(`${dataItem.next_claim}000`)),
+							next_claim_date_raw: dataItem.next_claim,
+							manager_percent: localData[index].manager_share,
+							scholar_percent: calculateScholarPercent(localData[index].manager_share),
+							manager_share: calculateManagerShare(
+								dataItem.total_slp,
+								localData[index].manager_share
+							),
+							scholar_share: calculateScholarShare(
+								dataItem.total_slp,
+								calculateScholarPercent(localData[index].manager_share)
+							),
+							mmr: dataItem.mmr,
+							rank: dataItem.rank,
+						};
+					});
+					setData(finalData);
+				})
+				.catch((error) => {
+					alert('Could not connect to server. Please try again later.');
+				});
 
-		// fetch slp price
-		axios
-			.get(
-				'https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
-			)
-			.then((response) => {
-				setSlpPrice(response.data['smooth-love-potion'].php);
-			});
+			// fetch slp price
+			axios
+				.get(
+					'https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
+				)
+				.then((response) => {
+					setSlpPrice(response.data['smooth-love-potion'].php);
+				})
+				.catch((error) => {
+					alert('Error fetching SLP price. Please try again later.');
+				});
+		} else {
+			document.body.style.cursor = 'default';
+			setData([]);
+		}
 
 		console.log('useEffect update addresses');
 	}, [addresses]);
@@ -125,7 +149,7 @@ function App() {
 	}
 
 	function handleJSONDownload(data) {
-		const fileName = 'settings.json';
+		const fileName = 'scholars.json';
 		const fileToSave = new Blob([JSON.stringify(data, null, 2)], {
 			type: 'application/json',
 		});
@@ -135,10 +159,12 @@ function App() {
 
 	function handleUpload(event) {
 		const fileReader = new FileReader();
-		fileReader.readAsText(event.target.files[0], 'UTF-8');
-		fileReader.onload = (event) => {
-			setLocalData(JSON.parse(event.target.result));
-		};
+		if (event.target.files[0]) {
+			fileReader.readAsText(event.target.files[0], 'UTF-8');
+			fileReader.onload = (event) => {
+				setLocalData(JSON.parse(event.target.result));
+			};
+		}
 	}
 
 	function cleanData(data) {
@@ -183,18 +209,42 @@ function App() {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
+			{/* <Box sx={{ minHeight: '40px', backgroundColor: '#ff9800' }}></Box> */}
 			<NavBar />
+			<Box
+				sx={{
+					height: '200px',
+					backgroundColor: '#1976D2',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'center',
+					alignItems: 'center',
+					mb: 4,
+					backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
+				}}
+			>
+				<img src={axie} alt="axie logo" style={{ height: '75px', marginBottom: '16px' }} />
+
+				{/* <Typography sx={{ color: '#ffffff', fontSize: 30 }}>Scholar Tracker</Typography> */}
+			</Box>
 			<Container maxWidth="lg">
 				<Alert icon={false} severity="info" sx={{ margin: 1, mb: 4 }}>
-					🚧 This site is under construction.{' '}
+					🚧 This site is under development.{' '}
 					<a
 						style={{ color: '#1976D2' }}
-						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co"
+						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
 					>
 						Click here to report bugs.
 					</a>
 				</Alert>
-				<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', mb: 4 }}>
+				<Box
+					sx={{
+						display: 'flex',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						mb: 4,
+					}}
+				>
 					<BasicCard
 						label="Total Unclaimed"
 						slp={calculateTotal(data, 'unclaimed_slp')}
@@ -227,40 +277,60 @@ function App() {
 					/>
 				</Box>
 				<Form localData={localData} onUpdate={handleUpdate} />
+				{/* <Box sx={{ display: 'flex' }}>
+					<BasicSelect />
+					<BasicSelect />
+				</Box> */}
 				<DataTable data={data} localData={localData} onDelete={handleUpdate} slpPrice={slpPrice} />
-				<Button
-					onClick={() => {
-						handleJSONDownload(localData);
-					}}
-				>
-					Export JSON
-				</Button>
-				{/* <Button
-					onClick={() => {
-						handleJSONUpload(localData);
-					}}
-				>
-					Upload JSON
-				</Button> */}
-				<label htmlFor="contained-button-file">
-					<Input
-						onChange={handleUpload}
-						accept="application/JSON"
-						id="contained-button-file"
-						type="file"
-					/>
-					<Button onClick={null} component="span">
-						Import JSON
+				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+					<Button
+						sx={{ margin: 1 }}
+						onClick={() => {
+							handleJSONDownload(localData);
+						}}
+						startIcon={<DownloadIcon />}
+						variant="outlined"
+					>
+						Export JSON
 					</Button>
-				</label>
-				<CSVLink
-					filename={'scholars.csv'}
-					data={cleanData(data)}
-					style={{ textDecoration: 'none' }}
-				>
-					<ExportButton />
-				</CSVLink>
-				<Typography>Powered by CoinGecko</Typography>
+					<label htmlFor="contained-button-file">
+						<Input
+							onChange={handleUpload}
+							accept="application/JSON"
+							id="contained-button-file"
+							type="file"
+						/>
+						<Button
+							onClick={null}
+							component="span"
+							startIcon={<UploadIcon />}
+							variant="outlined"
+							sx={{ margin: 1 }}
+						>
+							Import JSON
+						</Button>
+					</label>
+					<CSVLink
+						filename={'scholars.csv'}
+						data={cleanData(data)}
+						style={{ textDecoration: 'none' }}
+					>
+						<ExportButton />
+					</CSVLink>
+				</Box>
+				<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 5, mb: 5 }}>
+					<Avatar src={profile} sx={{ margin: 2, height: 40, width: 40 }} />
+					<Typography sx={{ fontSize: 14 }}>
+						by{' '}
+						<a
+							style={{ textDecoration: 'none', color: '#1976D2' }}
+							href="https://github.com/vlipatdev"
+						>
+							vlipatdev
+						</a>{' '}
+						with ❤️
+					</Typography>
+				</Box>
 			</Container>
 		</Box>
 	);

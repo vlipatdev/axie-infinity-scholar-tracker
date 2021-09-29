@@ -149,16 +149,16 @@ export default function DataTable(props) {
 	// }
 
 	return (
-		<TableContainer component={Paper} variant="outlined" sx={{ mb: 4 }}>
-			<Table aria-label="simple table">
+		<TableContainer component={Paper} variant="outlined" sx={{ mb: 4, maxHeight: '1000px' }}>
+			<Table stickyHeader aria-label="data table">
 				<TableHead>
 					<TableRow>
 						<TableCell>#</TableCell>
 						<TableCell align="right">Name</TableCell>
 						<TableCell align="right">Average</TableCell>
 						<TableCell align="right">Unclaimed</TableCell>
-						<TableCell align="right">Manager's Share</TableCell>
-						<TableCell align="right">Scholar's Share</TableCell>
+						<TableCell align="right">Manager</TableCell>
+						<TableCell align="right">Scholar</TableCell>
 						<TableCell align="right">Last Claim</TableCell>
 						<TableCell align="right">Next Claim</TableCell>
 						<TableCell align="right">MMR</TableCell>

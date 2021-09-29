@@ -27,7 +27,7 @@ export default function SnackBar(props) {
 					severity={type === 'add' ? 'success' : 'error'}
 					sx={{ width: '100%' }}
 				>
-					{type === 'add' ? 'Successfully added!' : 'Successfully removed!'}
+					{type === 'add' ? 'Successfully added !' : 'Successfully removed!'}
 				</Alert>
 			</Snackbar>
 		</div>

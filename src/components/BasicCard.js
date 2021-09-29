@@ -31,7 +31,7 @@ function BasicCard(props) {
 					{label}
 				</Typography>
 				<Box sx={{ display: 'flex', margin: 1, alignItems: 'center' }}>
-					<Avatar alt="slp icon" src={slpIcon} sx={{ margin: 1, height: 30, width: 30 }} />
+					<Avatar alt="slp icon" src={slpIcon} sx={{ margin: 1, height: 25, width: 25 }} />
 					<Typography sx={{ fontSize: 30, fontWeight: 'bold' }} variant="h5" component="div">
 						{numberWithCommas(slp)}
 					</Typography>
