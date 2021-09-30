@@ -12,19 +12,24 @@ import DataTable from './DataTable';
 import ExportButton from './ExportButton';
 import SortSelect from './SortSelect';
 import SortTypeSelect from './SortTypeSelect';
+import Footer from './Footer';
 
-import { styled } from '@mui/material/styles';
+import styled from '@mui/material/styles/styled';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
 
 import UploadIcon from '@mui/icons-material/Upload';
 import DownloadIcon from '@mui/icons-material/Download';
 
+import axieLogo from '../assets/images/axie_logo.png';
 import axie from '../assets/images/axie.png';
-import profile from '../assets/images/profile.png';
+import slpLogo from '../assets/images/slp_logo.png';
+import ethereumLogo from '../assets/images/ethereum_logo.png';
+import axsLogo from '../assets/images/axs_logo.png';
 
 import {
 	calculateAverageSlp,
@@ -37,7 +42,6 @@ import {
 	calculateScholarPercent,
 	sortArray,
 } from '../helpers';
-import { Typography } from '@mui/material';
 
 const Input = styled('input')({
 	display: 'none',
@@ -195,7 +199,23 @@ function App() {
 			fileReader.readAsText(event.target.files[0], 'UTF-8');
 			fileReader.onload = (event) => {
 				setIsDelete(false);
-				setLocalData(JSON.parse(event.target.result));
+				const JSONdata = JSON.parse(event.target.result);
+				if (JSONdata[0].name && JSONdata[0].ronin_address && JSONdata[0].manager_share) {
+					setLocalData(JSONdata);
+				} else if (JSONdata[0].name && JSONdata[0].eth && JSONdata[0].managerShare) {
+					const convertedJSONData = JSONdata.map((item) => {
+						return {
+							name: item.name,
+							ronin_address: item.eth,
+							manager_share: item.managerShare,
+						};
+					});
+					setLocalData(convertedJSONData);
+				} else {
+					alert(
+						'⚠️ Incompatible JSON structure.\n\nOnly exported JSON this site and https://axie-scho-tracker.vercel.app/ are accepted.\n\nSupport for other trackers will be added in the future.'
+					);
+				}
 			};
 		}
 	}
@@ -250,6 +270,7 @@ function App() {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			{/* <Box sx={{ minHeight: '40px', backgroundColor: '#ff9800' }}></Box> */}
+
 			<NavBar />
 			<Box
 				sx={{
@@ -259,15 +280,58 @@ function App() {
 					flexDirection: 'column',
 					justifyContent: 'center',
 					alignItems: 'center',
-					mb: 4,
-					backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
+					mb: 2,
+					// backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
 				}}
 			>
-				<img src={axie} alt="axie logo" style={{ height: '75px', marginBottom: '16px' }} />
-
-				{/* <Typography sx={{ color: '#ffffff', fontSize: 30 }}>Scholar Tracker</Typography> */}
+				<img src={axieLogo} alt="axie logo" style={{ height: '75px', marginBottom: '16px' }} />
 			</Box>
-			<Container maxWidth="lg">
+			<Container maxWidth="lg" sx={{ mb: 10 }}>
+				<Box
+					sx={{
+						display: 'flex',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						alignItems: 'center',
+						mb: 4,
+					}}
+				>
+					<Box sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}>
+						<img
+							src={ethereumLogo}
+							style={{ height: '20px', width: '20px', marginRight: '4px' }}
+							alt="ethereum logo"
+						/>
+						<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>146,054 PHP</Typography>
+						<Paper elevation="0" sx={{ borderRadius: '100px', backgroundColor: '#8BC34A' }}>
+							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>+13.14%</Typography>
+						</Paper>
+					</Box>
+
+					<Box sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}>
+						<img
+							src={axsLogo}
+							style={{ height: '20px', width: '20px', marginRight: '4px' }}
+							alt="axs logo"
+						/>
+						<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>3,570.05 PHP</Typography>
+						<Paper elevation="0" sx={{ borderRadius: '100px', backgroundColor: '#FF5252' }}>
+							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>-5.64%</Typography>
+						</Paper>{' '}
+					</Box>
+
+					<Box sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}>
+						<img
+							src={slpLogo}
+							style={{ height: '20px', width: '20px', marginRight: '4px' }}
+							alt="slp logo"
+						/>
+						<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>3.14 PHP</Typography>
+						<Paper elevation="0" sx={{ borderRadius: '100px', backgroundColor: '#8BC34A' }}>
+							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>+3.14%</Typography>
+						</Paper>{' '}
+					</Box>
+				</Box>
 				<Alert icon={false} severity="info" sx={{ margin: 1, mb: 4 }}>
 					🚧 This site is under development.{' '}
 					<a
@@ -317,68 +381,90 @@ function App() {
 					/>
 				</Box>
 				<Form localData={localData} onUpdate={handleUpdate} />
-				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<Typography>Sort by</Typography>
-					<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-					<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-				</Box>
-				<DataTable
-					data={data}
-					localData={localData}
-					localSettings={localSettings}
-					onDelete={handleUpdate}
-					slpPrice={slpPrice}
-				/>
-				<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-					<Button
-						sx={{ margin: 1 }}
-						onClick={() => {
-							handleJSONDownload(localData);
-						}}
-						startIcon={<DownloadIcon />}
-						variant="outlined"
-					>
-						Export JSON
-					</Button>
-					<label htmlFor="contained-button-file">
-						<Input
-							onChange={handleJSONUpload}
-							accept="application/JSON"
-							id="contained-button-file"
-							type="file"
+				{addresses.length !== 0 && (
+					<>
+						<Box sx={{ display: 'flex', alignItems: 'center' }}>
+							<Typography>Sort by</Typography>
+							<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+							<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+						</Box>
+						<DataTable
+							data={data}
+							localData={localData}
+							localSettings={localSettings}
+							onDelete={handleUpdate}
+							slpPrice={slpPrice}
 						/>
-						<Button
-							onClick={null}
-							component="span"
-							startIcon={<UploadIcon />}
-							variant="outlined"
-							sx={{ margin: 1 }}
-						>
-							Import JSON
-						</Button>
-					</label>
-					<CSVLink
-						filename={'scholars.csv'}
-						data={cleanData(sortedData)}
-						style={{ textDecoration: 'none' }}
+						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+							<Button
+								sx={{ margin: 1 }}
+								onClick={() => {
+									handleJSONDownload(localData);
+								}}
+								startIcon={<DownloadIcon />}
+								variant="outlined"
+							>
+								Export JSON
+							</Button>
+							<label htmlFor="contained-button-file">
+								<Input
+									onChange={handleJSONUpload}
+									accept="application/JSON"
+									id="contained-button-file"
+									type="file"
+								/>
+								<Button
+									component="span"
+									startIcon={<UploadIcon />}
+									variant="outlined"
+									sx={{ margin: 1 }}
+								>
+									Import JSON
+								</Button>
+							</label>
+							<CSVLink
+								filename={'scholars.csv'}
+								data={cleanData(sortedData)}
+								style={{ textDecoration: 'none' }}
+							>
+								<ExportButton />
+							</CSVLink>
+						</Box>
+					</>
+				)}
+				{addresses.length === 0 && (
+					<Box
+						sx={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignItems: 'center',
+							flexDirection: 'column',
+						}}
 					>
-						<ExportButton />
-					</CSVLink>
-				</Box>
-				<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 5, mb: 5 }}>
-					<Avatar src={profile} sx={{ margin: 2, height: 40, width: 40 }} />
-					<Typography sx={{ fontSize: 14 }}>
-						by{' '}
-						<a
-							style={{ textDecoration: 'none', color: '#1976D2' }}
-							href="https://github.com/vlipatdev"
-						>
-							vlipatdev
-						</a>{' '}
-						with ❤️
-					</Typography>
-				</Box>
+						<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
+						<Typography sx={{ mb: 10 }}>You have no scholars</Typography>
+						<label htmlFor="contained-button-file">
+							<Input
+								onChange={handleJSONUpload}
+								accept="application/JSON"
+								id="contained-button-file"
+								type="file"
+							/>
+							<Button
+								onClick={null}
+								component="span"
+								startIcon={<UploadIcon />}
+								variant="contained"
+								sx={{ margin: 1 }}
+								size="large"
+							>
+								Import JSON
+							</Button>
+						</label>
+					</Box>
+				)}
 			</Container>
+			<Footer />
 		</Box>
 	);
 }

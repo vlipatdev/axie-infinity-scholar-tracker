@@ -144,7 +144,7 @@ function Form(props) {
 	}
 
 	return (
-		<Box sx={{ margin: 1, mb: 4, display: 'flex', flexWrap: 'wrap' }}>
+		<Box sx={{ margin: 1, mb: 4, display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start' }}>
 			{/* <Paper variant="outlined" sx={{ display: 'flex', flexWrap: 'wrap' }}> */}
 			<TextField
 				error={!valid.name}
@@ -155,9 +155,9 @@ function Form(props) {
 				id="name"
 				label="Name"
 				variant="outlined"
-				// size="small"
+				size="small"
 				sx={{
-					flexGrow: 1,
+					flexGrow: 2,
 					margin: 1,
 				}}
 				value={profile.name}
@@ -171,9 +171,9 @@ function Form(props) {
 				id="ronin-address"
 				label="Ronin Address"
 				variant="outlined"
-				// size="small"
+				size="small"
 				sx={{
-					flexGrow: 1,
+					flexGrow: 2,
 					margin: 1,
 				}}
 				value={profile.ronin_address}
@@ -186,11 +186,11 @@ function Form(props) {
 				type="number"
 				name="manager_share"
 				id="manager-share"
-				label="Manager's Share"
+				label="Manager Share"
 				variant="outlined"
-				// size="small"
+				size="small"
 				sx={{
-					flexGrow: 1,
+					flexGrow: 2,
 					margin: 1,
 				}}
 				value={profile.manager_share}
@@ -214,7 +214,7 @@ function Form(props) {
 							manager_share: '',
 						});
 					} else {
-						alert('Invalid form inputs');
+						// alert('Invalid form inputs');
 					}
 				}}
 				type="submit"
@@ -225,7 +225,7 @@ function Form(props) {
 				Add Scholar
 			</Button>
 			{/* </Paper> */}
-			<Snackbar onClose={handleClose} open={open} type="add" name={profile.name} />
+			<Snackbar onClose={handleClose} open={open} type="success" name={profile.name} />
 		</Box>
 	);
 }

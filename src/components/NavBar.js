@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AboutDialog from './AboutDialog';
 
-import slp from '../assets/images/slp.png';
+import axsLogo from '../assets/images/axs_logo.png';
 
 function NavBar() {
 	const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ function NavBar() {
 		<AppBar sx={{ mb: 0 }} position="static">
 			<Toolbar>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-					<Avatar alt="slp icon" src={slp} />
+					<Avatar alt="slp icon" src={axsLogo} />
 				</IconButton>
 				<Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize: 24 }}>
 					Axie Scholar Tracker
