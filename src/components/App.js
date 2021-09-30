@@ -21,6 +21,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Tooltip from '@mui/material/Tooltip';
 
 import UploadIcon from '@mui/icons-material/Upload';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -41,6 +42,7 @@ import {
 	calculateTotal,
 	calculateScholarPercent,
 	sortArray,
+	addCommasToNumber,
 } from '../helpers';
 
 const Input = styled('input')({
@@ -52,9 +54,28 @@ function App() {
 	const [data, setData] = useState([]);
 	const [localData, setLocalData] = useState([]);
 	const [localSettings, setLocalSettings] = useState({ sort_by: 'name', sort_type: 'ascending' });
-	const [slpPrice, setSlpPrice] = useState(0);
-
+	const [cryptoData, setCryptoData] = useState({
+		'smooth-love-potion': {
+			php: 0,
+			php_24h_change: 0,
+			usd: 0,
+			usd_24h_change: 0,
+		},
+		ethereum: {
+			php: 0,
+			php_24h_change: 0,
+			usd: 0,
+			usd_24h_change: 0,
+		},
+		'axie-infinity': {
+			php: 0,
+			php_24h_change: 0,
+			usd: 0,
+			usd_24h_change: 0,
+		},
+	});
 	const [isDelete, setIsDelete] = useState(false);
+	const [currency, setCurrency] = useState('php');
 
 	const BASE_URL = 'https://game-api.axie.technology/api/v1/';
 
@@ -68,13 +89,14 @@ function App() {
 
 	// onload
 	useEffect(() => {
-		// get local storage data
+		// get local data
 		const localStorageData = JSON.parse(localStorage.getItem('profiles'));
 		if (localStorageData) {
 			setAddresses(localStorageData.map((item) => item.ronin_address));
 			setLocalData(localStorageData);
 		}
 
+		// get local settings
 		const localStorageSettings = JSON.parse(localStorage.getItem('settings'));
 		if (localStorageSettings) {
 			setLocalSettings(localStorageSettings);
@@ -83,7 +105,6 @@ function App() {
 		console.log('useEffect get local storage');
 	}, []);
 
-	// local data
 	useEffect(() => {
 		// update addresess
 		setAddresses(localData.map((item) => item.ronin_address));
@@ -156,18 +177,6 @@ function App() {
 					.catch((error) => {
 						alert('Could not connect to server. Please try again later.');
 					});
-
-				// fetch slp price
-				axios
-					.get(
-						'https://api.coingecko.com/api/v3/simple/price?ids=smooth-love-potion&vs_currencies=php&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
-					)
-					.then((response) => {
-						setSlpPrice(response.data['smooth-love-potion'].php);
-					})
-					.catch((error) => {
-						alert('Error fetching SLP price. Please try again later.');
-					});
 			} else {
 				setData(data.filter((dataItem) => addresses.includes(dataItem.ronin_address)));
 			}
@@ -175,6 +184,18 @@ function App() {
 			document.body.style.cursor = 'default';
 			setData([]);
 		}
+
+		// fetch crypto prices
+		axios
+			.get(
+				'https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Caxie-infinity%2Csmooth-love-potion&vs_currencies=php%2Cusd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
+			)
+			.then((response) => {
+				setCryptoData(response.data);
+			})
+			.catch((error) => {
+				alert('Error fetching crypto data. Please try again later.');
+			});
 
 		console.log('useEffect update addresses');
 	}, [addresses]);
@@ -213,7 +234,7 @@ function App() {
 					setLocalData(convertedJSONData);
 				} else {
 					alert(
-						'⚠️ Incompatible JSON structure.\n\nOnly exported JSON this site and https://axie-scho-tracker.vercel.app/ are accepted.\n\nSupport for other trackers will be added in the future.'
+						'❌ Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.vercel.app/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
 					);
 				}
 			};
@@ -269,8 +290,6 @@ function App() {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			{/* <Box sx={{ minHeight: '40px', backgroundColor: '#ff9800' }}></Box> */}
-
 			<NavBar />
 			<Box
 				sx={{
@@ -291,62 +310,119 @@ function App() {
 					sx={{
 						width: '100%',
 						display: 'flex',
-						flexWrap: 'wrap',
+						// flexWrap: 'wrap',
 						justifyContent: 'center',
-						alignItems: 'center',
+						// alignItems: 'flex-start',
 						mb: 4,
 					}}
 				>
-					<Box sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}>
-						<img
-							src={ethereumLogo}
-							style={{ height: '20px', width: '20px', marginRight: '4px' }}
-							alt="ethereum logo"
-						/>
-						<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>146,054 PHP</Typography>
-						<Paper elevation="0" sx={{ borderRadius: '100px', backgroundColor: '#8BC34A' }}>
-							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>+13.14%</Typography>
-						</Paper>
-					</Box>
-
-					<Box sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}>
-						<img
-							src={axsLogo}
-							style={{ height: '20px', width: '20px', marginRight: '4px' }}
-							alt="axs logo"
-						/>
-						<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>3,570.05 PHP</Typography>
-						<Paper elevation="0" sx={{ borderRadius: '100px', backgroundColor: '#FF5252' }}>
-							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>-5.64%</Typography>
-						</Paper>{' '}
-					</Box>
-
-					<Box sx={{ display: 'flex', alignItems: 'center', marginRight: 4 }}>
-						<img
-							src={slpLogo}
-							style={{ height: '20px', width: '20px', marginRight: '4px' }}
-							alt="slp logo"
-						/>
-						<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>3.14 PHP</Typography>
-						<Paper elevation="0" sx={{ borderRadius: '100px', backgroundColor: '#8BC34A' }}>
-							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>+3.14%</Typography>
-						</Paper>{' '}
-					</Box>
+					<Tooltip title="View on CoinGecko">
+						<a
+							href={`https://www.coingecko.com/en/coins/ethereum/${currency}`}
+							target="blank"
+							rel="noreferrer"
+							style={{ textDecoration: 'none', color: '#000000' }}
+						>
+							<Box sx={{ display: 'flex', alignItems: 'center', margin: 1 }}>
+								<img
+									src={ethereumLogo}
+									style={{ height: '20px', width: '20px', marginRight: '4px' }}
+									alt="ethereum logo"
+								/>
+								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
+									{addCommasToNumber(cryptoData.ethereum[currency])} {currency.toUpperCase()}
+								</Typography>
+								<Paper
+									elevation="0"
+									sx={{
+										borderRadius: '100px',
+										backgroundColor:
+											cryptoData.ethereum[`${currency}_24h_change`] >= 0 ? '#8BC34A' : '#FF5252',
+									}}
+								>
+									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
+										{cryptoData.ethereum[`${currency}_24h_change`] > 0 ? '+' : null}
+										{cryptoData.ethereum[`${currency}_24h_change`].toFixed(2)}%
+									</Typography>
+								</Paper>
+							</Box>
+						</a>
+					</Tooltip>
+					<Tooltip title="View on CoinGecko">
+						<a
+							href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
+							target="blank"
+							rel="noreferrer"
+							style={{ textDecoration: 'none', color: '#000000' }}
+						>
+							<Box sx={{ display: 'flex', alignItems: 'center', margin: 1 }}>
+								<img
+									src={axsLogo}
+									style={{ height: '20px', width: '20px', marginRight: '4px' }}
+									alt="axs logo"
+								/>
+								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
+									{addCommasToNumber(cryptoData['axie-infinity'][currency])}{' '}
+									{currency.toUpperCase()}
+								</Typography>
+								<Paper
+									elevation="0"
+									sx={{
+										borderRadius: '100px',
+										backgroundColor:
+											cryptoData['axie-infinity'][`${currency}_24h_change`] >= 0
+												? '#8BC34A'
+												: '#FF5252',
+									}}
+								>
+									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
+										{cryptoData['axie-infinity'][`${currency}_24h_change`] > 0 ? '+' : null}
+										{cryptoData['axie-infinity'][`${currency}_24h_change`].toFixed(2)}%
+									</Typography>
+								</Paper>
+							</Box>
+						</a>
+					</Tooltip>
+					<Tooltip title="View on CoinGecko">
+						<a
+							href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
+							target="blank"
+							rel="noreferrer"
+							style={{ textDecoration: 'none', color: '#000000' }}
+						>
+							<Box sx={{ display: 'flex', alignItems: 'center', margin: 1 }}>
+								<img
+									src={slpLogo}
+									style={{ height: '20px', width: '20px', marginRight: '4px' }}
+									alt="slp logo"
+								/>
+								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
+									{cryptoData['smooth-love-potion'][currency]} {currency.toUpperCase()}
+								</Typography>
+								<Paper
+									elevation="0"
+									sx={{
+										borderRadius: '100px',
+										backgroundColor:
+											cryptoData['smooth-love-potion'][`${currency}_24h_change`] >= 0
+												? '#8BC34A'
+												: '#FF5252',
+									}}
+								>
+									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
+										{cryptoData['smooth-love-potion'][`${currency}_24h_change`] > 0 ? '+' : null}
+										{cryptoData['smooth-love-potion'][`${currency}_24h_change`].toFixed(2)}%
+									</Typography>
+								</Paper>
+							</Box>
+						</a>
+					</Tooltip>
 					{/* <SortSelect
 						onUpdate={handleSortUpdate}
 						localSettings={localSettings}
 					/> */}
 				</Box>
-				<Alert icon={false} severity="info" sx={{ margin: 1, mb: 4 }}>
-					🚧 This site is under development.{' '}
-					<a
-						style={{ color: '#1976D2' }}
-						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
-					>
-						Click here to report bugs.
-					</a>{' '}
-					Thank you!
-				</Alert>
+
 				<Box
 					sx={{
 						display: 'flex',
@@ -356,40 +432,47 @@ function App() {
 					}}
 				>
 					<BasicCard
-						label="Total Unclaimed"
-						slp={calculateTotal(data, 'unclaimed_slp')}
-						slpPrice={slpPrice}
-					/>
-					<BasicCard
 						label="Total Average"
 						slp={calculateTotal(data, 'average_slp')}
-						slpPrice={slpPrice}
+						slpPrice={cryptoData['smooth-love-potion'][currency]}
+						currency={currency}
+					/>
+
+					<BasicCard
+						label="Total Unclaimed"
+						slp={calculateTotal(data, 'unclaimed_slp')}
+						slpPrice={cryptoData['smooth-love-potion'][currency]}
+						currency={currency}
 					/>
 					<BasicCard
 						label="Total Claimed"
 						slp={calculateTotal(data, 'claimed_slp')}
-						slpPrice={slpPrice}
+						slpPrice={cryptoData['smooth-love-potion'][currency]}
+						currency={currency}
 					/>
 					<BasicCard
 						label="Total Farmed"
 						slp={calculateTotal(data, 'total_slp')}
-						slpPrice={slpPrice}
+						slpPrice={cryptoData['smooth-love-potion'][currency]}
+						currency={currency}
 					/>
 					<BasicCard
 						label="Manager Total"
 						slp={calculateTotal(data, 'manager_share')}
-						slpPrice={slpPrice}
+						slpPrice={cryptoData['smooth-love-potion'][currency]}
+						currency={currency}
 					/>
 					<BasicCard
 						label="Scholar Total"
 						slp={calculateTotal(data, 'scholar_share')}
-						slpPrice={slpPrice}
+						slpPrice={cryptoData['smooth-love-potion'][currency]}
+						currency={currency}
 					/>
 				</Box>
 				<Form localData={localData} onUpdate={handleUpdate} />
 				{addresses.length !== 0 && (
 					<>
-						<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
 							<Typography>Sort by</Typography>
 							<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
 							<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
@@ -399,9 +482,9 @@ function App() {
 							localData={localData}
 							localSettings={localSettings}
 							onDelete={handleUpdate}
-							slpPrice={slpPrice}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
 						/>
-						<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+						<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
 							<Button
 								sx={{ margin: 1 }}
 								onClick={() => {
@@ -448,7 +531,7 @@ function App() {
 						}}
 					>
 						<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
-						<Typography sx={{ mb: 10 }}>You have no scholars</Typography>
+						<Typography sx={{ mb: 10 }}>No scholars added</Typography>
 						<label htmlFor="contained-button-file">
 							<Input
 								onChange={handleJSONUpload}
@@ -469,7 +552,18 @@ function App() {
 						</label>
 					</Box>
 				)}
+				{/* <Alert icon={false} severity="info" sx={{ margin: 1, mb: 4 }}>
+					🚧 This site is under development.{' '}
+					<a
+						style={{ color: '#1976D2' }}
+						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
+					>
+						Please click here to report bugs.
+					</a>{' '}
+					Thank you!
+				</Alert> */}
 			</Container>
+
 			<Footer />
 		</Box>
 	);

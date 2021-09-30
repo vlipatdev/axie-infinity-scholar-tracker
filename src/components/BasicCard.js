@@ -11,12 +11,13 @@ import { addCommasToNumber } from '../helpers';
 import slpLogo from '../assets/images/slp_logo.png';
 
 function BasicCard(props) {
-	const { label, slp, slpPrice } = props;
+	const { label, slp, slpPrice, currency } = props;
 
 	return (
 		<Card
 			variant="outlined"
 			sx={{
+				minWidth: '150px',
 				margin: 1,
 				display: 'flex',
 				flexDirection: 'column',
@@ -37,7 +38,7 @@ function BasicCard(props) {
 				</Box>
 
 				<Typography sx={{ textAlign: 'center' }} color="text.secondary">
-					≈ {addCommasToNumber((slp * slpPrice).toFixed(0))} PHP
+					≈ {addCommasToNumber((slp * slpPrice).toFixed(0))} {currency.toUpperCase()}
 				</Typography>
 				{/* <Typography variant="body2">
 					well meaning and kindly.

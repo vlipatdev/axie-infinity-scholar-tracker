@@ -123,7 +123,7 @@ export default function DataTable(props) {
 	function renderMarketplaceLink(name, roninAddress) {
 		const url = `https://marketplace.axieinfinity.com/profile/${roninAddress}`;
 		return (
-			<Tooltip title={`Open marketplace profile of ${name}`}>
+			<Tooltip title={`View marketplace profile of ${name}`}>
 				<a
 					href={url}
 					target="_blank"

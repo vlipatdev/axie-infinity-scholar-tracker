@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import AboutDialog from './AboutDialog';
 
@@ -30,10 +31,12 @@ function NavBar() {
 				<Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize: 24 }}>
 					Axie Scholar Tracker
 				</Typography>
-				<Button onClick={handleClick} sx={{ color: '#FFFFFF' }}>
-					{/* About */}
-					<InfoOutlinedIcon />
-				</Button>
+				<Tooltip title="About">
+					<Button onClick={handleClick} sx={{ color: '#FFFFFF' }}>
+						{/* About */}
+						<InfoOutlinedIcon />
+					</Button>
+				</Tooltip>
 			</Toolbar>
 			<AboutDialog open={open} onClose={handleClose} />
 		</AppBar>
