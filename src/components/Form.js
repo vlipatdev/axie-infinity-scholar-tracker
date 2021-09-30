@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 import Web3 from 'web3';
@@ -144,92 +145,88 @@ function Form(props) {
 	}
 
 	return (
-		<Box sx={{ margin: 1, mb: 4, display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-			{/* <Paper variant="outlined" sx={{ display: 'flex', flexWrap: 'wrap' }}> */}
-			<TextField
-				error={!valid.name}
-				helperText={!valid.name && valid.name_error_message}
-				onChange={handleChange}
-				onBlur={handleBlur}
-				name="name"
-				id="name"
-				label="Name"
-				variant="outlined"
-				size="small"
-				sx={{
-					flexGrow: 1,
-					margin: 1,
-					minWidth: '250px',
-				}}
-				value={profile.name}
-			/>
-			<TextField
-				error={!valid.ronin_address}
-				helperText={!valid.ronin_address && valid.ronin_error_message}
-				onChange={handleChange}
-				onBlur={handleBlur}
-				name="ronin_address"
-				id="ronin-address"
-				label="Ronin Address"
-				variant="outlined"
-				size="small"
-				sx={{
-					flexGrow: 1,
-					margin: 1,
-					minWidth: '250px',
-				}}
-				value={profile.ronin_address}
-			/>
-			<TextField
-				error={!valid.manager_share}
-				helperText={!valid.manager_share && valid.manager_error_message}
-				onChange={handleChange}
-				onBlur={handleBlur}
-				type="number"
-				name="manager_share"
-				id="manager-share"
-				label="Manager Share"
-				variant="outlined"
-				size="small"
-				sx={{
-					flexGrow: 1,
-					margin: 1,
-					minWidth: '250px',
-				}}
-				value={profile.manager_share}
-				inputProps={{ min: 0, max: 100 }}
-			/>
-			<Button
-				onClick={() => {
-					if (
-						valid.name &&
-						valid.ronin_address &&
-						valid.manager_share &&
-						profile.name !== '' &&
-						profile.ronin_address !== '' &&
-						profile.manager_share !== ''
-					) {
-						onUpdate([...localData, profile], false);
-						setOpen(true);
-						setProfile({
-							name: '',
-							ronin_address: '',
-							manager_share: '',
-						});
-					} else {
-						// alert('Invalid form inputs');
-					}
-				}}
-				type="submit"
-				size="large"
-				sx={{ flexGrow: 1, margin: 1 }}
-				variant="contained"
-				disableElevation
-			>
-				Add Scholar
-			</Button>
-			{/* </Paper> */}
-			<Snackbar onClose={handleClose} open={open} type="success" name={profile.name} />
+		<Box>
+			<Grid container spacing={2} sx={{ mb: 4 }}>
+				<Grid item xs={12} sm={6} md={3}>
+					<TextField
+						fullWidth
+						error={!valid.name}
+						helperText={!valid.name && valid.name_error_message}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						name="name"
+						id="name"
+						label="Name"
+						variant="outlined"
+						size="small"
+						value={profile.name}
+					/>
+				</Grid>
+				<Grid item xs={12} sm={6} md={3}>
+					<TextField
+						fullWidth
+						error={!valid.ronin_address}
+						helperText={!valid.ronin_address && valid.ronin_error_message}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						name="ronin_address"
+						id="ronin-address"
+						label="Ronin Address"
+						variant="outlined"
+						size="small"
+						value={profile.ronin_address}
+					/>
+				</Grid>
+				<Grid item xs={12} sm={6} md={3}>
+					<TextField
+						fullWidth
+						error={!valid.manager_share}
+						helperText={!valid.manager_share && valid.manager_error_message}
+						onChange={handleChange}
+						onBlur={handleBlur}
+						type="number"
+						name="manager_share"
+						id="manager-share"
+						label="Manager Share"
+						variant="outlined"
+						size="small"
+						value={profile.manager_share}
+						inputProps={{ min: 0, max: 100 }}
+					/>
+				</Grid>
+				<Grid item xs={12} sm={6} md={3}>
+					<Button
+						fullWidth
+						onClick={() => {
+							if (
+								valid.name &&
+								valid.ronin_address &&
+								valid.manager_share &&
+								profile.name !== '' &&
+								profile.ronin_address !== '' &&
+								profile.manager_share !== ''
+							) {
+								onUpdate([...localData, profile], false);
+								setOpen(true);
+								setProfile({
+									name: '',
+									ronin_address: '',
+									manager_share: '',
+								});
+							} else {
+								// alert('Invalid form inputs');
+							}
+						}}
+						type="submit"
+						size="medium"
+						variant="contained"
+						disableElevation
+					>
+						Add Scholar
+					</Button>
+				</Grid>
+			</Grid>
+			<Snackbar onClose={handleClose} open={open} type="success" />
 		</Box>
 	);
 }

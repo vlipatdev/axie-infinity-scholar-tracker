@@ -17,13 +17,9 @@ function BasicCard(props) {
 		<Card
 			variant="outlined"
 			sx={{
-				minWidth: '150px',
-				margin: 1,
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
-				flexGrow: 1,
-				flexBasis: 0,
 			}}
 		>
 			<CardContent>

@@ -16,6 +16,7 @@ import Footer from './Footer';
 
 import styled from '@mui/material/styles/styled';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -312,7 +313,7 @@ function App() {
 						display: 'flex',
 						flexWrap: 'wrap',
 						justifyContent: 'center',
-						mb: 4,
+						mb: 6,
 					}}
 				>
 					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
@@ -440,13 +441,9 @@ function App() {
 							</Box>
 						</a>
 					</Tooltip>
-					{/* <SortSelect
-						onUpdate={handleSortUpdate}
-						localSettings={localSettings}
-					/> */}
 				</Box>
 
-				<Box
+				{/* <Box
 					sx={{
 						display: 'flex',
 						flexWrap: 'wrap',
@@ -491,7 +488,63 @@ function App() {
 						slpPrice={cryptoData['smooth-love-potion'][currency]}
 						currency={currency}
 					/>
-				</Box>
+				</Box> */}
+				<Grid
+					container
+					spacing={2}
+					sx={{
+						mb: 6,
+					}}
+				>
+					<Grid item xs={6} sm={4} lg={2}>
+						<BasicCard
+							label="Total Average"
+							slp={calculateTotal(data, 'average_slp')}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
+							currency={currency}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={4} lg={2}>
+						<BasicCard
+							label="Total Unclaimed"
+							slp={calculateTotal(data, 'unclaimed_slp')}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
+							currency={currency}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={4} lg={2}>
+						<BasicCard
+							label="Total Claimed"
+							slp={calculateTotal(data, 'claimed_slp')}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
+							currency={currency}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={4} lg={2}>
+						<BasicCard
+							label="Total Farmed"
+							slp={calculateTotal(data, 'total_slp')}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
+							currency={currency}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={4} lg={2}>
+						<BasicCard
+							label="Manager Total"
+							slp={calculateTotal(data, 'manager_share')}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
+							currency={currency}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={4} lg={2}>
+						<BasicCard
+							label="Scholar Total"
+							slp={calculateTotal(data, 'scholar_share')}
+							slpPrice={cryptoData['smooth-love-potion'][currency]}
+							currency={currency}
+						/>
+					</Grid>
+				</Grid>
 				<Form localData={localData} onUpdate={handleUpdate} />
 				{addresses.length !== 0 && (
 					<>
