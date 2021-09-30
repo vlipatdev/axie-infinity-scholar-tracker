@@ -281,7 +281,7 @@ function App() {
 					justifyContent: 'center',
 					alignItems: 'center',
 					mb: 2,
-					// backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
+					backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
 				}}
 			>
 				<img src={axieLogo} alt="axie logo" style={{ height: '75px', marginBottom: '16px' }} />
@@ -289,6 +289,7 @@ function App() {
 			<Container maxWidth="lg" sx={{ mb: 10 }}>
 				<Box
 					sx={{
+						width: '100%',
 						display: 'flex',
 						flexWrap: 'wrap',
 						justifyContent: 'center',
@@ -331,6 +332,10 @@ function App() {
 							<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>+3.14%</Typography>
 						</Paper>{' '}
 					</Box>
+					{/* <SortSelect
+						onUpdate={handleSortUpdate}
+						localSettings={localSettings}
+					/> */}
 				</Box>
 				<Alert icon={false} severity="info" sx={{ margin: 1, mb: 4 }}>
 					🚧 This site is under development.{' '}
@@ -339,7 +344,8 @@ function App() {
 						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
 					>
 						Click here to report bugs.
-					</a>
+					</a>{' '}
+					Thank you!
 				</Alert>
 				<Box
 					sx={{
