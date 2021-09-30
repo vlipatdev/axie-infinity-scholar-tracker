@@ -1,26 +1,25 @@
 {
   "files": {
     "main.css": "/axie-infinity-scholar-tracker/static/css/main.dfb60ae8.chunk.css",
-    "main.js": "/axie-infinity-scholar-tracker/static/js/main.047d3745.chunk.js",
-    "main.js.map": "/axie-infinity-scholar-tracker/static/js/main.047d3745.chunk.js.map",
+    "main.js": "/axie-infinity-scholar-tracker/static/js/main.6ab81043.chunk.js",
+    "main.js.map": "/axie-infinity-scholar-tracker/static/js/main.6ab81043.chunk.js.map",
     "runtime-main.js": "/axie-infinity-scholar-tracker/static/js/runtime-main.d179967e.js",
     "runtime-main.js.map": "/axie-infinity-scholar-tracker/static/js/runtime-main.d179967e.js.map",
-    "static/js/2.ad18ff0b.chunk.js": "/axie-infinity-scholar-tracker/static/js/2.ad18ff0b.chunk.js",
-    "static/js/2.ad18ff0b.chunk.js.map": "/axie-infinity-scholar-tracker/static/js/2.ad18ff0b.chunk.js.map",
+    "static/js/2.335cbed5.chunk.js": "/axie-infinity-scholar-tracker/static/js/2.335cbed5.chunk.js",
+    "static/js/2.335cbed5.chunk.js.map": "/axie-infinity-scholar-tracker/static/js/2.335cbed5.chunk.js.map",
     "index.html": "/axie-infinity-scholar-tracker/index.html",
     "static/css/main.dfb60ae8.chunk.css.map": "/axie-infinity-scholar-tracker/static/css/main.dfb60ae8.chunk.css.map",
-    "static/js/2.ad18ff0b.chunk.js.LICENSE.txt": "/axie-infinity-scholar-tracker/static/js/2.ad18ff0b.chunk.js.LICENSE.txt",
+    "static/js/2.335cbed5.chunk.js.LICENSE.txt": "/axie-infinity-scholar-tracker/static/js/2.335cbed5.chunk.js.LICENSE.txt",
     "static/media/axie.29b34e4d.png": "/axie-infinity-scholar-tracker/static/media/axie.29b34e4d.png",
-    "static/media/axie_logo.01bdef7f.png": "/axie-infinity-scholar-tracker/static/media/axie_logo.01bdef7f.png",
     "static/media/axs_logo.c5d7796b.png": "/axie-infinity-scholar-tracker/static/media/axs_logo.c5d7796b.png",
-    "static/media/ethereum_logo.a85b6de0.png": "/axie-infinity-scholar-tracker/static/media/ethereum_logo.a85b6de0.png",
-    "static/media/profile.dbf4c566.png": "/axie-infinity-scholar-tracker/static/media/profile.dbf4c566.png",
-    "static/media/slp_logo.d438d6bd.png": "/axie-infinity-scholar-tracker/static/media/slp_logo.d438d6bd.png"
+    "static/media/ethereum_logo.6fd3bdfc.png": "/axie-infinity-scholar-tracker/static/media/ethereum_logo.6fd3bdfc.png",
+    "static/media/profile.36140b61.png": "/axie-infinity-scholar-tracker/static/media/profile.36140b61.png",
+    "static/media/slp_logo.18074c03.png": "/axie-infinity-scholar-tracker/static/media/slp_logo.18074c03.png"
   },
   "entrypoints": [
     "static/js/runtime-main.d179967e.js",
-    "static/js/2.ad18ff0b.chunk.js",
+    "static/js/2.335cbed5.chunk.js",
     "static/css/main.dfb60ae8.chunk.css",
-    "static/js/main.047d3745.chunk.js"
+    "static/js/main.6ab81043.chunk.js"
   ]
 }
