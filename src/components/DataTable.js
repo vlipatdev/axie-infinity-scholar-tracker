@@ -138,7 +138,7 @@ export default function DataTable(props) {
 
 	return (
 		<>
-			<TableContainer component={Paper} variant="outlined" sx={{ mb: 4, maxHeight: '1000px' }}>
+			<TableContainer component={Paper} variant="outlined" sx={{ mb: 8, maxHeight: '1000px' }}>
 				<Table stickyHeader aria-label="data table">
 					<TableHead>
 						<TableRow>

@@ -23,7 +23,7 @@ export default function SortTypeSelect(props) {
 			<FormControl fullWidth>
 				<InputLabel id="select-label"></InputLabel>
 				<Select
-					sx={{ margin: 2, minWidth: '150px' }}
+					sx={{ margin: 2, minWidth: '125px' }}
 					variant="standard"
 					labelId="select-label"
 					name="sort_type"

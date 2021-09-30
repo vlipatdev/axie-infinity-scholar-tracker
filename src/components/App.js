@@ -234,7 +234,7 @@ function App() {
 					setLocalData(convertedJSONData);
 				} else {
 					alert(
-						'❌ Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.vercel.app/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
+						'Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.vercel.app/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
 					);
 				}
 			};
@@ -400,7 +400,7 @@ function App() {
 					</Tooltip>
 					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
 						<a
-							href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
+							href={`https://www.coingecko.com/en/coins/smooth-love-potion/${currency}`}
 							target="blank"
 							rel="noreferrer"
 							style={{ textDecoration: 'none', color: '#000000' }}
@@ -511,7 +511,7 @@ function App() {
 						/>
 						<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
 							<Button
-								sx={{ margin: 1 }}
+								sx={{ margin: 1, minWidth: '200px' }}
 								onClick={() => {
 									handleJSONDownload(localData);
 								}}
@@ -531,7 +531,7 @@ function App() {
 									component="span"
 									startIcon={<UploadIcon />}
 									variant="outlined"
-									sx={{ margin: 1 }}
+									sx={{ margin: 1, minWidth: '200px' }}
 								>
 									Import JSON
 								</Button>

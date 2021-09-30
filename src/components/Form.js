@@ -157,8 +157,9 @@ function Form(props) {
 				variant="outlined"
 				size="small"
 				sx={{
-					flexGrow: 2,
+					flexGrow: 1,
 					margin: 1,
+					minWidth: '250px',
 				}}
 				value={profile.name}
 			/>
@@ -173,8 +174,9 @@ function Form(props) {
 				variant="outlined"
 				size="small"
 				sx={{
-					flexGrow: 2,
+					flexGrow: 1,
 					margin: 1,
+					minWidth: '250px',
 				}}
 				value={profile.ronin_address}
 			/>
@@ -190,8 +192,9 @@ function Form(props) {
 				variant="outlined"
 				size="small"
 				sx={{
-					flexGrow: 2,
+					flexGrow: 1,
 					margin: 1,
+					minWidth: '250px',
 				}}
 				value={profile.manager_share}
 				inputProps={{ min: 0, max: 100 }}
