@@ -7,6 +7,7 @@ function ExportButton() {
 			sx={{ margin: 1, minWidth: '200px' }}
 			variant="contained"
 			color="success"
+			disableElevation
 			startIcon={<DownloadIcon />}
 		>
 			Export Excel

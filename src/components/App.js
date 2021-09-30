@@ -571,6 +571,7 @@ function App() {
 								variant="contained"
 								sx={{ margin: 1 }}
 								size="large"
+								disableElevation
 							>
 								Import JSON
 							</Button>

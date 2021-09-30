@@ -224,6 +224,7 @@ function Form(props) {
 				size="large"
 				sx={{ flexGrow: 1, margin: 1 }}
 				variant="contained"
+				disableElevation
 			>
 				Add Scholar
 			</Button>
