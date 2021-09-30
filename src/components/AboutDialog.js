@@ -28,6 +28,12 @@ function AboutDialog(props) {
 							</a>
 							.
 						</Typography>
+						<br />
+						<Typography>
+							This site's data is saved in your browser's local storage. Clearing your browser's
+							cache will erase this data. Make sure to export JSON first to avoid losing data.
+						</Typography>
+						<br />
 						<Typography>
 							This site supports JSON import from{' '}
 							<a
@@ -40,13 +46,8 @@ function AboutDialog(props) {
 						</Typography>
 						<br />
 						<Typography>
-							This site's data is saved in your browser's local storage. Clearing your browser's
-							cache will erase this data. Make sure to export JSON first.
-						</Typography>
-						<br />
-						<Typography>
-							Future releases will included daily SLP data, dark mode, table customization, support
-							for multiple currencies, and more.
+							Future releases will includes daily SLP data, dark mode, table customization, support
+							for multiple currencies, JSON support from other trackers, and more.
 						</Typography>
 
 						<br />
@@ -55,10 +56,7 @@ function AboutDialog(props) {
 							<a href="https://skymavis.com/" style={{ textDecoration: 'none', color: '#1976D2' }}>
 								Sky Mavis
 							</a>
-							.
-						</Typography>
-						<Typography>
-							Crypto prices courtesy of{' '}
+							. Crypto prices courtesy of{' '}
 							<a
 								href="https://www.coingecko.com/en/api"
 								style={{ textDecoration: 'none', color: '#1976D2' }}
@@ -87,8 +85,8 @@ function AboutDialog(props) {
 							mt: 4,
 						}}
 					>
-						<Avatar src={profile} sx={{ m: 2, height: 40, width: 40 }} />
-						<Typography sx={{ fontSize: 14 }}>
+						<Avatar src={profile} sx={{ mr: 1, height: 40, width: 40 }} />
+						<Typography sx={{ fontSize: 14, color: '#000000' }}>
 							coded by{' '}
 							<a
 								style={{ textDecoration: 'none', color: '#1976D2' }}

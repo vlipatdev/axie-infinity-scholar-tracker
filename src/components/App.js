@@ -220,7 +220,7 @@ function App() {
 					setLocalData(convertedJSONData);
 				} else {
 					alert(
-						'Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.vercel.app/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
+						'Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.xyz/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
 					);
 				}
 			};
