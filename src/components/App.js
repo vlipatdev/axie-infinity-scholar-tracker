@@ -3,7 +3,17 @@ import axios from 'axios';
 import { CSVLink } from 'react-csv';
 import FileSaver from 'file-saver';
 
-import '../styles/App.css';
+import styled from '@mui/material/styles/styled';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+// import Alert from '@mui/material/Alert';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import Tooltip from '@mui/material/Tooltip';
+import UploadIcon from '@mui/icons-material/Upload';
+import DownloadIcon from '@mui/icons-material/Download';
 
 import NavBar from './NavBar';
 import BasicCard from './BasicCard';
@@ -13,21 +23,8 @@ import ExportButton from './ExportButton';
 import SortSelect from './SortSelect';
 import SortTypeSelect from './SortTypeSelect';
 import Footer from './Footer';
+import Header from './Header';
 
-import styled from '@mui/material/styles/styled';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Alert from '@mui/material/Alert';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Tooltip from '@mui/material/Tooltip';
-
-import UploadIcon from '@mui/icons-material/Upload';
-import DownloadIcon from '@mui/icons-material/Download';
-
-import axieLogo from '../assets/images/axie_logo.png';
 import axie from '../assets/images/axie.png';
 import slpLogo from '../assets/images/slp_logo.png';
 import ethereumLogo from '../assets/images/ethereum_logo.png';
@@ -76,70 +73,58 @@ function App() {
 		},
 	});
 	const [isDelete, setIsDelete] = useState(false);
-	const [currency, setCurrency] = useState('php');
-
-	const BASE_URL = 'https://game-api.axie.technology/api/v1/';
+	const [currency] = useState('php');
 
 	let sortedData;
-
 	if (localSettings.sort_type === 'ascending') {
 		sortedData = sortArray(data, localSettings.sort_by);
 	} else {
 		sortedData = sortArray(data, localSettings.sort_by).reverse();
 	}
 
-	// onload
 	useEffect(() => {
-		// get local data
 		const localStorageData = JSON.parse(localStorage.getItem('profiles'));
 		if (localStorageData) {
 			setAddresses(localStorageData.map((item) => item.ronin_address));
 			setLocalData(localStorageData);
 		}
 
-		// get local settings
 		const localStorageSettings = JSON.parse(localStorage.getItem('settings'));
 		if (localStorageSettings) {
 			setLocalSettings(localStorageSettings);
 		}
 
-		console.log('useEffect get local storage');
+		// console.log('useEffect get local storage');
 	}, []);
 
 	useEffect(() => {
-		// update addresess
 		setAddresses(localData.map((item) => item.ronin_address));
-
-		// update local storage
 		localStorage.setItem('profiles', JSON.stringify(localData));
 
-		console.log('useEffect update local data');
+		// console.log('useEffect update local data');
 	}, [localData]);
 
 	useEffect(() => {
 		localStorage.setItem('settings', JSON.stringify(localSettings));
-
-		console.log('useEffect update local settings');
+		// console.log('useEffect update local settings');
 	}, [localSettings]);
 
 	useEffect(() => {
-		const finalUrl = BASE_URL + addresses.join('%2C');
-
 		if (addresses.length !== 0) {
 			if (!isDelete) {
-				console.log('fetching slp data...');
+				// console.log('fetching slp data...');
 
 				// fetch slp data
 				axios
-					.get(finalUrl)
+					.get(`https://game-api.axie.technology/api/v1/${addresses.join('%2C')}`)
 					.then((response) => {
 						let dataArray;
-
 						if (addresses.length === 1) {
 							dataArray = [response.data];
 						} else {
 							dataArray = Object.values(response.data);
 						}
+
 						const finalData = dataArray.map((dataItem, index) => {
 							return {
 								last_updated: processDate(dataItem.cache_last_updated),
@@ -198,7 +183,7 @@ function App() {
 				alert('Error fetching crypto data. Please try again later.');
 			});
 
-		console.log('useEffect update addresses');
+		// console.log('useEffect update addresses');
 	}, [addresses]);
 
 	function handleUpdate(data, isDelete) {
@@ -292,20 +277,7 @@ function App() {
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<NavBar />
-			<Box
-				sx={{
-					height: '200px',
-					backgroundColor: '#1976D2',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
-					mb: 2,
-					backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
-				}}
-			>
-				<img src={axieLogo} alt="axie logo" style={{ height: '75px', marginBottom: '16px' }} />
-			</Box>
+			<Header />
 			<Container maxWidth="lg" sx={{ mb: 10 }}>
 				<Box
 					sx={{
@@ -328,7 +300,7 @@ function App() {
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
-									margin: 1,
+									m: 1,
 									minWidth: '200px',
 								}}
 							>
@@ -341,11 +313,11 @@ function App() {
 									{addCommasToNumber(cryptoData.ethereum[currency])} {currency.toUpperCase()}
 								</Typography>
 								<Paper
-									elevation="0"
+									elevation={0}
 									sx={{
 										borderRadius: '100px',
 										backgroundColor:
-											cryptoData.ethereum[`${currency}_24h_change`] >= 0 ? '#8BC34A' : '#FF5252',
+											cryptoData.ethereum[`${currency}_24h_change`] >= 0 ? '#6cc000' : '#ff5341', // hardcoded
 									}}
 								>
 									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
@@ -368,7 +340,7 @@ function App() {
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
-									margin: 1,
+									m: 1,
 									minWidth: '200px',
 								}}
 							>
@@ -382,13 +354,13 @@ function App() {
 									{currency.toUpperCase()}
 								</Typography>
 								<Paper
-									elevation="0"
+									elevation={0}
 									sx={{
 										borderRadius: '100px',
 										backgroundColor:
 											cryptoData['axie-infinity'][`${currency}_24h_change`] >= 0
-												? '#8BC34A'
-												: '#FF5252',
+												? '#6cc000'
+												: '#ff5341',
 									}}
 								>
 									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
@@ -411,7 +383,7 @@ function App() {
 									display: 'flex',
 									alignItems: 'center',
 									justifyContent: 'center',
-									margin: 1,
+									m: 1,
 									minWidth: '200px',
 								}}
 							>
@@ -424,13 +396,13 @@ function App() {
 									{cryptoData['smooth-love-potion'][currency]} {currency.toUpperCase()}
 								</Typography>
 								<Paper
-									elevation="0"
+									elevation={0}
 									sx={{
 										borderRadius: '100px',
 										backgroundColor:
 											cryptoData['smooth-love-potion'][`${currency}_24h_change`] >= 0
-												? '#8BC34A'
-												: '#FF5252',
+												? '#6cc000'
+												: '#ff5341',
 									}}
 								>
 									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
@@ -442,53 +414,15 @@ function App() {
 						</a>
 					</Tooltip>
 				</Box>
-
-				{/* <Box
-					sx={{
-						display: 'flex',
-						flexWrap: 'wrap',
-						justifyContent: 'center',
-						mb: 4,
-					}}
-				>
-					<BasicCard
-						label="Total Average"
-						slp={calculateTotal(data, 'average_slp')}
-						slpPrice={cryptoData['smooth-love-potion'][currency]}
-						currency={currency}
-					/>
-
-					<BasicCard
-						label="Total Unclaimed"
-						slp={calculateTotal(data, 'unclaimed_slp')}
-						slpPrice={cryptoData['smooth-love-potion'][currency]}
-						currency={currency}
-					/>
-					<BasicCard
-						label="Total Claimed"
-						slp={calculateTotal(data, 'claimed_slp')}
-						slpPrice={cryptoData['smooth-love-potion'][currency]}
-						currency={currency}
-					/>
-					<BasicCard
-						label="Total Farmed"
-						slp={calculateTotal(data, 'total_slp')}
-						slpPrice={cryptoData['smooth-love-potion'][currency]}
-						currency={currency}
-					/>
-					<BasicCard
-						label="Manager Total"
-						slp={calculateTotal(data, 'manager_share')}
-						slpPrice={cryptoData['smooth-love-potion'][currency]}
-						currency={currency}
-					/>
-					<BasicCard
-						label="Scholar Total"
-						slp={calculateTotal(data, 'scholar_share')}
-						slpPrice={cryptoData['smooth-love-potion'][currency]}
-						currency={currency}
-					/>
-				</Box> */}
+				{/* <Alert icon={false} severity="info" sx={{ m: 1, mb: 4 }}>
+					🚧 This site is under development.{' '}
+					<a
+						style={{ color: '#1976D2' }}
+						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
+					>
+						Click here to report errors or bugs.
+					</a>
+				</Alert> */}
 				<Grid
 					container
 					spacing={2}
@@ -549,7 +483,7 @@ function App() {
 				{addresses.length !== 0 && (
 					<>
 						<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-							<Typography>Sort by</Typography>
+							<Typography color="text.secondary">Sort by</Typography>
 							<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
 								<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
 								<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
@@ -564,7 +498,7 @@ function App() {
 						/>
 						<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
 							<Button
-								sx={{ margin: 1, minWidth: '200px' }}
+								sx={{ m: 1, minWidth: '200px' }}
 								onClick={() => {
 									handleJSONDownload(localData);
 								}}
@@ -584,7 +518,7 @@ function App() {
 									component="span"
 									startIcon={<UploadIcon />}
 									variant="outlined"
-									sx={{ margin: 1, minWidth: '200px' }}
+									sx={{ m: 1, minWidth: '200px' }}
 								>
 									Import JSON
 								</Button>
@@ -621,9 +555,8 @@ function App() {
 								onClick={null}
 								component="span"
 								startIcon={<UploadIcon />}
-								variant="contained"
-								sx={{ margin: 1 }}
-								size="large"
+								variant="outlined"
+								sx={{ m: 1 }}
 								disableElevation
 							>
 								Import JSON
@@ -631,16 +564,6 @@ function App() {
 						</label>
 					</Box>
 				)}
-				{/* <Alert icon={false} severity="info" sx={{ margin: 1, mb: 4 }}>
-					🚧 This site is under development.{' '}
-					<a
-						style={{ color: '#1976D2' }}
-						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
-					>
-						Please click here to report bugs.
-					</a>{' '}
-					Thank you!
-				</Alert> */}
 			</Container>
 
 			<Footer />

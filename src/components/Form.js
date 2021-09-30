@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
 
 import Web3 from 'web3';
 
@@ -28,7 +27,7 @@ function Form(props) {
 		manager_error_message: '',
 	});
 
-	const handleClose = (event, reason) => {
+	const handleClose = (_, reason) => {
 		if (reason === 'clickaway') {
 			return;
 		}
@@ -146,7 +145,7 @@ function Form(props) {
 
 	return (
 		<Box>
-			<Grid container spacing={2} sx={{ mb: 4 }}>
+			<Grid container spacing={2} sx={{ mb: 6 }}>
 				<Grid item xs={12} sm={6} md={3}>
 					<TextField
 						fullWidth

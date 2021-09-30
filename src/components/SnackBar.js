@@ -9,7 +9,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert icon={<CheckIcon />} ref={ref} variant="filled" {...props} />;
 });
 
-export default function SnackBar(props) {
+function SnackBar(props) {
 	const { onClose, open, type } = props;
 
 	const action = (
@@ -34,3 +34,5 @@ export default function SnackBar(props) {
 		</div>
 	);
 }
+
+export default SnackBar;

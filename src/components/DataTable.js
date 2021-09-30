@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 
-import FormDialog from '../components/FormDialog';
 import SnackBar from '../components/SnackBar';
 
 import { addCommasToNumber, limitString, sortArray } from '../helpers';
@@ -46,63 +45,23 @@ function createData(
 
 export default function DataTable(props) {
 	const { data, localData, onDelete, localSettings } = props;
-	let sortedData;
+	const [snackBarOpen, setSnackBarOpen] = useState(false);
 
+	let sortedData;
 	if (localSettings.sort_type === 'ascending') {
 		sortedData = sortArray(data, localSettings.sort_by);
 	} else {
 		sortedData = sortArray(data, localSettings.sort_by).reverse();
 	}
 
-	const [modalOpen, setModalOpen] = useState(false);
-
-	function handleModalClose() {
-		setModalOpen(false);
-	}
-
-	const [snackBarOpen, setSnackBarOpen] = useState(false);
-
-	const handleSnackBarClose = (event, reason) => {
+	function handleSnackBarClose(_, reason) {
 		if (reason === 'clickaway') {
 			return;
 		}
-
 		setSnackBarOpen(false);
-	};
+	}
 
-	const rows = sortedData.map((address, index) => {
-		if (address.next_claim_raw === 1209600) {
-			return createData(
-				index + 1,
-				renderMarketplaceLink(address.name, address.ronin_address),
-				addCommasToNumber(address.average_slp),
-				addCommasToNumber(address.unclaimed_slp),
-				`${addCommasToNumber(address.manager_share)} (${address.manager_percent}%)`,
-				`${addCommasToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
-				'No record',
-				'No record',
-				address.mmr,
-				renderDeleteButton(address.name),
-				address.ronin_address
-			);
-		} else {
-			return createData(
-				index + 1,
-				renderMarketplaceLink(address.name, address.ronin_address),
-				addCommasToNumber(address.average_slp),
-				addCommasToNumber(address.unclaimed_slp),
-				`${addCommasToNumber(address.manager_share)} (${address.manager_percent}%)`,
-				`${addCommasToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
-				address.last_claim_date,
-				address.next_claim_date,
-				address.mmr,
-				renderDeleteButton(address.name),
-				address.ronin_address
-			);
-		}
-	});
-
-	function handleHover() {
+	function handleMouseEnter() {
 		document.body.style.cursor = 'pointer';
 	}
 
@@ -135,6 +94,38 @@ export default function DataTable(props) {
 			</Tooltip>
 		);
 	}
+
+	const rows = sortedData.map((address, index) => {
+		if (address.next_claim_raw === 1209600) {
+			return createData(
+				index + 1,
+				renderMarketplaceLink(address.name, address.ronin_address),
+				addCommasToNumber(address.average_slp),
+				addCommasToNumber(address.unclaimed_slp),
+				`${addCommasToNumber(address.manager_share)} (${address.manager_percent}%)`,
+				`${addCommasToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
+				'No record',
+				'No record',
+				address.mmr,
+				renderDeleteButton(address.name),
+				address.ronin_address
+			);
+		} else {
+			return createData(
+				index + 1,
+				renderMarketplaceLink(address.name, address.ronin_address),
+				addCommasToNumber(address.average_slp),
+				addCommasToNumber(address.unclaimed_slp),
+				`${addCommasToNumber(address.manager_share)} (${address.manager_percent}%)`,
+				`${addCommasToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
+				address.last_claim_date,
+				address.next_claim_date,
+				address.mmr,
+				renderDeleteButton(address.name),
+				address.ronin_address
+			);
+		}
+	});
 
 	return (
 		<>
@@ -173,14 +164,13 @@ export default function DataTable(props) {
 								<TableCell align="right">{row.nextClaim}</TableCell>
 								<TableCell align="right">{row.mmr}</TableCell>
 								<TableCell
-									onMouseEnter={handleHover}
+									onMouseEnter={handleMouseEnter}
 									onMouseLeave={handleMouseLeave}
 									onClick={() => {
 										onDelete(
 											localData.filter((data) => data.ronin_address !== row.roninAddress),
 											true
 										);
-										// setSnackBarOpen(true);
 									}}
 									align="right"
 								>
@@ -191,7 +181,6 @@ export default function DataTable(props) {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<FormDialog open={modalOpen} localData={localData} onClose={handleModalClose} />
 			<SnackBar open={snackBarOpen} onClose={handleSnackBarClose} type="delete" />
 		</>
 	);

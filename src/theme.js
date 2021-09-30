@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-const theme = createTheme({
+let theme = createTheme({
 	palette: {
 		mode: 'light',
 	},

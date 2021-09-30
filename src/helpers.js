@@ -95,23 +95,3 @@ export const sortArray = (array, sortBy) => {
 	};
 	return array.sort(compare);
 };
-
-// const sampleLocalStorageArray = [
-// 	{
-// 		name: 1,
-// 		ronin_address: 'ronin:26d252724d08a30151ab5c87bd6b4fb5eadb1500',
-// 		manager_share: 40,
-// 	},
-// 	{
-// 		name: 2,
-// 		ronin_address: 'ronin:94cd705c143a1e356e6f0b12876746853e08b438',
-// 		manager_share: 40,
-// 	},
-// 	{
-// 		name: 3,
-// 		ronin_address: 'ronin:66371edb29c61c9601400da9c30f443e04867fe1',
-// 		manager_share: 40,
-// 	},
-// ];
-
-// localStorage.setItem('profiles', JSON.stringify(sampleLocalStorageArray));

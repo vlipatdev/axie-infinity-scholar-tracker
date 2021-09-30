@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SortSelect(props) {
+function SortSelect(props) {
 	const { onUpdate, localSettings } = props;
 	const [sortBy, setSortBy] = useState('');
 
@@ -23,7 +23,7 @@ export default function SortSelect(props) {
 			<FormControl fullWidth>
 				<InputLabel id="select-label"></InputLabel>
 				<Select
-					sx={{ margin: 2, minWidth: '125px' }}
+					sx={{ m: 2, minWidth: '125px' }}
 					variant="standard"
 					name="sort_by"
 					labelId="select-label"
@@ -44,3 +44,5 @@ export default function SortSelect(props) {
 		</Box>
 	);
 }
+
+export default SortSelect;

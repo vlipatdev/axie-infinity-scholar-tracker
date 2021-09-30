@@ -1,45 +1,43 @@
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-
-import profile from '../assets/images/profile.png';
+import Tooltip from '@mui/material/Tooltip';
 
 function Footer() {
+	function handleMouseEnter() {
+		document.body.style.cursor = 'pointer';
+	}
+
+	function handleMouseLeave() {
+		document.body.style.cursor = 'default';
+	}
+
+	function handleClick() {
+		navigator.clipboard.writeText('ronin:7587459e4c00420a218c35abec543cc9d22e45d1');
+	}
+
 	return (
 		<Box
 			sx={{
 				display: 'flex',
+				flexDirection: 'column',
 				justifyContent: 'center',
 				alignItems: 'center',
 				mt: 10,
 			}}
 		>
-			{/* <Avatar src={profile} sx={{ margin: 2, height: 40, width: 40 }} />
-			<Typography sx={{ fontSize: 14 }}>
-				by{' '}
-				<a style={{ textDecoration: 'none', color: '#1976D2' }} href="https://github.com/vlipatdev">
-					vlipatdev
-				</a>{' '}
-				with ❤️
-			</Typography> */}
-			<Typography sx={{ fontSize: 12, margin: 4, textAlign: 'center' }}>
-				Unofficial scholar tracker for{' '}
-				<a href="https://axieinfinity.com/" style={{ textDecoration: 'none', color: '#1976D2' }}>
-					Axie Infinity
-				</a>
-				. Data provided by{' '}
-				<a href="https://skymavis.com/" style={{ textDecoration: 'none', color: '#1976D2' }}>
-					Sky Mavis
-				</a>
-				. Crypto prices courtesy of{' '}
-				<a
-					href="https://www.coingecko.com/en/api"
-					style={{ textDecoration: 'none', color: '#1976D2' }}
+			<Box>
+				<Typography sx={{ fontSize: 14, textAlign: 'center' }}>Donate</Typography>
+				<Tooltip
+					onMouseEnter={handleMouseEnter}
+					onMouseLeave={handleMouseLeave}
+					onClick={handleClick}
+					title="Click to copy"
 				>
-					CoinGecko
-				</a>
-				.
-			</Typography>
+					<Typography sx={{ fontSize: 14, mb: 4, textAlign: 'center', color: '#1976D2' }}>
+						ronin:7587459e4c00420a218c35abec543cc9d22e45d1
+					</Typography>
+				</Tooltip>
+			</Box>
 		</Box>
 	);
 }

@@ -1,4 +1,5 @@
-html {
+html,
+body {
 	margin: 0;
 	padding: 0;
 }
@@ -6,11 +7,28 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	/* background-color: #242735; */
-	/* color: #ffffff; */
 }
 
 :root {
+	--color-aquatic: #00b8ce;
+	--color-beast: #ffb812;
+	--color-bug: #ff5341;
+	--color-bird: #ff8bbd;
+	--color-plant: #6cc000;
+	--color-reptile: #dc8be4;
+	--color-hidden-1: #c6bdd4;
+	--color-hidden-2: #beceff;
+	--color-hidden-3: #129092;
+	--color-axie: #8d65ff;
+	--color-savannah: #f99e2e;
+	--color-forest: #6cc000;
+	--color-arctic: #dbf0ef;
+	--color-mystic: #6fccd4;
+	--color-genesis: #3e7292;
+	--color-rarity-rare: #09b99b;
+	--color-rariry-epic: #ffa22a;
+	--color-rarity-mystic: #ae2aff;
+	--color-text-arctic: #55586a;
 	--color-white: #ffffff;
 	--color-gray-1: #a1a6b6;
 	--color-gray-2: #6b7185;

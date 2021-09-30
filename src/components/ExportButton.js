@@ -4,7 +4,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 function ExportButton() {
 	return (
 		<Button
-			sx={{ margin: 1, minWidth: '200px' }}
+			sx={{ m: 1, minWidth: '200px' }}
 			variant="contained"
 			color="success"
 			disableElevation
