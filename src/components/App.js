@@ -310,20 +310,27 @@ function App() {
 					sx={{
 						width: '100%',
 						display: 'flex',
-						// flexWrap: 'wrap',
+						flexWrap: 'wrap',
 						justifyContent: 'center',
-						// alignItems: 'flex-start',
 						mb: 4,
 					}}
 				>
-					<Tooltip title="View on CoinGecko">
+					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
 						<a
 							href={`https://www.coingecko.com/en/coins/ethereum/${currency}`}
 							target="blank"
 							rel="noreferrer"
 							style={{ textDecoration: 'none', color: '#000000' }}
 						>
-							<Box sx={{ display: 'flex', alignItems: 'center', margin: 1 }}>
+							<Box
+								sx={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									margin: 1,
+									minWidth: '200px',
+								}}
+							>
 								<img
 									src={ethereumLogo}
 									style={{ height: '20px', width: '20px', marginRight: '4px' }}
@@ -348,14 +355,22 @@ function App() {
 							</Box>
 						</a>
 					</Tooltip>
-					<Tooltip title="View on CoinGecko">
+					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
 						<a
 							href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
 							target="blank"
 							rel="noreferrer"
 							style={{ textDecoration: 'none', color: '#000000' }}
 						>
-							<Box sx={{ display: 'flex', alignItems: 'center', margin: 1 }}>
+							<Box
+								sx={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									margin: 1,
+									minWidth: '200px',
+								}}
+							>
 								<img
 									src={axsLogo}
 									style={{ height: '20px', width: '20px', marginRight: '4px' }}
@@ -383,14 +398,22 @@ function App() {
 							</Box>
 						</a>
 					</Tooltip>
-					<Tooltip title="View on CoinGecko">
+					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
 						<a
 							href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
 							target="blank"
 							rel="noreferrer"
 							style={{ textDecoration: 'none', color: '#000000' }}
 						>
-							<Box sx={{ display: 'flex', alignItems: 'center', margin: 1 }}>
+							<Box
+								sx={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'center',
+									margin: 1,
+									minWidth: '200px',
+								}}
+							>
 								<img
 									src={slpLogo}
 									style={{ height: '20px', width: '20px', marginRight: '4px' }}
@@ -474,8 +497,10 @@ function App() {
 					<>
 						<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
 							<Typography>Sort by</Typography>
-							<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-							<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+							<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+								<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+								<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+							</Box>
 						</Box>
 						<DataTable
 							data={data}
