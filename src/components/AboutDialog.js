@@ -18,6 +18,9 @@ function AboutDialog(props) {
 			<DialogContent>
 				<DialogContentText>
 					<Box>
+						<Typography color="text.primary">✨ Features</Typography>
+						<br />
+
 						<Typography>
 							This is an unofficial scholar tracker for{' '}
 							<a
@@ -35,6 +38,11 @@ function AboutDialog(props) {
 						</Typography>
 						<br />
 						<Typography>
+							Importing JSON will override current data. Only up to 100 ronin addresses are
+							supported at the moment.
+						</Typography>
+						<br />
+						<Typography>
 							This site supports JSON import from{' '}
 							<a
 								href="https://axie-scho-tracker.xyz/"
@@ -44,10 +52,12 @@ function AboutDialog(props) {
 							</a>
 							.
 						</Typography>
+
 						<br />
 						<Typography>
-							Future releases will includes daily SLP data, dark mode, table customization, support
-							for multiple currencies, JSON support from other trackers, and more.
+							Future releases will includes search function, daily SLP data, dark mode, table
+							customization, table pagination, multiple currencies, JSON support from other
+							trackers, and more.
 						</Typography>
 
 						<br />
@@ -86,7 +96,7 @@ function AboutDialog(props) {
 						}}
 					>
 						<Avatar src={profile} sx={{ mr: 1, height: 40, width: 40 }} />
-						<Typography sx={{ fontSize: 14, color: '#000000' }}>
+						<Typography color="text.primary" sx={{ fontSize: 14 }}>
 							coded by{' '}
 							<a
 								style={{ textDecoration: 'none', color: '#1976D2' }}

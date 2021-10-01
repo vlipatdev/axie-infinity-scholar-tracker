@@ -13,10 +13,10 @@ function Header() {
 				justifyContent: 'center',
 				alignItems: 'center',
 				mb: 2,
-				backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`,
+				backgroundImage: `url('https://www.transparenttextures.com/patterns/axiom-pattern.png')`, // TODO: Replace with local file
 			}}
 		>
-			<img src={axieLogo} alt="axie logo" style={{ height: '75px', marginBottom: '16px' }} />
+			<img src={axieLogo} alt="axie logo" style={{ height: '100px', marginBottom: '16px' }} />
 		</Box>
 	);
 }

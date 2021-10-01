@@ -74,24 +74,12 @@ export const limitString = (string) => {
 };
 
 export const sortArray = (array, sortBy) => {
-	// https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
 	const compare = (a, b) => {
-		if (sortBy === 'name') {
-			if (a[sortBy].toLowerCase() < b[sortBy].toLowerCase()) {
-				return -1;
-			}
-			if (a[sortBy].toLowerCase() > b[sortBy].toLowerCase()) {
-				return 1;
-			}
-		} else {
-			if (a[sortBy] < b[sortBy]) {
-				return -1;
-			}
-			if (a[sortBy] > b[sortBy]) {
-				return 1;
-			}
-		}
-		return 0;
+		// https://stackoverflow.com/questions/2802341/javascript-natural-sort-of-alphanumerical-strings
+		return a[sortBy].localeCompare(b[sortBy], undefined, {
+			numeric: true,
+			sensitivity: 'base',
+		});
 	};
 	return array.sort(compare);
 };

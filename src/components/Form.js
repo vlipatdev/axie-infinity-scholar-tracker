@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Snackbar from './SnackBar';
 
 function Form(props) {
-	const { localData, onUpdate } = props;
+	const { localData, onUpdate, scholars } = props;
 
 	const [open, setOpen] = useState(false);
 	const [profile, setProfile] = useState({
@@ -192,13 +192,17 @@ function Form(props) {
 								profile.ronin_address !== '' &&
 								profile.manager_share !== ''
 							) {
-								onUpdate([...localData, profile], false);
-								setOpen(true);
-								setProfile({
-									name: '',
-									ronin_address: '',
-									manager_share: '',
-								});
+								if (scholars >= 100) {
+									alert('Only 100 scholars are allowed at the moment.');
+								} else {
+									onUpdate([...localData, profile], false);
+									setOpen(true);
+									setProfile({
+										name: '',
+										ronin_address: '',
+										manager_share: '',
+									});
+								}
 							} else {
 								// alert('Invalid form inputs');
 							}

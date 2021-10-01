@@ -106,7 +106,7 @@ function App() {
 				alert('Error fetching crypto data. Please try again later.');
 			});
 
-		console.log('useEffect get local storage');
+		// console.log('useEffect get local storage');
 	}, []);
 
 	useEffect(() => {
@@ -124,8 +124,6 @@ function App() {
 	useEffect(() => {
 		if (addresses.length !== 0) {
 			if (!isDelete) {
-				// console.log('fetching slp data...');
-
 				// fetch slp data
 				axios
 					.get(`https://game-api.axie.technology/api/v1/${addresses.join('%2C')}`)
@@ -208,19 +206,27 @@ function App() {
 				setIsDelete(false);
 				const JSONdata = JSON.parse(event.target.result);
 				if (JSONdata[0].name && JSONdata[0].ronin_address && JSONdata[0].manager_share) {
-					setLocalData(JSONdata);
+					if (JSONdata.length > 100) {
+						alert('Only JSON files with max 100 ronin addresses are allowed at the moment.');
+					} else {
+						setLocalData(JSONdata);
+					}
 				} else if (JSONdata[0].name && JSONdata[0].eth && JSONdata[0].managerShare) {
-					const convertedJSONData = JSONdata.map((item) => {
-						return {
-							name: item.name,
-							ronin_address: item.eth,
-							manager_share: item.managerShare,
-						};
-					});
-					setLocalData(convertedJSONData);
+					if (JSONdata.length > 100) {
+						alert('Only JSON files with max 100 ronin addresses are allowed at the moment.');
+					} else {
+						const convertedJSONData = JSONdata.map((item) => {
+							return {
+								name: item.name,
+								ronin_address: item.eth,
+								manager_share: item.managerShare,
+							};
+						});
+						setLocalData(convertedJSONData);
+					}
 				} else {
 					alert(
-						'Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.xyz/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
+						'Incompamtible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.xyz/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
 					);
 				}
 			};
@@ -479,7 +485,7 @@ function App() {
 						/>
 					</Grid>
 				</Grid>
-				<Form localData={localData} onUpdate={handleUpdate} />
+				<Form localData={localData} onUpdate={handleUpdate} scholars={addresses.length} />
 				{addresses.length !== 0 && (
 					<>
 						<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
