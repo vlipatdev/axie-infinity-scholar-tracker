@@ -94,7 +94,19 @@ function App() {
 			setLocalSettings(localStorageSettings);
 		}
 
-		// console.log('useEffect get local storage');
+		// fetch crypto prices
+		axios
+			.get(
+				'https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Caxie-infinity%2Csmooth-love-potion&vs_currencies=php%2Cusd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
+			)
+			.then((response) => {
+				setCryptoData(response.data);
+			})
+			.catch((error) => {
+				alert('Error fetching crypto data. Please try again later.');
+			});
+
+		console.log('useEffect get local storage');
 	}, []);
 
 	useEffect(() => {
@@ -170,18 +182,6 @@ function App() {
 			document.body.style.cursor = 'default';
 			setData([]);
 		}
-
-		// fetch crypto prices
-		axios
-			.get(
-				'https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Caxie-infinity%2Csmooth-love-potion&vs_currencies=php%2Cusd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
-			)
-			.then((response) => {
-				setCryptoData(response.data);
-			})
-			.catch((error) => {
-				alert('Error fetching crypto data. Please try again later.');
-			});
 
 		// console.log('useEffect update addresses');
 	}, [addresses]);
