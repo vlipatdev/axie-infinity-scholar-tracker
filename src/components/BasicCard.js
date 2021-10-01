@@ -22,8 +22,12 @@ function BasicCard(props) {
 				flexDirection: 'column',
 				alignItems: 'center',
 				borderRadius: '15px',
+				transition: 'all 0.2s',
 				// backgroundColor: '#f2f8fd',
 				boxShadow: '0 8px 30px rgb(222 230 241 / 80%)',
+				'&:hover': {
+					transform: 'scale(1.03)',
+				},
 			}}
 		>
 			<CardContent>
