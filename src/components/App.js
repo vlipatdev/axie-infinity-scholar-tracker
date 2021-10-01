@@ -40,7 +40,7 @@ import {
 	calculateTotal,
 	calculateScholarPercent,
 	sortArray,
-	addCommasToNumber,
+	addCommaToNumber,
 } from '../helpers';
 
 const Input = styled('input')({
@@ -182,6 +182,7 @@ function App() {
 		}
 
 		// console.log('useEffect update addresses');
+		// eslint-disable-next-line
 	}, [addresses]);
 
 	function handleUpdate(data, isDelete) {
@@ -316,7 +317,7 @@ function App() {
 									alt="ethereum logo"
 								/>
 								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
-									{addCommasToNumber(cryptoData.ethereum[currency])} {currency.toUpperCase()}
+									{addCommaToNumber(cryptoData.ethereum[currency])} {currency.toUpperCase()}
 								</Typography>
 								<Paper
 									elevation={0}
@@ -356,8 +357,7 @@ function App() {
 									alt="axs logo"
 								/>
 								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
-									{addCommasToNumber(cryptoData['axie-infinity'][currency])}{' '}
-									{currency.toUpperCase()}
+									{addCommaToNumber(cryptoData['axie-infinity'][currency])} {currency.toUpperCase()}
 								</Typography>
 								<Paper
 									elevation={0}
@@ -503,32 +503,36 @@ function App() {
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 						/>
 						<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-							<Button
-								sx={{ m: 1, minWidth: '200px' }}
-								onClick={() => {
-									handleJSONDownload(localData);
-								}}
-								startIcon={<DownloadIcon />}
-								variant="outlined"
-							>
-								Export JSON
-							</Button>
-							<label htmlFor="contained-button-file">
-								<Input
-									onChange={handleJSONUpload}
-									accept="application/JSON"
-									id="contained-button-file"
-									type="file"
-								/>
+							<Tooltip title="Download list of scholars in .json format">
 								<Button
-									component="span"
-									startIcon={<UploadIcon />}
-									variant="outlined"
 									sx={{ m: 1, minWidth: '200px' }}
+									onClick={() => {
+										handleJSONDownload(localData);
+									}}
+									startIcon={<DownloadIcon />}
+									variant="outlined"
 								>
-									Import JSON
+									Download list
 								</Button>
-							</label>
+							</Tooltip>
+							<Tooltip title="Upload list of scholars">
+								<label htmlFor="contained-button-file">
+									<Input
+										onChange={handleJSONUpload}
+										accept="application/JSON"
+										id="contained-button-file"
+										type="file"
+									/>
+									<Button
+										component="span"
+										startIcon={<UploadIcon />}
+										variant="outlined"
+										sx={{ m: 1, minWidth: '200px' }}
+									>
+										Upload List
+									</Button>
+								</label>
+							</Tooltip>
 							<CSVLink
 								filename={'scholars.csv'}
 								data={cleanData(sortedData)}
@@ -565,7 +569,7 @@ function App() {
 								sx={{ m: 1 }}
 								disableElevation
 							>
-								Import JSON
+								Upload list
 							</Button>
 						</label>
 					</Box>

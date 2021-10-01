@@ -18,11 +18,8 @@ function AboutDialog(props) {
 			<DialogContent>
 				<DialogContentText>
 					<Box>
-						<Typography color="text.primary">✨ Features</Typography>
-						<br />
-
 						<Typography>
-							This is an unofficial scholar tracker for{' '}
+							Unofficial scholar tracker for{' '}
 							<a
 								href="https://axieinfinity.com/"
 								style={{ textDecoration: 'none', color: '#1976D2' }}
@@ -31,6 +28,12 @@ function AboutDialog(props) {
 							</a>
 							.
 						</Typography>
+						{/* <br />
+						<Typography color="text.primary" sx={{ fontWeight: 'bold' }}>
+							✨ Features
+						</Typography>
+						<br /> */}
+						<Typography color="text.primary" sx={{ fontWeight: 'bold' }}></Typography>
 						<br />
 						<Typography>
 							This site's data is saved in your browser's local storage. Clearing your browser's

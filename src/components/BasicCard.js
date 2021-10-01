@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 
 import slpLogo from '../assets/images/slp_logo.png';
 
-import { addCommasToNumber } from '../helpers';
+import { addCommaToNumber } from '../helpers';
 
 function BasicCard(props) {
 	const { label, slp, slpPrice, currency } = props;
@@ -29,11 +29,11 @@ function BasicCard(props) {
 				<Box sx={{ display: 'flex', m: 1, alignItems: 'center' }}>
 					<Avatar alt="slp icon" src={slpLogo} sx={{ m: 1, height: 40, width: 40 }} />
 					<Typography sx={{ fontSize: 24, fontWeight: 'bold' }} variant="h5" component="div">
-						{addCommasToNumber(slp)}
+						{addCommaToNumber(slp)}
 					</Typography>
 				</Box>
 				<Typography sx={{ textAlign: 'center' }} color="text.secondary">
-					≈ {addCommasToNumber((slp * slpPrice).toFixed(0))} {currency.toUpperCase()}
+					≈ {addCommaToNumber((slp * slpPrice).toFixed(0))} {currency.toUpperCase()}
 				</Typography>
 			</CardContent>
 		</Card>

@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 
-import { addCommasToNumber, limitString, sortArray } from '../helpers';
+import { addCommaToNumber, limitString, sortArray } from '../helpers';
 
 function createData(
 	number,
@@ -60,7 +60,7 @@ export default function DataTable(props) {
 	function renderDeleteButton(name) {
 		return (
 			<Tooltip title={`Remove ${name}`}>
-				<IconButton color="primary" size="small">
+				<IconButton color="error" size="small">
 					<DeleteIcon />
 				</IconButton>
 			</Tooltip>
@@ -88,10 +88,10 @@ export default function DataTable(props) {
 			return createData(
 				index + 1,
 				renderMarketplaceLink(address.name, address.ronin_address),
-				addCommasToNumber(address.average_slp),
-				addCommasToNumber(address.unclaimed_slp),
-				`${addCommasToNumber(address.manager_share)} (${address.manager_percent}%)`,
-				`${addCommasToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
+				addCommaToNumber(address.average_slp),
+				addCommaToNumber(address.unclaimed_slp),
+				`${addCommaToNumber(address.manager_share)} (${address.manager_percent}%)`,
+				`${addCommaToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
 				'No record',
 				'No record',
 				address.mmr,
@@ -102,10 +102,10 @@ export default function DataTable(props) {
 			return createData(
 				index + 1,
 				renderMarketplaceLink(address.name, address.ronin_address),
-				addCommasToNumber(address.average_slp),
-				addCommasToNumber(address.unclaimed_slp),
-				`${addCommasToNumber(address.manager_share)} (${address.manager_percent}%)`,
-				`${addCommasToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
+				addCommaToNumber(address.average_slp),
+				addCommaToNumber(address.unclaimed_slp),
+				`${addCommaToNumber(address.manager_share)} (${address.manager_percent}%)`,
+				`${addCommaToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
 				address.last_claim_date,
 				address.next_claim_date,
 				address.mmr,

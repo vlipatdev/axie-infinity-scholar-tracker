@@ -1,4 +1,4 @@
-export const addCommasToNumber = (number) => {
+export const addCommaToNumber = (number) => {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
@@ -19,6 +19,14 @@ export const calculateLastClaimInDays = (lastClaim) => {
 	return Math.ceil((Date.now() - parseInt(`${lastClaim}000`)) / 86400000);
 };
 
+export const addDaysAgoText = (days) => {
+	if (days === 1) {
+		return `${days} day ago`;
+	} else {
+		return `${days} days ago`;
+	}
+};
+
 export const calculateNextClaimInDays = (nextClaim) => {
 	return Math.floor((parseInt(`${nextClaim}000`) - Date.now()) / 86400000);
 };
@@ -31,26 +39,6 @@ export const calculateTotal = (array, property) => {
 	});
 
 	return sum;
-};
-
-export const lastClaimInDays = (days) => {
-	if (days === 1) {
-		return `${days} day ago`;
-	} else {
-		return `${days} days ago`;
-	}
-};
-
-export const nextClaimInDays = (days) => {
-	if (days < 0) {
-		return `${Math.abs(days)} days ago`;
-	} else {
-		if (days === 1) {
-			return `in ${days} day`;
-		} else {
-			return `in ${days} days`;
-		}
-	}
 };
 
 export const calculateScholarPercent = (managerPercent) => {
@@ -76,7 +64,7 @@ export const limitString = (string) => {
 export const sortArray = (array, sortBy) => {
 	const compare = (a, b) => {
 		// https://stackoverflow.com/questions/2802341/javascript-natural-sort-of-alphanumerical-strings
-		return a[sortBy].localeCompare(b[sortBy], undefined, {
+		return a[sortBy].toString().localeCompare(b[sortBy].toString(), undefined, {
 			numeric: true,
 			sensitivity: 'base',
 		});
