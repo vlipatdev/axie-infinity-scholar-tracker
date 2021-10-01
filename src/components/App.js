@@ -15,7 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import UploadIcon from '@mui/icons-material/Upload';
 import DownloadIcon from '@mui/icons-material/Download';
 
-import NavBar from './NavBar';
+// import NavBar from './NavBar';
 import BasicCard from './BasicCard';
 import Form from './Form';
 import DataTable from './DataTable';

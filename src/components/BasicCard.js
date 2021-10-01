@@ -22,20 +22,24 @@ function BasicCard(props) {
 				flexDirection: 'column',
 				alignItems: 'center',
 				borderRadius: '15px',
-				backgroundColor: '#f2f8fd',
+				// backgroundColor: '#f2f8fd',
+				boxShadow: '0 8px 30px rgb(222 230 241 / 80%)',
 			}}
 		>
 			<CardContent>
-				<Typography sx={{ textAlign: 'center' }} color="text.secondary" gutterBottom>
-					{label}
-				</Typography>
 				<Box sx={{ display: 'flex', m: 1, alignItems: 'center' }}>
 					<Avatar alt="slp icon" src={slpLogo} sx={{ m: 1, height: 40, width: 40 }} />
-					<Typography sx={{ fontSize: 24, fontWeight: 'bold' }} variant="h5" component="div">
+					<Typography sx={{ fontSize: 28, fontWeight: 'bold' }} variant="h5" component="div">
 						{addCommaToNumber(slp)}
 					</Typography>
 				</Box>
-				<Typography sx={{ textAlign: 'center' }} color="text.secondary">
+				<Typography
+					sx={{ fontSize: 14, fontWeight: 'bold', textAlign: 'center' }}
+					// color="text.secondary"
+				>
+					{label}
+				</Typography>
+				<Typography sx={{ fontSize: 14, textAlign: 'center' }} color="text.secondary">
 					≈ {addCommaToNumber((slp * slpPrice).toFixed(0))} {currency.toUpperCase()}
 				</Typography>
 			</CardContent>
