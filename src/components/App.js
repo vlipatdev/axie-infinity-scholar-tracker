@@ -83,7 +83,7 @@ function App() {
 	}
 
 	useEffect(() => {
-		const localStorageData = JSON.parse(localStorage.getItem('profiles'));
+		const localStorageData = JSON.parse(localStorage.getItem('scholars'));
 		if (localStorageData) {
 			setAddresses(localStorageData.map((item) => item.ronin_address));
 			setLocalData(localStorageData);
@@ -111,7 +111,7 @@ function App() {
 
 	useEffect(() => {
 		setAddresses(localData.map((item) => item.ronin_address));
-		localStorage.setItem('profiles', JSON.stringify(localData));
+		localStorage.setItem('scholars', JSON.stringify(localData));
 
 		// console.log('useEffect update local data');
 	}, [localData]);
@@ -283,7 +283,7 @@ function App() {
 
 	return (
 		<Box sx={{ flexGrow: 1 }}>
-			<NavBar />
+			{/* <NavBar /> */}
 			<Header />
 			<Container maxWidth="lg" sx={{ mb: 10 }}>
 				<Box
@@ -575,7 +575,6 @@ function App() {
 					</Box>
 				)}
 			</Container>
-
 			<Footer />
 		</Box>
 	);

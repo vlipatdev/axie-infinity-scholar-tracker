@@ -15,15 +15,18 @@ function BasicCard(props) {
 
 	return (
 		<Card
-			variant="outlined"
+			// variant="outlined"
+			elevation={0}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
+				borderRadius: '15px',
+				backgroundColor: '#f2f8fd',
 			}}
 		>
 			<CardContent>
-				<Typography sx={{ fontSize: 16, textAlign: 'center' }} color="text.secondary" gutterBottom>
+				<Typography sx={{ textAlign: 'center' }} color="text.secondary" gutterBottom>
 					{label}
 				</Typography>
 				<Box sx={{ display: 'flex', m: 1, alignItems: 'center' }}>

@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 
-import { addCommaToNumber, limitString, sortArray } from '../helpers';
+import { addCommaToNumber, limitString, sortArray, lastClaimInDays } from '../helpers';
 
 function createData(
 	number,
@@ -106,7 +106,7 @@ export default function DataTable(props) {
 				addCommaToNumber(address.unclaimed_slp),
 				`${addCommaToNumber(address.manager_share)} (${address.manager_percent}%)`,
 				`${addCommaToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
-				address.last_claim_date,
+				`${lastClaimInDays(address.last_claim_in_days)}`,
 				address.next_claim_date,
 				address.mmr,
 				renderDeleteButton(address.name),

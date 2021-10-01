@@ -23,7 +23,7 @@ function NavBar() {
 	}
 
 	return (
-		<AppBar sx={{ mb: 0 }} position="static">
+		<AppBar sx={{ background: 'none' }} elevation={0} position="static">
 			<Toolbar>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
 					<Avatar alt="slp icon" src={axsLogo} />

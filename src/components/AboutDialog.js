@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
-import profile from '../assets/images/profile.png';
+import profile from '../assets/images/profile.jpg';
 
 function AboutDialog(props) {
 	const { open, onClose } = props;
@@ -33,7 +33,7 @@ function AboutDialog(props) {
 							✨ Features
 						</Typography>
 						<br /> */}
-						<Typography color="text.primary" sx={{ fontWeight: 'bold' }}></Typography>
+						{/* <Typography color="text.primary" sx={{ fontWeight: 'bold' }}></Typography>
 						<br />
 						<Typography>
 							This site's data is saved in your browser's local storage. Clearing your browser's
@@ -54,11 +54,11 @@ function AboutDialog(props) {
 								https://axie-scho-tracker.xyz/
 							</a>
 							.
-						</Typography>
+						</Typography> */}
 
 						<br />
 						<Typography>
-							Future releases will includes search function, daily SLP data, dark mode, table
+							Future releases will include scholar search, daily SLP data, dark mode, table
 							customization, table pagination, multiple currencies, JSON support from other
 							trackers, and more.
 						</Typography>
@@ -103,9 +103,9 @@ function AboutDialog(props) {
 							coded by{' '}
 							<a
 								style={{ textDecoration: 'none', color: '#1976D2' }}
-								href="https://github.com/vlipatdev"
+								href="https://www.facebook.com/xf606bZhSFYbORVF/"
 							>
-								vlipatdev
+								vlipat
 							</a>{' '}
 							with ❤️
 						</Typography>

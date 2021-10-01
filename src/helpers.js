@@ -19,7 +19,7 @@ export const calculateLastClaimInDays = (lastClaim) => {
 	return Math.ceil((Date.now() - parseInt(`${lastClaim}000`)) / 86400000);
 };
 
-export const addDaysAgoText = (days) => {
+export const lastClaimInDays = (days) => {
 	if (days === 1) {
 		return `${days} day ago`;
 	} else {
