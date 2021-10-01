@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/axie-infinity-scholar-tracker/static/css/main.e80fb65b.chunk.css",
-    "main.js": "/axie-infinity-scholar-tracker/static/js/main.5e7bb58a.chunk.js",
-    "main.js.map": "/axie-infinity-scholar-tracker/static/js/main.5e7bb58a.chunk.js.map",
+    "main.js": "/axie-infinity-scholar-tracker/static/js/main.566d3315.chunk.js",
+    "main.js.map": "/axie-infinity-scholar-tracker/static/js/main.566d3315.chunk.js.map",
     "runtime-main.js": "/axie-infinity-scholar-tracker/static/js/runtime-main.d179967e.js",
     "runtime-main.js.map": "/axie-infinity-scholar-tracker/static/js/runtime-main.d179967e.js.map",
     "static/js/2.159ac2ea.chunk.js": "/axie-infinity-scholar-tracker/static/js/2.159ac2ea.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.d179967e.js",
     "static/js/2.159ac2ea.chunk.js",
     "static/css/main.e80fb65b.chunk.css",
-    "static/js/main.5e7bb58a.chunk.js"
+    "static/js/main.566d3315.chunk.js"
   ]
 }
