@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,8 +8,6 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
-
-import SnackBar from '../components/SnackBar';
 
 import { addCommasToNumber, limitString, sortArray } from '../helpers';
 
@@ -45,20 +41,12 @@ function createData(
 
 export default function DataTable(props) {
 	const { data, localData, onDelete, localSettings } = props;
-	const [snackBarOpen, setSnackBarOpen] = useState(false);
 
 	let sortedData;
 	if (localSettings.sort_type === 'ascending') {
 		sortedData = sortArray(data, localSettings.sort_by);
 	} else {
 		sortedData = sortArray(data, localSettings.sort_by).reverse();
-	}
-
-	function handleSnackBarClose(_, reason) {
-		if (reason === 'clickaway') {
-			return;
-		}
-		setSnackBarOpen(false);
 	}
 
 	function handleMouseEnter() {
@@ -181,7 +169,6 @@ export default function DataTable(props) {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<SnackBar open={snackBarOpen} onClose={handleSnackBarClose} type="delete" />
 		</>
 	);
 }

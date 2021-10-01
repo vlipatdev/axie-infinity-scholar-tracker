@@ -5,8 +5,6 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 
-import Web3 from 'web3';
-
 import Snackbar from './SnackBar';
 
 function Form(props) {
@@ -91,23 +89,12 @@ function Form(props) {
 							ronin_error_message: 'Ronin address already exists',
 						};
 					} else {
-						if (value.startsWith('ronin:')) {
-							const address = `0x${value.slice(6)}`;
-							const isValidAddress = Web3.utils.isAddress(address);
-
-							if (isValidAddress) {
-								return {
-									...prevValid,
-									ronin_address: true,
-									ronin_error_message: '',
-								};
-							} else {
-								return {
-									...prevValid,
-									ronin_address: false,
-									ronin_error_message: 'Invalid ronin address',
-								};
-							}
+						if (value.match(/^ronin:[a-zA-Z0-9]{40}$/)) {
+							return {
+								...prevValid,
+								ronin_address: true,
+								ronin_error_message: '',
+							};
 						} else {
 							return {
 								...prevValid,
