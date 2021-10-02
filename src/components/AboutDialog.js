@@ -57,9 +57,8 @@ function AboutDialog(props) {
 						</Typography> */}
 						<br />
 						<Typography>
-							This site is in early stages of development. Future releases will include daily SLP
-							data, table customization, multiple currencies, JSON support for other trackers, dark
-							mode, and more.
+							Future releases will include daily SLP data, table customization, multiple currencies,
+							JSON support for other trackers, dark mode, and more.
 						</Typography>
 
 						<br />
