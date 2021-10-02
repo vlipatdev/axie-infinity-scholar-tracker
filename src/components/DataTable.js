@@ -122,15 +122,15 @@ export default function DataTable(props) {
 					<TableHead>
 						<TableRow>
 							<TableCell>#</TableCell>
-							<TableCell align="right">Name</TableCell>
-							<TableCell align="right">Average</TableCell>
-							<TableCell align="right">Unclaimed</TableCell>
-							<TableCell align="right">Manager</TableCell>
-							<TableCell align="right">Scholar</TableCell>
-							<TableCell align="right">Last Claim</TableCell>
-							<TableCell align="right">Next Claim</TableCell>
-							<TableCell align="right">MMR</TableCell>
-							<TableCell align="right"></TableCell>
+							<TableCell align="left">Name</TableCell>
+							<TableCell align="center">Daily Average</TableCell>
+							<TableCell align="center">Unclaimed</TableCell>
+							<TableCell align="center">Manager Share</TableCell>
+							<TableCell align="center">Scholar Share</TableCell>
+							<TableCell align="center">Last Claim</TableCell>
+							<TableCell align="center">Next Claim</TableCell>
+							<TableCell align="center">MMR</TableCell>
+							<TableCell align="center"></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
@@ -143,14 +143,14 @@ export default function DataTable(props) {
 								<TableCell component="th" scope="row">
 									{row.number}
 								</TableCell>
-								<TableCell align="right">{row.name}</TableCell>
-								<TableCell align="right">{row.average}</TableCell>
-								<TableCell align="right">{row.unclaimed}</TableCell>
-								<TableCell align="right">{row.manager}</TableCell>
-								<TableCell align="right">{row.scholar}</TableCell>
-								<TableCell align="right">{row.lastClaim}</TableCell>
-								<TableCell align="right">{row.nextClaim}</TableCell>
-								<TableCell align="right">{row.mmr}</TableCell>
+								<TableCell align="left">{row.name}</TableCell>
+								<TableCell align="center">{row.average}</TableCell>
+								<TableCell align="center">{row.unclaimed}</TableCell>
+								<TableCell align="center">{row.manager}</TableCell>
+								<TableCell align="center">{row.scholar}</TableCell>
+								<TableCell align="center">{row.lastClaim}</TableCell>
+								<TableCell align="center">{row.nextClaim}</TableCell>
+								<TableCell align="center">{row.mmr}</TableCell>
 								<TableCell
 									onMouseEnter={handleMouseEnter}
 									onMouseLeave={handleMouseLeave}

@@ -173,7 +173,7 @@ function Form(props) {
 						type="number"
 						name="manager_share"
 						id="manager-share"
-						label="Manager Share"
+						label="Manager Share (%)"
 						variant="outlined"
 						size="small"
 						value={profile.manager_share}

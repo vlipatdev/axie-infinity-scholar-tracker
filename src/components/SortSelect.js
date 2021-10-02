@@ -33,7 +33,7 @@ function SortSelect(props) {
 					onChange={handleChange}
 				>
 					<MenuItem value={'name'}>Name</MenuItem>
-					<MenuItem value={'average_slp'}>Average SLP</MenuItem>
+					<MenuItem value={'average_slp'}>Daily Average SLP</MenuItem>
 					<MenuItem value={'unclaimed_slp'}>Unclaimed SLP</MenuItem>
 					<MenuItem value={'manager_share'}>Manager Share</MenuItem>
 					<MenuItem value={'scholar_share'}>Scholar Share</MenuItem>

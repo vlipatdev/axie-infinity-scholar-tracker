@@ -61,7 +61,7 @@ function App() {
 		},
 		ethereum: {
 			php: 0,
-			php_24h_change: 0,
+			php_24h_chasnge: 0,
 			usd: 0,
 			usd_24h_change: 0,
 		},
@@ -73,7 +73,7 @@ function App() {
 		},
 	});
 	const [isDelete, setIsDelete] = useState(false);
-	const [currency] = useState('php');
+	const [currency] = useState('usd');
 
 	let sortedData;
 	if (localSettings.sort_type === 'ascending') {
@@ -493,7 +493,7 @@ function App() {
 				>
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
-							label="Total Average"
+							label="Total Daily Average"
 							slp={calculateTotal(data, 'average_slp')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}

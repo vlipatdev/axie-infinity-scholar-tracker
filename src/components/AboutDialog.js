@@ -55,7 +55,6 @@ function AboutDialog(props) {
 							</a>
 							.
 						</Typography> */}
-
 						<br />
 						<Typography>
 							This site is in early stages of development. Future releases will include daily SLP
@@ -89,7 +88,6 @@ function AboutDialog(props) {
 							.
 						</Typography>
 					</Box>
-
 					<Box
 						sx={{
 							display: 'flex',
