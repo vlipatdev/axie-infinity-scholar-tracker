@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
@@ -7,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+
 import AboutDialog from './AboutDialog';
 
 import theme from '../theme';
@@ -28,7 +30,7 @@ function NavBar() {
 		<AppBar sx={{ background: 'none' }} elevation={0} position="static">
 			<Toolbar>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-					<Avatar alt="slp icon" src={axsLogo} />
+					<Avatar alt="axs logo" src={axsLogo} />
 				</IconButton>
 				<Typography
 					variant="h1"

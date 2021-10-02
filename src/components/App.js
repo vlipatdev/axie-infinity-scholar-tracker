@@ -73,7 +73,7 @@ function App() {
 		},
 	});
 	const [isDelete, setIsDelete] = useState(false);
-	const [currency] = useState('usd');
+	const [currency] = useState('php');
 
 	let sortedData;
 	if (localSettings.sort_type === 'ascending') {
