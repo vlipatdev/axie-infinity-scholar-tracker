@@ -31,14 +31,14 @@ import axsLogo from '../assets/images/axs_logo.png';
 import theme from '../theme';
 
 import {
-	calculateAverageSlp,
-	calculateLastClaimInDays,
+	calcAverageSlp,
+	calcLastClaimInDays,
 	processDate,
-	calculateNextClaimInDays,
-	calculateManagerShare,
-	calculateScholarShare,
-	calculateTotal,
-	calculateScholarPercent,
+	calcNextClaimInDays,
+	calcManagerShare,
+	calcScholarShare,
+	calcTotal,
+	calcScholarPercent,
 	sortArray,
 	addCommaToNumber,
 } from '../helpers';
@@ -85,7 +85,7 @@ function App() {
 	useEffect(() => {
 		const localStorageData = JSON.parse(localStorage.getItem('scholars'));
 		if (localStorageData) {
-			setAddresses(localStorageData.map((item) => item.ronin_address));
+			setAddresses(localStorageData.map((scholar) => scholar.ronin_address));
 			setLocalData(localStorageData);
 		}
 
@@ -110,7 +110,7 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		setAddresses(localData.map((item) => item.ronin_address));
+		setAddresses(localData.map((scholar) => scholar.ronin_address));
 		localStorage.setItem('scholars', JSON.stringify(localData));
 
 		// console.log('useEffect update local data');
@@ -140,28 +140,25 @@ function App() {
 								last_updated: processDate(dataItem.cache_last_updated),
 								name: localData[index].name,
 								ronin_address: localData[index].ronin_address,
-								average_slp: calculateAverageSlp(
+								average_slp: calcAverageSlp(
 									dataItem.in_game_slp,
-									calculateLastClaimInDays(dataItem.last_claim)
+									calcLastClaimInDays(dataItem.last_claim)
 								),
 								unclaimed_slp: dataItem.in_game_slp,
 								claimed_slp: dataItem.total_slp - dataItem.in_game_slp,
 								total_slp: dataItem.total_slp,
-								last_claim_in_days: calculateLastClaimInDays(dataItem.last_claim),
+								last_claim_in_days: calcLastClaimInDays(dataItem.last_claim),
 								last_claim_date: processDate(parseInt(`${dataItem.last_claim}000`)),
 								last_claim_raw: parseInt(`${dataItem.last_claim}000`),
-								next_claim_in_days: calculateNextClaimInDays(dataItem.next_claim),
+								next_claim_in_days: calcNextClaimInDays(dataItem.next_claim),
 								next_claim_date: processDate(parseInt(`${dataItem.next_claim}000`)),
 								next_claim_raw: dataItem.next_claim,
 								manager_percent: parseInt(localData[index].manager_share),
-								scholar_percent: calculateScholarPercent(localData[index].manager_share),
-								manager_share: calculateManagerShare(
+								scholar_percent: calcScholarPercent(localData[index].manager_share),
+								manager_share: calcManagerShare(dataItem.total_slp, localData[index].manager_share),
+								scholar_share: calcScholarShare(
 									dataItem.total_slp,
-									localData[index].manager_share
-								),
-								scholar_share: calculateScholarShare(
-									dataItem.total_slp,
-									calculateScholarPercent(localData[index].manager_share)
+									calcScholarPercent(localData[index].manager_share)
 								),
 								mmr: dataItem.mmr,
 								rank: dataItem.rank,
@@ -494,7 +491,7 @@ function App() {
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
 							label="Total Daily Average"
-							slp={calculateTotal(data, 'average_slp')}
+							slp={calcTotal(data, 'average_slp')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}
 						/>
@@ -502,7 +499,7 @@ function App() {
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
 							label="Total Unclaimed"
-							slp={calculateTotal(data, 'unclaimed_slp')}
+							slp={calcTotal(data, 'unclaimed_slp')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}
 						/>
@@ -510,7 +507,7 @@ function App() {
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
 							label="Total Claimed"
-							slp={calculateTotal(data, 'claimed_slp')}
+							slp={calcTotal(data, 'claimed_slp')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}
 						/>
@@ -518,7 +515,7 @@ function App() {
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
 							label="Total Farmed"
-							slp={calculateTotal(data, 'total_slp')}
+							slp={calcTotal(data, 'total_slp')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}
 						/>
@@ -526,7 +523,7 @@ function App() {
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
 							label="Manager Total"
-							slp={calculateTotal(data, 'manager_share')}
+							slp={calcTotal(data, 'manager_share')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}
 						/>
@@ -534,7 +531,7 @@ function App() {
 					<Grid item xs={6} sm={4} lg={2}>
 						<BasicCard
 							label="Scholar Total"
-							slp={calculateTotal(data, 'scholar_share')}
+							slp={calcTotal(data, 'scholar_share')}
 							slpPrice={cryptoData['smooth-love-potion'][currency]}
 							currency={currency}
 						/>

@@ -11,11 +11,11 @@ export const processDate = (dateInMilliseconds) => {
 	});
 };
 
-export const calculateAverageSlp = (inGameSlp, lastClaimInDays) => {
+export const calcAverageSlp = (inGameSlp, lastClaimInDays) => {
 	return parseInt((inGameSlp / lastClaimInDays).toFixed(0));
 };
 
-export const calculateLastClaimInDays = (lastClaim) => {
+export const calcLastClaimInDays = (lastClaim) => {
 	return Math.ceil((Date.now() - parseInt(`${lastClaim}000`)) / 86400000);
 };
 
@@ -27,11 +27,11 @@ export const lastClaimInDays = (days) => {
 	}
 };
 
-export const calculateNextClaimInDays = (nextClaim) => {
+export const calcNextClaimInDays = (nextClaim) => {
 	return Math.floor((parseInt(`${nextClaim}000`) - Date.now()) / 86400000);
 };
 
-export const calculateTotal = (array, property) => {
+export const calcTotal = (array, property) => {
 	let sum = 0;
 
 	array.forEach((item) => {
@@ -41,15 +41,15 @@ export const calculateTotal = (array, property) => {
 	return sum;
 };
 
-export const calculateScholarPercent = (managerPercent) => {
+export const calcScholarPercent = (managerPercent) => {
 	return 100 - managerPercent;
 };
 
-export const calculateManagerShare = (totalSlp, managerPercent) => {
+export const calcManagerShare = (totalSlp, managerPercent) => {
 	return parseInt((totalSlp * (managerPercent / 100)).toFixed(0));
 };
 
-export const calculateScholarShare = (totalSlp, scholarPercent) => {
+export const calcScholarShare = (totalSlp, scholarPercent) => {
 	return parseInt((totalSlp * (scholarPercent / 100)).toFixed(0));
 };
 
