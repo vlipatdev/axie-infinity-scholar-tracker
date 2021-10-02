@@ -58,14 +58,14 @@ function AboutDialog(props) {
 
 						<br />
 						<Typography>
-							Future releases will include scholar search, daily SLP data, dark mode, table
-							customization, table pagination, multiple currencies, JSON support from other
-							trackers, and more.
+							This site is in early stages of development. Future releases will include daily SLP
+							data, table customization, multiple currencies, JSON support for other trackers, dark
+							mode, and more.
 						</Typography>
 
 						<br />
 						<Typography>
-							Data provided by{' '}
+							Scholar data provided by{' '}
 							<a href="https://skymavis.com/" style={{ textDecoration: 'none', color: '#1976D2' }}>
 								Sky Mavis
 							</a>
@@ -84,7 +84,7 @@ function AboutDialog(props) {
 								style={{ color: '#1976D2', textDecoration: 'none' }}
 								href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
 							>
-								Report errors or bugs
+								Report bugs or send suggestions
 							</a>
 							.
 						</Typography>
@@ -98,9 +98,9 @@ function AboutDialog(props) {
 							mt: 4,
 						}}
 					>
-						<Avatar src={profile} sx={{ mr: 1, height: 40, width: 40 }} />
+						<Avatar src={profile} sx={{ mr: 1, height: 35, width: 35 }} />
 						<Typography color="text.primary" sx={{ fontSize: 14 }}>
-							coded by{' '}
+							by{' '}
 							<a
 								style={{ textDecoration: 'none', color: '#1976D2' }}
 								href="https://www.facebook.com/xf606bZhSFYbORVF/"

@@ -6,16 +6,14 @@ import FileSaver from 'file-saver';
 import styled from '@mui/material/styles/styled';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-// import Alert from '@mui/material/Alert';
+import Alert from '@mui/material/Alert';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
 import Tooltip from '@mui/material/Tooltip';
 import UploadIcon from '@mui/icons-material/Upload';
 import DownloadIcon from '@mui/icons-material/Download';
 
-// import NavBar from './NavBar';
 import BasicCard from './BasicCard';
 import Form from './Form';
 import DataTable from './DataTable';
@@ -29,6 +27,8 @@ import axie from '../assets/images/axie.png';
 import slpLogo from '../assets/images/slp_logo.png';
 import ethereumLogo from '../assets/images/ethereum_logo.png';
 import axsLogo from '../assets/images/axs_logo.png';
+
+import theme from '../theme';
 
 import {
 	calculateAverageSlp,
@@ -139,7 +139,6 @@ function App() {
 							return {
 								last_updated: processDate(dataItem.cache_last_updated),
 								name: localData[index].name,
-
 								ronin_address: localData[index].ronin_address,
 								average_slp: calculateAverageSlp(
 									dataItem.in_game_slp,
@@ -206,12 +205,14 @@ function App() {
 			fileReader.onload = (event) => {
 				setIsDelete(false);
 				const JSONdata = JSON.parse(event.target.result);
+				// simple JSON validation
 				if (JSONdata[0].name && JSONdata[0].ronin_address && JSONdata[0].manager_share) {
 					if (JSONdata.length > 100) {
 						alert('Only JSON files with max 100 ronin addresses are allowed at the moment.');
 					} else {
 						setLocalData(JSONdata);
 					}
+					// JSON from https://axie-scho-tracker.xyz/
 				} else if (JSONdata[0].name && JSONdata[0].eth && JSONdata[0].managerShare) {
 					if (JSONdata.length > 100) {
 						alert('Only JSON files with max 100 ronin addresses are allowed at the moment.');
@@ -227,7 +228,7 @@ function App() {
 					}
 				} else {
 					alert(
-						'Incompamtible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.xyz/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
+						'Incompatible JSON structure.\n\nOnly exported JSON from this site and https://axie-scho-tracker.xyz/ are accepted at the moment.\n\nSupport for other trackers will be added in the future.'
 					);
 				}
 			};
@@ -295,7 +296,7 @@ function App() {
 						mb: 6,
 					}}
 				>
-					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
+					<Tooltip title="View on CoinGecko">
 						<a
 							href={`https://www.coingecko.com/en/coins/ethereum/${currency}`}
 							target="blank"
@@ -308,7 +309,7 @@ function App() {
 									alignItems: 'center',
 									justifyContent: 'center',
 									m: 1,
-									minWidth: '200px',
+									// minWidth: '200px',
 								}}
 							>
 								<img
@@ -316,26 +317,44 @@ function App() {
 									style={{ height: '20px', width: '20px', marginRight: '4px' }}
 									alt="ethereum logo"
 								/>
-								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
+								<Typography
+									sx={{
+										mr: 1,
+										fontSize: 14,
+										fontWeight: 'bold',
+										[theme.breakpoints.down('md')]: {
+											fontSize: 12,
+										},
+									}}
+								>
 									{addCommaToNumber(cryptoData.ethereum[currency])} {currency.toUpperCase()}
 								</Typography>
-								<Paper
-									elevation={0}
+								<Box
 									sx={{
 										borderRadius: '100px',
 										backgroundColor:
 											cryptoData.ethereum[`${currency}_24h_change`] >= 0 ? '#6cc000' : '#ff5341', // hardcoded
 									}}
 								>
-									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
+									<Typography
+										sx={{
+											color: '#FFFFFF',
+											fontSize: 12,
+											[theme.breakpoints.down('md')]: {
+												fontSize: 10,
+											},
+											ml: 1,
+											mr: 1,
+										}}
+									>
 										{cryptoData.ethereum[`${currency}_24h_change`] > 0 ? '+' : null}
 										{cryptoData.ethereum[`${currency}_24h_change`].toFixed(2)}%
 									</Typography>
-								</Paper>
+								</Box>
 							</Box>
 						</a>
 					</Tooltip>
-					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
+					<Tooltip title="View on CoinGecko">
 						<a
 							href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
 							target="blank"
@@ -348,7 +367,7 @@ function App() {
 									alignItems: 'center',
 									justifyContent: 'center',
 									m: 1,
-									minWidth: '200px',
+									// minWidth: '200px',
 								}}
 							>
 								<img
@@ -356,11 +375,19 @@ function App() {
 									style={{ height: '20px', width: '20px', marginRight: '4px' }}
 									alt="axs logo"
 								/>
-								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
+								<Typography
+									sx={{
+										mr: 1,
+										fontWeight: 'bold',
+										fontSize: 14,
+										[theme.breakpoints.down('md')]: {
+											fontSize: 12,
+										},
+									}}
+								>
 									{addCommaToNumber(cryptoData['axie-infinity'][currency])} {currency.toUpperCase()}
 								</Typography>
-								<Paper
-									elevation={0}
+								<Box
 									sx={{
 										borderRadius: '100px',
 										backgroundColor:
@@ -369,15 +396,25 @@ function App() {
 												: '#ff5341',
 									}}
 								>
-									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
+									<Typography
+										sx={{
+											color: '#FFFFFF',
+											fontSize: 12,
+											[theme.breakpoints.down('md')]: {
+												fontSize: 10,
+											},
+											ml: 1,
+											mr: 1,
+										}}
+									>
 										{cryptoData['axie-infinity'][`${currency}_24h_change`] > 0 ? '+' : null}
 										{cryptoData['axie-infinity'][`${currency}_24h_change`].toFixed(2)}%
 									</Typography>
-								</Paper>
+								</Box>
 							</Box>
 						</a>
 					</Tooltip>
-					<Tooltip title="View on CoinGecko" style={{ flexGrow: 1 }}>
+					<Tooltip title="View on CoinGecko">
 						<a
 							href={`https://www.coingecko.com/en/coins/smooth-love-potion/${currency}`}
 							target="blank"
@@ -390,7 +427,7 @@ function App() {
 									alignItems: 'center',
 									justifyContent: 'center',
 									m: 1,
-									minWidth: '200px',
+									// minWidth: '200px',
 								}}
 							>
 								<img
@@ -398,11 +435,19 @@ function App() {
 									style={{ height: '20px', width: '20px', marginRight: '4px' }}
 									alt="slp logo"
 								/>
-								<Typography sx={{ mr: 1, fontSize: 14, fontWeight: 'bold' }}>
+								<Typography
+									sx={{
+										mr: 1,
+										fontSize: 14,
+										[theme.breakpoints.down('md')]: {
+											fontSize: 12,
+										},
+										fontWeight: 'bold',
+									}}
+								>
 									{cryptoData['smooth-love-potion'][currency]} {currency.toUpperCase()}
 								</Typography>
-								<Paper
-									elevation={0}
+								<Box
 									sx={{
 										borderRadius: '100px',
 										backgroundColor:
@@ -411,17 +456,27 @@ function App() {
 												: '#ff5341',
 									}}
 								>
-									<Typography sx={{ color: '#FFFFFF', fontSize: 12, ml: 1, mr: 1 }}>
+									<Typography
+										sx={{
+											color: '#FFFFFF',
+											fontSize: 12,
+											[theme.breakpoints.down('md')]: {
+												fontSize: 10,
+											},
+											ml: 1,
+											mr: 1,
+										}}
+									>
 										{cryptoData['smooth-love-potion'][`${currency}_24h_change`] > 0 ? '+' : null}
 										{cryptoData['smooth-love-potion'][`${currency}_24h_change`].toFixed(2)}%
 									</Typography>
-								</Paper>
+								</Box>
 							</Box>
 						</a>
 					</Tooltip>
 				</Box>
 				{/* <Alert icon={false} severity="info" sx={{ m: 1, mb: 4 }}>
-					🚧 This site is under development.{' '}
+					🚧 This site is currently in alpha.{' '}
 					<a
 						style={{ color: '#1976D2' }}
 						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
@@ -554,24 +609,26 @@ function App() {
 					>
 						<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
 						<Typography sx={{ mb: 10 }}>No scholars added</Typography>
-						<label htmlFor="contained-button-file">
-							<Input
-								onChange={handleJSONUpload}
-								accept="application/JSON"
-								id="contained-button-file"
-								type="file"
-							/>
-							<Button
-								onClick={null}
-								component="span"
-								startIcon={<UploadIcon />}
-								variant="outlined"
-								sx={{ m: 1 }}
-								disableElevation
-							>
-								Upload list
-							</Button>
-						</label>
+						<Tooltip title="Upload list of scholars">
+							<label htmlFor="contained-button-file">
+								<Input
+									onChange={handleJSONUpload}
+									accept="application/JSON"
+									id="contained-button-file"
+									type="file"
+								/>
+								<Button
+									onClick={null}
+									component="span"
+									startIcon={<UploadIcon />}
+									variant="outlined"
+									sx={{ m: 1 }}
+									disableElevation
+								>
+									Upload list
+								</Button>
+							</label>
+						</Tooltip>
 					</Box>
 				)}
 			</Container>

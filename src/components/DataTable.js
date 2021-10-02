@@ -60,7 +60,7 @@ export default function DataTable(props) {
 	function renderDeleteButton(name) {
 		return (
 			<Tooltip title={`Remove ${name}`}>
-				<IconButton color="error" size="small">
+				<IconButton color="primary" size="small">
 					<DeleteIcon />
 				</IconButton>
 			</Tooltip>
@@ -117,7 +117,7 @@ export default function DataTable(props) {
 
 	return (
 		<>
-			<TableContainer component={Paper} variant="outlined" sx={{ mb: 8, maxHeight: '1000px' }}>
+			<TableContainer component={Paper} variant="outlined" sx={{ mb: 8 }}>
 				<Table stickyHeader aria-label="data table">
 					<TableHead>
 						<TableRow>
