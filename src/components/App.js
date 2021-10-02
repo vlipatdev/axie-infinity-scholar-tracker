@@ -61,7 +61,7 @@ function App() {
 		},
 		ethereum: {
 			php: 0,
-			php_24h_chasnge: 0,
+			php_24h_change: 0,
 			usd: 0,
 			usd_24h_change: 0,
 		},
