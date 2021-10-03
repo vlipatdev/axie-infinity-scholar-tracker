@@ -1,20 +1,20 @@
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
 import theme from '../theme';
 
 function Footer() {
+	function handleClick() {
+		navigator.clipboard.writeText('ronin:7587459e4c00420a218c35abec543cc9d22e45d1');
+	}
+
 	function handleMouseEnter() {
 		document.body.style.cursor = 'pointer';
 	}
 
 	function handleMouseLeave() {
 		document.body.style.cursor = 'default';
-	}
-
-	function handleClick() {
-		navigator.clipboard.writeText('ronin:7587459e4c00420a218c35abec543cc9d22e45d1');
 	}
 
 	return (
@@ -40,9 +40,9 @@ function Footer() {
 					Donate
 				</Typography>
 				<Tooltip
+					onClick={handleClick}
 					onMouseEnter={handleMouseEnter}
 					onMouseLeave={handleMouseLeave}
-					onClick={handleClick}
 					title="Click to copy"
 				>
 					<Typography
@@ -53,7 +53,7 @@ function Footer() {
 							},
 							mb: 4,
 							textAlign: 'center',
-							color: '#1976D2',
+							color: theme.palette.primary.main,
 						}}
 					>
 						ronin:7587459e4c00420a218c35abec543cc9d22e45d1

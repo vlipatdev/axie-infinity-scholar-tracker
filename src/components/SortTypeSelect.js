@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 function SortTypeSelect(props) {
 	const { onUpdate, localSettings } = props;
+
 	const [sortType, setSortType] = useState('');
 
 	useEffect(() => {

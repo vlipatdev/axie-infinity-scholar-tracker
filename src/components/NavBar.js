@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import Toolbar from '@mui/material/Toolbar';
 import AppBar from '@mui/material/AppBar';
-import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 import AboutDialog from './AboutDialog';
@@ -46,7 +47,7 @@ function NavBar() {
 					Axie Scholar Tracker
 				</Typography>
 				<Tooltip title="About">
-					<Button onClick={handleClick} sx={{ color: '#FFFFFF' }}>
+					<Button onClick={handleClick} sx={{ color: 'white' }}>
 						<InfoOutlinedIcon />
 					</Button>
 				</Tooltip>

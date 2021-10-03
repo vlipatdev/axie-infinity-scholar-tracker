@@ -1,17 +1,20 @@
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
 
 import profile from '../assets/images/profile.jpg';
 
+import theme from '../theme';
+
 function AboutDialog(props) {
 	const { open, onClose } = props;
+
 	return (
 		<Dialog open={open} onClose={onClose}>
 			<DialogTitle>About</DialogTitle>
@@ -22,55 +25,30 @@ function AboutDialog(props) {
 							Unofficial scholar tracker for{' '}
 							<a
 								href="https://axieinfinity.com/"
-								style={{ textDecoration: 'none', color: '#1976D2' }}
+								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
 							>
 								Axie Infinity
 							</a>
 							.
 						</Typography>
-						{/* <br />
-						<Typography color="text.primary" sx={{ fontWeight: 'bold' }}>
-							✨ Features
-						</Typography>
-						<br /> */}
-						{/* <Typography color="text.primary" sx={{ fontWeight: 'bold' }}></Typography>
-						<br />
-						<Typography>
-							This site's data is saved in your browser's local storage. Clearing your browser's
-							cache will erase this data. Make sure to export JSON first to avoid losing data.
-						</Typography>
-						<br />
-						<Typography>
-							Importing JSON will override current data. Only up to 100 ronin addresses are
-							supported at the moment.
-						</Typography>
-						<br />
-						<Typography>
-							This site supports JSON import from{' '}
-							<a
-								href="https://axie-scho-tracker.xyz/"
-								style={{ textDecoration: 'none', color: '#1976D2' }}
-							>
-								https://axie-scho-tracker.xyz/
-							</a>
-							.
-						</Typography> */}
 						<br />
 						<Typography>
 							Future releases will include daily SLP data, table customization, multiple currencies,
 							JSON support for other trackers, dark mode, and more.
 						</Typography>
-
 						<br />
 						<Typography>
-							Scholar data provided by{' '}
-							<a href="https://skymavis.com/" style={{ textDecoration: 'none', color: '#1976D2' }}>
+							Data provided by{' '}
+							<a
+								href="https://skymavis.com/"
+								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+							>
 								Sky Mavis
 							</a>
 							. Crypto prices courtesy of{' '}
 							<a
 								href="https://www.coingecko.com/en/api"
-								style={{ textDecoration: 'none', color: '#1976D2' }}
+								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
 							>
 								CoinGecko
 							</a>
@@ -79,8 +57,8 @@ function AboutDialog(props) {
 						<br />
 						<Typography>
 							<a
-								style={{ color: '#1976D2', textDecoration: 'none' }}
-								href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
+								href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject= Axie Scholar Tracker Bug"
+								style={{ color: theme.palette.primary.main, textDecoration: 'none' }}
 							>
 								Report bugs or send suggestions
 							</a>
@@ -90,8 +68,8 @@ function AboutDialog(props) {
 					<Box
 						sx={{
 							display: 'flex',
-							justifyContent: 'center',
 							alignItems: 'center',
+							justifyContent: 'center',
 							mt: 4,
 						}}
 					>
@@ -99,10 +77,10 @@ function AboutDialog(props) {
 						<Typography color="text.primary" sx={{ fontSize: 14 }}>
 							by{' '}
 							<a
-								style={{ textDecoration: 'none', color: '#1976D2' }}
-								href="https://www.facebook.com/xf606bZhSFYbORVF/"
+								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+								href="https://github.com/vlipatdev"
 							>
-								vlipat
+								vlipatdev
 							</a>{' '}
 							with ❤️
 						</Typography>

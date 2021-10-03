@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
-import Snackbar from './SnackBar';
+import SnackBar from './SnackBar';
 
 function Form(props) {
 	const { localData, onUpdate, scholars } = props;
@@ -25,12 +25,12 @@ function Form(props) {
 		manager_error_message: '',
 	});
 
-	const handleClose = (_, reason) => {
+	function handleClose(_, reason) {
 		if (reason === 'clickaway') {
 			return;
 		}
 		setOpen(false);
-	};
+	}
 
 	function handleChange(event) {
 		const { name, value } = event.target;
@@ -216,7 +216,7 @@ function Form(props) {
 					</Button>
 				</Grid>
 			</Grid>
-			<Snackbar onClose={handleClose} open={open} type="success" />
+			<SnackBar onClose={handleClose} open={open} type="success" />
 		</Box>
 	);
 }

@@ -5,12 +5,14 @@ import NavBar from './NavBar';
 import axieLogo from '../assets/images/axie_logo.png';
 import background from '../assets/images/background.jpg';
 
+import theme from '../theme';
+
 function Header() {
 	return (
 		<Box
 			sx={{
 				backgroundPosition: 'center',
-				backgroundColor: '#1976D2',
+				backgroundColor: theme.palette.primary.main,
 				backgroundImage: `linear-gradient(rgba(21, 101, 192, 0.8),rgba(21, 101, 192, 0.95)),url(${background})`,
 			}}
 		>

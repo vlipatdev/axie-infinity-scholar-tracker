@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
 	return <MuiAlert icon={<CheckIcon />} ref={ref} variant="filled" {...props} />;
@@ -22,7 +22,7 @@ function SnackBar(props) {
 
 	return (
 		<div>
-			<Snackbar open={open} autoHideDuration={6000} onClose={onClose} action={action}>
+			<Snackbar open={open} autoHideDuration={5000} onClose={onClose} action={action}>
 				<Alert
 					onClose={onClose}
 					severity={type === 'success' ? 'info' : 'error'}

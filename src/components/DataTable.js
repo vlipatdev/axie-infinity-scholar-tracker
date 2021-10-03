@@ -1,15 +1,18 @@
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Tooltip from '@mui/material/Tooltip';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { addCommaToNumber, limitString, sortArray, lastClaimInDays } from '../helpers';
+
+import theme from '../theme';
 
 function createData(
 	number,
@@ -75,7 +78,7 @@ export default function DataTable(props) {
 					href={url}
 					target="_blank"
 					rel="noreferrer"
-					style={{ textDecoration: 'none', color: '#1976D2' }} // hardcoded color
+					style={{ textDecoration: 'none', color: theme.palette.primary.main }}
 				>
 					{limitString(name)}
 				</a>
@@ -83,36 +86,31 @@ export default function DataTable(props) {
 		);
 	}
 
-	const rows = sortedData.map((address, index) => {
-		if (address.next_claim_raw === 1209600) {
-			return createData(
-				index + 1,
-				renderMarketplaceLink(address.name, address.ronin_address),
-				addCommaToNumber(address.average_slp),
-				addCommaToNumber(address.unclaimed_slp),
-				`${addCommaToNumber(address.manager_share)} (${address.manager_percent}%)`,
-				`${addCommaToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
-				'No record',
-				'No record',
-				address.mmr,
-				renderDeleteButton(address.name),
-				address.ronin_address
-			);
+	const rows = sortedData.map((item, index) => {
+		let lastClaim;
+		let nextClaim;
+
+		if (item.next_claim_raw === 1209600) {
+			lastClaim = 'No record';
+			nextClaim = 'No record';
 		} else {
-			return createData(
-				index + 1,
-				renderMarketplaceLink(address.name, address.ronin_address),
-				addCommaToNumber(address.average_slp),
-				addCommaToNumber(address.unclaimed_slp),
-				`${addCommaToNumber(address.manager_share)} (${address.manager_percent}%)`,
-				`${addCommaToNumber(address.scholar_share)} (${address.scholar_percent}%)`,
-				`${lastClaimInDays(address.last_claim_in_days)}`,
-				address.next_claim_date,
-				address.mmr,
-				renderDeleteButton(address.name),
-				address.ronin_address
-			);
+			lastClaim = `${lastClaimInDays(item.last_claim_in_days)}`;
+			nextClaim = item.next_claim_date;
 		}
+
+		return createData(
+			index + 1,
+			renderMarketplaceLink(item.name, item.ronin_address),
+			addCommaToNumber(item.average_slp),
+			addCommaToNumber(item.unclaimed_slp),
+			`${addCommaToNumber(item.manager_share)} (${item.manager_percent}%)`,
+			`${addCommaToNumber(item.scholar_share)} (${item.scholar_percent}%)`,
+			lastClaim,
+			nextClaim,
+			item.mmr,
+			renderDeleteButton(item.name),
+			item.ronin_address
+		);
 	});
 
 	return (
