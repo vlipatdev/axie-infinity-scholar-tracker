@@ -20,51 +20,49 @@ function AboutDialog(props) {
 			<DialogTitle>About</DialogTitle>
 			<DialogContent>
 				<DialogContentText>
-					<Box>
-						<Typography>
-							Unofficial scholar tracker for{' '}
-							<a
-								href="https://axieinfinity.com/"
-								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
-							>
-								Axie Infinity
-							</a>
-							.
-						</Typography>
-						<br />
-						<Typography>
-							Future releases will include daily SLP data, table customization, multiple currencies,
-							JSON support for other trackers, dark mode, and more.
-						</Typography>
-						<br />
-						<Typography>
-							Data provided by{' '}
-							<a
-								href="https://skymavis.com/"
-								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
-							>
-								Sky Mavis
-							</a>
-							. Crypto prices courtesy of{' '}
-							<a
-								href="https://www.coingecko.com/en/api"
-								style={{ textDecoration: 'none', color: theme.palette.primary.main }}
-							>
-								CoinGecko
-							</a>
-							.
-						</Typography>
-						<br />
-						<Typography>
-							<a
-								href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject= Axie Scholar Tracker Bug"
-								style={{ color: theme.palette.primary.main, textDecoration: 'none' }}
-							>
-								Report bugs or send suggestions
-							</a>
-							.
-						</Typography>
-					</Box>
+					<Typography>
+						This is an unofficial scholar tracker for{' '}
+						<a
+							href="https://axieinfinity.com/"
+							style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+						>
+							Axie Infinity
+						</a>
+						.
+					</Typography>
+					<br />
+					<Typography>
+						Future releases will include daily SLP data, table customization, multiple currencies,
+						JSON support for other trackers, dark mode, and more.
+					</Typography>
+					<br />
+					<Typography>
+						Data provided by{' '}
+						<a
+							href="https://skymavis.com/"
+							style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+						>
+							Sky Mavis
+						</a>
+						. Crypto prices courtesy of{' '}
+						<a
+							href="https://www.coingecko.com/en/api"
+							style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+						>
+							CoinGecko
+						</a>
+						.
+					</Typography>
+					<br />
+					<Typography>
+						<a
+							href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject= Axie Scholar Tracker Bug"
+							style={{ textDecoration: 'none', color: theme.palette.primary.main }}
+						>
+							Report bugs or send suggestions
+						</a>
+						.
+					</Typography>
 					<Box
 						sx={{
 							display: 'flex',

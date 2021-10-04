@@ -52,7 +52,7 @@ function Form(props) {
 					return {
 						...prevValid,
 						name: false,
-						name_error_message: 'Name is required',
+						name_error_message: 'Scholar name is required',
 					};
 				} else {
 					const index = localData.findIndex(
@@ -62,7 +62,7 @@ function Form(props) {
 						return {
 							...prevValid,
 							name: false,
-							name_error_message: 'Name already exists',
+							name_error_message: 'Scholar name already exists',
 						};
 					}
 					return {
@@ -142,7 +142,7 @@ function Form(props) {
 						onBlur={handleBlur}
 						name="name"
 						id="name"
-						label="Name"
+						label="Scholar Name"
 						variant="outlined"
 						size="small"
 						value={profile.name}

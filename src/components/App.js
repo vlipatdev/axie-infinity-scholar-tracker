@@ -9,11 +9,13 @@ import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
+import Fab from '@mui/material/Fab';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 import DownloadIcon from '@mui/icons-material/Download';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import UploadIcon from '@mui/icons-material/Upload';
 
 import BasicCard from './BasicCard';
@@ -279,13 +281,7 @@ function App() {
 			<CryptoBar data={cryptoData} currency={currency} />
 			<Container maxWidth="lg" sx={{ mb: 10 }}>
 				{/* <Alert icon={false} severity="info" sx={{ m: 1, mb: 4 }}>
-					🚧 This site is currently in alpha.{' '}
-					<a
-						style={{ color: theme.palette.primary.main }}
-						href="mailto:610b145c-e385-48c8-bf7f-c4b9a2468b18@simplelogin.co?subject=Axie Scholar Tracker Bug"
-					>
-						Click here to report errors or bugs.
-					</a>
+					Only up to 100 scholars are supported at the moment.
 				</Alert> */}
 				<Grid
 					container
@@ -434,6 +430,11 @@ function App() {
 						</Tooltip>
 					</Box>
 				)}
+				{/* <Fab
+					sx={{ margin: 0, top: 'auto', right: 20, bottom: 20, left: 'auto', position: 'fixed' }}
+					color="primary"
+					aria-label="help"
+				></Fab> */}
 			</Container>
 			{/* <Footer /> */}
 		</Box>
