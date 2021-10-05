@@ -10,13 +10,13 @@ import SnackBar from './SnackBar';
 function Form(props) {
 	const { localData, onUpdate, scholars } = props;
 
-	const [open, setOpen] = useState(false);
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [profile, setProfile] = useState({
 		name: '',
 		ronin_address: '',
 		manager_share: '',
 	});
-	const [valid, setValid] = useState({
+	const [isValid, setIsValid] = useState({
 		name: true,
 		ronin_address: true,
 		manager_share: true,
@@ -25,11 +25,11 @@ function Form(props) {
 		manager_error_message: '',
 	});
 
-	function handleClose(_, reason) {
+	function handleSnackbarClose(_, reason) {
 		if (reason === 'clickaway') {
 			return;
 		}
-		setOpen(false);
+		setSnackbarOpen(false);
 	}
 
 	function handleChange(event) {
@@ -46,11 +46,11 @@ function Form(props) {
 	function handleBlur(event) {
 		const { name, value } = event.target;
 
-		setValid((prevValid) => {
+		setIsValid((prevIsValid) => {
 			if (name === 'name') {
 				if (!value) {
 					return {
-						...prevValid,
+						...prevIsValid,
 						name: false,
 						name_error_message: 'Scholar name is required',
 					};
@@ -60,13 +60,13 @@ function Form(props) {
 					);
 					if (index !== -1) {
 						return {
-							...prevValid,
+							...prevIsValid,
 							name: false,
 							name_error_message: 'Scholar name already exists',
 						};
 					}
 					return {
-						...prevValid,
+						...prevIsValid,
 						name: true,
 						name_error_message: '',
 					};
@@ -74,7 +74,7 @@ function Form(props) {
 			} else if (name === 'ronin_address') {
 				if (!value) {
 					return {
-						...prevValid,
+						...prevIsValid,
 						ronin_address: false,
 						ronin_error_message: 'Ronin address is required',
 					};
@@ -84,20 +84,20 @@ function Form(props) {
 					);
 					if (index !== -1) {
 						return {
-							...prevValid,
+							...prevIsValid,
 							ronin_address: false,
 							ronin_error_message: 'Ronin address already exists',
 						};
 					} else {
 						if (value.match(/^ronin:[a-zA-Z0-9]{40}$/)) {
 							return {
-								...prevValid,
+								...prevIsValid,
 								ronin_address: true,
 								ronin_error_message: '',
 							};
 						} else {
 							return {
-								...prevValid,
+								...prevIsValid,
 								ronin_address: false,
 								ronin_error_message: 'Invalid ronin address',
 							};
@@ -107,21 +107,20 @@ function Form(props) {
 			} else if (name === 'manager_share') {
 				if (!value) {
 					return {
-						...prevValid,
+						...prevIsValid,
 						manager_share: false,
 						manager_error_message: `Manager share is required`,
 					};
 				} else {
 					if (value < 0 || value > 100) {
 						return {
-							...prevValid,
+							...prevIsValid,
 							manager_share: false,
 							manager_error_message: `Manager share must be 0 - 100`,
 						};
 					}
-
 					return {
-						...prevValid,
+						...prevIsValid,
 						manager_share: true,
 						manager_error_message: '',
 					};
@@ -136,8 +135,8 @@ function Form(props) {
 				<Grid item xs={12} sm={6} md={3}>
 					<TextField
 						fullWidth
-						error={!valid.name}
-						helperText={!valid.name && valid.name_error_message}
+						error={!isValid.name}
+						helperText={isValid.name_error_message}
 						onChange={handleChange}
 						onBlur={handleBlur}
 						name="name"
@@ -151,8 +150,8 @@ function Form(props) {
 				<Grid item xs={12} sm={6} md={3}>
 					<TextField
 						fullWidth
-						error={!valid.ronin_address}
-						helperText={!valid.ronin_address && valid.ronin_error_message}
+						error={!isValid.ronin_address}
+						helperText={isValid.ronin_error_message}
 						onChange={handleChange}
 						onBlur={handleBlur}
 						name="ronin_address"
@@ -166,8 +165,8 @@ function Form(props) {
 				<Grid item xs={12} sm={6} md={3}>
 					<TextField
 						fullWidth
-						error={!valid.manager_share}
-						helperText={!valid.manager_share && valid.manager_error_message}
+						error={!isValid.manager_share}
+						helperText={isValid.manager_error_message}
 						onChange={handleChange}
 						onBlur={handleBlur}
 						type="number"
@@ -185,18 +184,18 @@ function Form(props) {
 						fullWidth
 						onClick={() => {
 							if (
-								valid.name &&
-								valid.ronin_address &&
-								valid.manager_share &&
-								profile.name !== '' &&
-								profile.ronin_address !== '' &&
-								profile.manager_share !== ''
+								isValid.name &&
+								isValid.ronin_address &&
+								isValid.manager_share &&
+								profile.name &&
+								profile.ronin_address &&
+								profile.manager_share
 							) {
 								if (scholars >= 100) {
 									alert('Only 100 scholars are allowed at the moment.');
 								} else {
 									onUpdate([...localData, profile], false);
-									setOpen(true);
+									setSnackbarOpen(true);
 									setProfile({
 										name: '',
 										ronin_address: '',
@@ -216,7 +215,7 @@ function Form(props) {
 					</Button>
 				</Grid>
 			</Grid>
-			<SnackBar onClose={handleClose} open={open} type="add" />
+			<SnackBar onClose={handleSnackbarClose} open={snackbarOpen} type="add" />
 		</Box>
 	);
 }

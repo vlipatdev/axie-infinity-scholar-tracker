@@ -15,13 +15,13 @@ function ScholarPage(props) {
 
 	const { localData, onUpdate } = props;
 
-	const [open, setOpen] = useState(false);
+	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [profile, setProfile] = useState({
 		name: '',
 		ronin_address: '',
 		manager_share: '',
 	});
-	const [valid, setValid] = useState({
+	const [isValid, setIsValid] = useState({
 		name: true,
 		manager_share: true,
 		name_error_message: '',
@@ -30,6 +30,8 @@ function ScholarPage(props) {
 
 	useEffect(() => {
 		document.body.style.cursor = 'default';
+
+		// redirect if scholar name does not exist
 		const scholarIndex = localData.findIndex((scholar) => scholar.name === scholarName);
 		if (localData.length > 0 && scholarIndex === -1) {
 			history.push('/');
@@ -45,11 +47,11 @@ function ScholarPage(props) {
 		}
 	}, [localData]);
 
-	function handleClose(_, reason) {
+	function handleSnackbarClose(_, reason) {
 		if (reason === 'clickaway') {
 			return;
 		}
-		setOpen(false);
+		setSnackbarOpen(false);
 	}
 
 	function handleChange(event) {
@@ -66,7 +68,7 @@ function ScholarPage(props) {
 	function handleBlur(event) {
 		const { name, value } = event.target;
 
-		setValid((prevValid) => {
+		setIsValid((prevValid) => {
 			if (name === 'name') {
 				if (!value) {
 					return {
@@ -125,15 +127,15 @@ function ScholarPage(props) {
 	return (
 		<Box>
 			<Typography variant="h6" sx={{ mb: 4 }}>
-				Edit details for {scholarName}
+				Edit details for "{scholarName}"
 			</Typography>
 			<Grid container spacing={2} sx={{ mb: 6 }}>
 				<Grid item xs={12}>
 					<TextField
 						autoFocus
 						fullWidth
-						error={!valid.name}
-						helperText={!valid.name && valid.name_error_message}
+						error={!isValid.name}
+						helperText={isValid.name_error_message}
 						onChange={handleChange}
 						onBlur={handleBlur}
 						name="name"
@@ -148,8 +150,8 @@ function ScholarPage(props) {
 				<Grid item xs={12}>
 					<TextField
 						fullWidth
-						error={!valid.manager_share}
-						helperText={!valid.manager_share && valid.manager_error_message}
+						error={!isValid.manager_share}
+						helperText={isValid.manager_error_message}
 						onChange={handleChange}
 						onBlur={handleBlur}
 						type="number"
@@ -191,17 +193,11 @@ function ScholarPage(props) {
 					<Button
 						fullWidth
 						onClick={() => {
-							if (
-								valid.name &&
-								valid.manager_share &&
-								profile.name !== '' &&
-								profile.manager_share !== ''
-							) {
+							if (isValid.name && isValid.manager_share && profile.name && profile.manager_share) {
 								onUpdate(
 									[...localData.filter((scholar) => scholar.name !== scholarName), profile],
 									false
 								);
-								// setOpen(true);
 								history.goBack();
 							} else {
 								// alert('Invalid form inputs');
@@ -216,7 +212,7 @@ function ScholarPage(props) {
 					</Button>
 				</Grid>
 			</Grid>
-			<SnackBar onClose={handleClose} open={open} type="update" />
+			<SnackBar onClose={handleSnackbarClose} open={snackbarOpen} type="update" />
 		</Box>
 	);
 }

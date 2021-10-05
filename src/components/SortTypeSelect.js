@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -22,13 +23,13 @@ function SortTypeSelect(props) {
 	return (
 		<Box>
 			<FormControl fullWidth>
-				<InputLabel id="select-label"></InputLabel>
+				<InputLabel id="sort-type-select-label"></InputLabel>
 				<Select
 					sx={{ m: 2, minWidth: '125px' }}
 					variant="standard"
-					labelId="select-label"
+					labelId="sort-type-select-label"
 					name="sort_type"
-					id="sort-select"
+					id="sort-type-select"
 					value={sortType}
 					label="Asc/Desc"
 					onChange={handleChange}

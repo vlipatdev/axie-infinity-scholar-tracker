@@ -36,11 +36,9 @@ export const calcScholarShare = (totalSlp, scholarPercent) => {
 
 export const calcTotal = (array, property) => {
 	let sum = 0;
-
 	array.forEach((item) => {
 		sum += parseInt(item[property]);
 	});
-
 	return sum;
 };
 
@@ -52,7 +50,7 @@ export const limitString = (string) => {
 	}
 };
 
-export const processDate = (dateInMilliseconds) => {
+export const formatDate = (dateInMilliseconds) => {
 	return new Date(dateInMilliseconds).toLocaleDateString('en-US', {
 		month: 'long',
 		day: 'numeric',
@@ -62,8 +60,8 @@ export const processDate = (dateInMilliseconds) => {
 };
 
 export const sortArray = (array, sortBy) => {
+	// https://stackoverflow.com/questions/2802341/javascript-natural-sort-of-alphanumerical-strings
 	const compare = (a, b) => {
-		// https://stackoverflow.com/questions/2802341/javascript-natural-sort-of-alphanumerical-strings
 		return a[sortBy].toString().localeCompare(b[sortBy].toString(), undefined, {
 			numeric: true,
 			sensitivity: 'base',

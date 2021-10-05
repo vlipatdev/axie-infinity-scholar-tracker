@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -22,13 +23,13 @@ function SortBySelect(props) {
 	return (
 		<Box>
 			<FormControl fullWidth>
-				<InputLabel id="select-label"></InputLabel>
+				<InputLabel id="sort-by-select-label"></InputLabel>
 				<Select
 					sx={{ m: 2, minWidth: '125px' }}
 					variant="standard"
 					name="sort_by"
-					labelId="select-label"
-					id="sort-select"
+					labelId="sort-by-select-label"
+					id="sort-by-select"
 					value={sortBy}
 					label="Sort by"
 					onChange={handleChange}

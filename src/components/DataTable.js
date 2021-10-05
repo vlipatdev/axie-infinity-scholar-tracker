@@ -131,8 +131,7 @@ export default function DataTable(props) {
 
 		return createData(
 			index + 1,
-			item.name,
-			// renderMarketplaceLink(item.name, item.ronin_address),
+			renderMarketplaceLink(item.name, item.ronin_address),
 			addCommaToNumber(item.average_slp),
 			addCommaToNumber(item.unclaimed_slp),
 			`${addCommaToNumber(item.manager_share)} (${item.manager_percent}%)`,
@@ -142,7 +141,8 @@ export default function DataTable(props) {
 			item.mmr,
 			renderEditButton(item.name),
 			renderDeleteButton(item.name),
-			item.ronin_address
+			item.ronin_address,
+			item.name
 		);
 	});
 
@@ -182,7 +182,7 @@ export default function DataTable(props) {
 								<TableCell
 									onMouseEnter={handleMouseEnter}
 									onMouseLeave={handleMouseLeave}
-									align="right"
+									align="center"
 								>
 									{row.edit}
 								</TableCell>
@@ -190,7 +190,7 @@ export default function DataTable(props) {
 									onClick={() => handleDelete(row)}
 									onMouseEnter={handleMouseEnter}
 									onMouseLeave={handleMouseLeave}
-									align="right"
+									align="center"
 								>
 									{row.del}
 								</TableCell>

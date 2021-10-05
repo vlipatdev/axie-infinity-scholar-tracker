@@ -30,7 +30,7 @@ import axie from '../assets/images/axie.png';
 import {
 	calcAverageSlp,
 	calcLastClaimInDays,
-	processDate,
+	formatDate,
 	calcNextClaimInDays,
 	calcManagerShare,
 	calcScholarShare,
@@ -70,7 +70,7 @@ function App() {
 			usd_24h_change: 0,
 		},
 	});
-	const [isDelete, setIsDelete] = useState(false);
+	const [fromDelete, setFromDelete] = useState(false);
 	const [currency] = useState('php');
 
 	let sortedData;
@@ -81,18 +81,20 @@ function App() {
 	}
 
 	useEffect(() => {
+		// get scholars list
 		const localStorageData = JSON.parse(localStorage.getItem('scholars'));
 		if (localStorageData) {
 			setAddresses(localStorageData.map((scholar) => scholar.ronin_address));
 			setLocalData(localStorageData);
 		}
 
+		// get user settings
 		const localStorageSettings = JSON.parse(localStorage.getItem('settings'));
 		if (localStorageSettings) {
 			setLocalSettings(localStorageSettings);
 		}
 
-		// fetch crypto prices
+		// get crypto prices
 		axios
 			.get(
 				'https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Caxie-infinity%2Csmooth-love-potion&vs_currencies=php%2Cusd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
@@ -100,29 +102,24 @@ function App() {
 			.then((response) => {
 				setCryptoData(response.data);
 			})
-			.catch((error) => {
+			.catch(() => {
 				alert('Error fetching crypto data. Please try again later.');
 			});
-
-		// console.log('useEffect get local storage');
 	}, []);
 
 	useEffect(() => {
 		setAddresses(localData.map((scholar) => scholar.ronin_address));
 		localStorage.setItem('scholars', JSON.stringify(localData));
-
-		// console.log('useEffect update local data');
 	}, [localData]);
 
 	useEffect(() => {
 		localStorage.setItem('settings', JSON.stringify(localSettings));
-		// console.log('useEffect update local settings');
 	}, [localSettings]);
 
 	useEffect(() => {
 		if (addresses.length !== 0) {
-			if (!isDelete) {
-				// fetch slp data
+			if (!fromDelete) {
+				// get scholar data
 				axios
 					.get(`https://game-api.axie.technology/api/v1/${addresses.join('%2C')}`)
 					.then((response) => {
@@ -130,12 +127,13 @@ function App() {
 						if (addresses.length === 1) {
 							dataArray = [response.data];
 						} else {
+							// convert data object to array
 							dataArray = Object.values(response.data);
 						}
 
 						const finalData = dataArray.map((item, index) => {
 							return {
-								last_updated: processDate(item.cache_last_updated),
+								last_updated: formatDate(item.cache_last_updated),
 								name: localData[index].name,
 								ronin_address: localData[index].ronin_address,
 								average_slp: calcAverageSlp(item.in_game_slp, calcLastClaimInDays(item.last_claim)),
@@ -143,10 +141,10 @@ function App() {
 								claimed_slp: item.total_slp - item.in_game_slp,
 								total_slp: item.total_slp,
 								last_claim_in_days: calcLastClaimInDays(item.last_claim),
-								last_claim_date: processDate(parseInt(`${item.last_claim}000`)),
+								last_claim_date: formatDate(parseInt(`${item.last_claim}000`)),
 								last_claim_raw: parseInt(`${item.last_claim}000`),
 								next_claim_in_days: calcNextClaimInDays(item.next_claim),
-								next_claim_date: processDate(parseInt(`${item.next_claim}000`)),
+								next_claim_date: formatDate(parseInt(`${item.next_claim}000`)),
 								next_claim_raw: item.next_claim,
 								manager_percent: parseInt(localData[index].manager_share),
 								scholar_percent: calcScholarPercent(localData[index].manager_share),
@@ -161,7 +159,7 @@ function App() {
 						});
 						setData(finalData);
 					})
-					.catch((error) => {
+					.catch(() => {
 						alert('Could not connect to server. Please try again later.');
 					});
 			} else {
@@ -171,14 +169,11 @@ function App() {
 			document.body.style.cursor = 'default';
 			setData([]);
 		}
-
-		// console.log('useEffect update addresses');
-		// eslint-disable-next-line
 	}, [addresses]);
 
-	function handleUpdate(data, isDelete) {
+	function handleLocalDataUpdate(data, fromDelete) {
 		setLocalData(data);
-		setIsDelete(isDelete);
+		setFromDelete(fromDelete);
 	}
 
 	function handleJSONDownload(data) {
@@ -195,7 +190,7 @@ function App() {
 		if (event.target.files[0]) {
 			fileReader.readAsText(event.target.files[0], 'UTF-8');
 			fileReader.onload = (event) => {
-				setIsDelete(false);
+				setFromDelete(false); // prevents refetching of scholar data
 				const JSONdata = JSON.parse(event.target.result);
 				// very simple JSON validation
 				if (JSONdata[0].name && JSONdata[0].ronin_address && JSONdata[0].manager_share) {
@@ -204,7 +199,7 @@ function App() {
 					} else {
 						setLocalData(JSONdata);
 					}
-					// JSON from https://axie-scho-tracker.xyz/
+					// very simple validation for JSON from https://axie-scho-tracker.xyz/
 				} else if (JSONdata[0].name && JSONdata[0].eth && JSONdata[0].managerShare) {
 					if (JSONdata.length > 100) {
 						alert('Only JSON files with max 100 ronin addresses are allowed at the moment.');
@@ -281,7 +276,7 @@ function App() {
 				<BrowserRouter>
 					<Switch>
 						<Route path="/scholar/:name">
-							<ScholarPage localData={localData} onUpdate={handleUpdate} />
+							<ScholarPage localData={localData} onUpdate={handleLocalDataUpdate} />
 						</Route>
 						<Route exact path="/">
 							<CryptoBar data={cryptoData} currency={currency} />
@@ -341,7 +336,11 @@ function App() {
 									/>
 								</Grid>
 							</Grid>
-							<Form localData={localData} onUpdate={handleUpdate} scholars={addresses.length} />
+							<Form
+								localData={localData}
+								onUpdate={handleLocalDataUpdate}
+								scholars={addresses.length}
+							/>
 							{addresses.length !== 0 && (
 								<>
 									<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -355,7 +354,7 @@ function App() {
 										data={data}
 										localData={localData}
 										localSettings={localSettings}
-										onDelete={handleUpdate}
+										onDelete={handleLocalDataUpdate}
 										slpPrice={cryptoData['smooth-love-potion'][currency]}
 									/>
 									<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -376,7 +375,7 @@ function App() {
 												<Input
 													onChange={handleJSONUpload}
 													accept="application/JSON"
-													id="contained-button-file"
+													id="upload-button"
 													type="file"
 												/>
 												<Button
@@ -415,7 +414,7 @@ function App() {
 											<Input
 												onChange={handleJSONUpload}
 												accept="application/JSON"
-												id="contained-button-file"
+												id="upload-button"
 												type="file"
 											/>
 											<Button

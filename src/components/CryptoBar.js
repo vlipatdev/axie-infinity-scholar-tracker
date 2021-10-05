@@ -36,7 +36,6 @@ function CryptoBar(props) {
 							alignItems: 'center',
 							justifyContent: 'center',
 							m: 1,
-							// minWidth: '200px',
 						}}
 					>
 						<img
@@ -94,7 +93,6 @@ function CryptoBar(props) {
 							alignItems: 'center',
 							justifyContent: 'center',
 							m: 1,
-							// minWidth: '200px',
 						}}
 					>
 						<img
@@ -152,7 +150,6 @@ function CryptoBar(props) {
 							alignItems: 'center',
 							justifyContent: 'center',
 							m: 1,
-							// minWidth: '200px',
 						}}
 					>
 						<img
