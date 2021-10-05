@@ -25,7 +25,7 @@ import ExportCSVButton from './ExportCSVButton';
 import Footer from './Footer';
 import Form from './Form';
 import Header from './Header';
-import SortSelect from './SortSelect';
+import SortBySelect from './SortBySelect';
 import SortTypeSelect from './SortTypeSelect';
 
 import axie from '../assets/images/axie.png';
@@ -345,7 +345,7 @@ function App() {
 						<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
 							<Typography color="text.secondary">Sort by</Typography>
 							<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-								<SortSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+								<SortBySelect onUpdate={handleSortUpdate} localSettings={localSettings} />
 								<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
 							</Box>
 						</Box>

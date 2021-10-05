@@ -10,7 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { addCommaToNumber, limitString, sortArray, lastClaimInDays } from '../helpers';
+import { addCommaToNumber, limitString, sortArray, addDaysAgo } from '../helpers';
 
 import theme from '../theme';
 
@@ -94,7 +94,7 @@ export default function DataTable(props) {
 			lastClaim = 'No record';
 			nextClaim = 'No record';
 		} else {
-			lastClaim = `${lastClaimInDays(item.last_claim_in_days)}`;
+			lastClaim = `${addDaysAgo(item.last_claim_in_days)}`;
 			nextClaim = item.next_claim_date;
 		}
 

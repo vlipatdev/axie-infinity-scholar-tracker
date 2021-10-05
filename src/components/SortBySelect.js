@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
-function SortSelect(props) {
+function SortBySelect(props) {
 	const { onUpdate, localSettings } = props;
 
 	const [sortBy, setSortBy] = useState('');
@@ -46,4 +46,4 @@ function SortSelect(props) {
 	);
 }
 
-export default SortSelect;
+export default SortBySelect;

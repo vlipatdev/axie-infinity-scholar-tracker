@@ -2,6 +2,14 @@ export const addCommaToNumber = (number) => {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+export const addDaysAgo = (days) => {
+	if (days === 1) {
+		return `${days} day ago`;
+	} else {
+		return `${days} days ago`;
+	}
+};
+
 export const calcAverageSlp = (inGameSlp, lastClaimInDays) => {
 	return parseInt((inGameSlp / lastClaimInDays).toFixed(0));
 };
@@ -34,14 +42,6 @@ export const calcTotal = (array, property) => {
 	});
 
 	return sum;
-};
-
-export const lastClaimInDays = (days) => {
-	if (days === 1) {
-		return `${days} day ago`;
-	} else {
-		return `${days} days ago`;
-	}
 };
 
 export const limitString = (string) => {
