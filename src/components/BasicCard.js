@@ -8,6 +8,8 @@ import slpLogo from '../assets/images/slp_logo.png';
 
 import { addCommaToNumber } from '../helpers';
 
+import theme from '../theme';
+
 function BasicCard(props) {
 	const { label, slp, slpPrice, currency } = props;
 
@@ -28,8 +30,30 @@ function BasicCard(props) {
 		>
 			<CardContent>
 				<Box sx={{ display: 'flex', m: 1, alignItems: 'center' }}>
-					<Avatar alt="slp icon" src={slpLogo} sx={{ m: 1, height: 35, width: 35 }} />
-					<Typography sx={{ fontSize: 28, fontWeight: 'bold' }} variant="h5" component="div">
+					<Avatar
+						alt="slp icon"
+						src={slpLogo}
+						sx={{
+							m: 1,
+							height: 35,
+							width: 35,
+							[theme.breakpoints.down('md')]: {
+								height: 30,
+								width: 30,
+							},
+						}}
+					/>
+					<Typography
+						sx={{
+							fontSize: 26,
+							[theme.breakpoints.down('md')]: {
+								fontSize: 24,
+							},
+							fontWeight: 'bold',
+						}}
+						variant="h5"
+						component="div"
+					>
 						{addCommaToNumber(slp)}
 					</Typography>
 				</Box>
