@@ -23,12 +23,8 @@ function SnackBar(props) {
 	return (
 		<div>
 			<Snackbar open={open} autoHideDuration={5000} onClose={onClose} action={action}>
-				<Alert
-					onClose={onClose}
-					severity={type === 'success' ? 'info' : 'error'}
-					sx={{ width: '100%' }}
-				>
-					{type === 'success' ? 'Scholar added' : 'Successfully removed'}
+				<Alert onClose={onClose} severity="info" sx={{ width: '100%' }}>
+					{type === 'add' ? 'Scholar added' : 'Scholar updated'}
 				</Alert>
 			</Snackbar>
 		</div>

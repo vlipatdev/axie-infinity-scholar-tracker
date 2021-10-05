@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -9,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import { addCommaToNumber, limitString, sortArray, addDaysAgo } from '../helpers';
 
@@ -24,6 +27,7 @@ function createData(
 	lastClaim,
 	nextClaim,
 	mmr,
+	edit,
 	del,
 	roninAddress
 ) {
@@ -37,6 +41,7 @@ function createData(
 		lastClaim,
 		nextClaim,
 		mmr,
+		edit,
 		del,
 		roninAddress,
 	};
@@ -70,6 +75,32 @@ export default function DataTable(props) {
 		);
 	}
 
+	function renderEditButton(name) {
+		return (
+			<Link
+				to={{
+					pathname: `/scholar/${name}`,
+					state: {
+						name: name,
+					},
+				}}
+			>
+				<Tooltip title={`Edit details for ${name}`}>
+					<IconButton color="primary" size="small">
+						<EditIcon />
+					</IconButton>
+				</Tooltip>
+			</Link>
+		);
+	}
+
+	function handleDelete(row) {
+		onDelete(
+			localData.filter((data) => data.ronin_address !== row.roninAddress),
+			true
+		);
+	}
+
 	function renderMarketplaceLink(name, roninAddress) {
 		const url = `https://marketplace.axieinfinity.com/profile/${roninAddress}`;
 		return (
@@ -100,7 +131,8 @@ export default function DataTable(props) {
 
 		return createData(
 			index + 1,
-			renderMarketplaceLink(item.name, item.ronin_address),
+			item.name,
+			// renderMarketplaceLink(item.name, item.ronin_address),
 			addCommaToNumber(item.average_slp),
 			addCommaToNumber(item.unclaimed_slp),
 			`${addCommaToNumber(item.manager_share)} (${item.manager_percent}%)`,
@@ -108,6 +140,7 @@ export default function DataTable(props) {
 			lastClaim,
 			nextClaim,
 			item.mmr,
+			renderEditButton(item.name),
 			renderDeleteButton(item.name),
 			item.ronin_address
 		);
@@ -129,15 +162,12 @@ export default function DataTable(props) {
 							<TableCell align="center">Next Claim</TableCell>
 							<TableCell align="center">MMR</TableCell>
 							<TableCell align="center"></TableCell>
+							<TableCell align="center"></TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>
 						{rows.map((row, index) => (
-							<TableRow
-								onClick={null}
-								key={index}
-								sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-							>
+							<TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 								<TableCell component="th" scope="row">
 									{row.number}
 								</TableCell>
@@ -152,12 +182,14 @@ export default function DataTable(props) {
 								<TableCell
 									onMouseEnter={handleMouseEnter}
 									onMouseLeave={handleMouseLeave}
-									onClick={() => {
-										onDelete(
-											localData.filter((data) => data.ronin_address !== row.roninAddress),
-											true
-										);
-									}}
+									align="right"
+								>
+									{row.edit}
+								</TableCell>
+								<TableCell
+									onClick={() => handleDelete(row)}
+									onMouseEnter={handleMouseEnter}
+									onMouseLeave={handleMouseLeave}
 									align="right"
 								>
 									{row.del}

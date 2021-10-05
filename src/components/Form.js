@@ -216,7 +216,7 @@ function Form(props) {
 					</Button>
 				</Grid>
 			</Grid>
-			<SnackBar onClose={handleClose} open={open} type="success" />
+			<SnackBar onClose={handleClose} open={open} type="add" />
 		</Box>
 	);
 }
