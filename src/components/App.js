@@ -370,7 +370,7 @@ function App() {
 										</Button>
 									</Tooltip>
 									<Tooltip title="Upload list of scholars">
-										<label htmlFor="contained-button-file">
+										<label htmlFor="upload-button">
 											<Input
 												onChange={handleJSONUpload}
 												accept="application/JSON"
@@ -409,7 +409,7 @@ function App() {
 								<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
 								<Typography sx={{ mb: 10 }}>No scholars added</Typography>
 								<Tooltip title="Upload list of scholars">
-									<label htmlFor="contained-button-file">
+									<label htmlFor="upload-button">
 										<Input
 											onChange={handleJSONUpload}
 											accept="application/JSON"
