@@ -28,7 +28,10 @@ function CryptoBar(props) {
 					href={`https://www.coingecko.com/en/coins/ethereum/${currency}`}
 					target="blank"
 					rel="noreferrer"
-					style={{ textDecoration: 'none', color: 'black' }}
+					style={{
+						textDecoration: 'none',
+						color: theme.palette.mode === 'light' ? 'black' : 'white',
+					}}
 				>
 					<Box
 						sx={{
@@ -85,7 +88,10 @@ function CryptoBar(props) {
 					href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
 					target="blank"
 					rel="noreferrer"
-					style={{ textDecoration: 'none', color: 'black' }}
+					style={{
+						textDecoration: 'none',
+						color: theme.palette.mode === 'light' ? 'black' : 'white',
+					}}
 				>
 					<Box
 						sx={{
@@ -142,7 +148,10 @@ function CryptoBar(props) {
 					href={`https://www.coingecko.com/en/coins/smooth-love-potion/${currency}`}
 					target="blank"
 					rel="noreferrer"
-					style={{ textDecoration: 'none', color: 'black' }}
+					style={{
+						textDecoration: 'none',
+						color: theme.palette.mode === 'light' ? 'black' : 'white',
+					}}
 				>
 					<Box
 						sx={{

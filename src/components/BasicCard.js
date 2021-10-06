@@ -16,13 +16,14 @@ function BasicCard(props) {
 	return (
 		<Card
 			elevation={0}
+			variant={theme.palette.mode === 'dark' && 'outlined'}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center',
 				borderRadius: '15px',
 				transition: 'all 0.2s',
-				boxShadow: '0 8px 30px rgb(222 230 241 / 80%)',
+				boxShadow: theme.palette.mode === 'light' && '0 8px 30px rgb(222 230 241 / 80%)',
 				'&:hover': {
 					transform: 'scale(1.03)',
 				},
