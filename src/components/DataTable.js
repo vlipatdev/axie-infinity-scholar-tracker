@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { addCommaToNumber, limitString, sortArray, addDaysAgo } from '../helpers';
+import { addCommaToNumber, limitString, sortArray, addDaysAgo } from '../utils';
 
 import theme from '../theme';
 

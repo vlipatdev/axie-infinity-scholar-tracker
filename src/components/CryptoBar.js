@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-import { addCommaToNumber } from '../helpers';
+import { addCommaToNumber } from '../utils';
 
 import axsLogo from '../assets/images/axs_logo.png';
 import ethereumLogo from '../assets/images/ethereum_logo.png';

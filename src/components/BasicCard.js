@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import slpLogo from '../assets/images/slp_logo.png';
 
-import { addCommaToNumber } from '../helpers';
+import { addCommaToNumber } from '../utils';
 
 import theme from '../theme';
 

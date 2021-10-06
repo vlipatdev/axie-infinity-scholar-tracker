@@ -37,7 +37,7 @@ import {
 	calcTotal,
 	calcScholarPercent,
 	sortArray,
-} from '../helpers';
+} from '../utils';
 
 import ScholarPage from './ScholarPage';
 
