@@ -9,14 +9,6 @@ function Footer() {
 		navigator.clipboard.writeText('ronin:7587459e4c00420a218c35abec543cc9d22e45d1');
 	}
 
-	function handleMouseEnter() {
-		document.body.style.cursor = 'pointer';
-	}
-
-	function handleMouseLeave() {
-		document.body.style.cursor = 'default';
-	}
-
 	return (
 		<Box
 			sx={{
@@ -40,9 +32,8 @@ function Footer() {
 					Donate
 				</Typography>
 				<Tooltip
+					sx={{ '&:hover': { cursor: 'pointer' } }}
 					onClick={handleClick}
-					onMouseEnter={handleMouseEnter}
-					onMouseLeave={handleMouseLeave}
 					title="Click to copy"
 				>
 					<Typography

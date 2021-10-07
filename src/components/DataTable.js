@@ -61,14 +61,6 @@ function DataTable(props) {
 		sortedData = sortArray(data, localSettings.sort_by).reverse();
 	}
 
-	function handleMouseEnter() {
-		document.body.style.cursor = 'pointer';
-	}
-
-	function handleMouseLeave() {
-		document.body.style.cursor = 'default';
-	}
-
 	function renderDeleteButton(name) {
 		return (
 			<Tooltip title={`Remove ${name}`}>
@@ -189,17 +181,10 @@ function DataTable(props) {
 								<TableCell align="center">{row.lastClaim}</TableCell>
 								<TableCell align="center">{row.nextClaim}</TableCell>
 								<TableCell align="center">{row.mmr}</TableCell>
+								<TableCell align="center">{row.edit}</TableCell>
 								<TableCell
-									onMouseEnter={handleMouseEnter}
-									onMouseLeave={handleMouseLeave}
-									align="center"
-								>
-									{row.edit}
-								</TableCell>
-								<TableCell
+									sx={{ '&:hover': { cursor: 'pointer' } }}
 									onClick={() => handleDelete(row)}
-									onMouseEnter={handleMouseEnter}
-									onMouseLeave={handleMouseLeave}
 									align="center"
 								>
 									{row.del}

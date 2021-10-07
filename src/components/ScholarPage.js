@@ -29,8 +29,6 @@ function ScholarPage(props) {
 	});
 
 	useEffect(() => {
-		document.body.style.cursor = 'default';
-
 		// redirect if scholar name does not exist
 		const scholarIndex = localData.findIndex((scholar) => scholar.name === scholarName);
 		if (localData.length > 0 && scholarIndex === -1) {

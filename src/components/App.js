@@ -166,7 +166,6 @@ function App() {
 				setData(data.filter((item) => addresses.includes(item.ronin_address)));
 			}
 		} else {
-			document.body.style.cursor = 'default';
 			setData([]);
 		}
 	}, [addresses]);
