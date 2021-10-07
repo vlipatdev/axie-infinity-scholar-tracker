@@ -68,17 +68,17 @@ function ScholarPage(props) {
 	function handleBlur(event) {
 		const { name, value } = event.target;
 
-		setIsValid((prevValid) => {
+		setIsValid((prevIsValid) => {
 			if (name === 'name') {
 				if (!value) {
 					return {
-						...prevValid,
+						...prevIsValid,
 						name: false,
 						name_error_message: 'Scholar name is required',
 					};
 				} else if (value === scholarName) {
 					return {
-						...prevValid,
+						...prevIsValid,
 						name: true,
 						name_error_message: '',
 					};
@@ -88,13 +88,13 @@ function ScholarPage(props) {
 					);
 					if (index !== -1) {
 						return {
-							...prevValid,
+							...prevIsValid,
 							name: false,
 							name_error_message: 'Scholar name already exists',
 						};
 					}
 					return {
-						...prevValid,
+						...prevIsValid,
 						name: true,
 						name_error_message: '',
 					};
@@ -102,20 +102,20 @@ function ScholarPage(props) {
 			} else if (name === 'manager_share') {
 				if (!value) {
 					return {
-						...prevValid,
+						...prevIsValid,
 						manager_share: false,
 						manager_error_message: `Manager share is required`,
 					};
 				} else {
 					if (value < 0 || value > 100) {
 						return {
-							...prevValid,
+							...prevIsValid,
 							manager_share: false,
 							manager_error_message: `Manager share must be 0 - 100`,
 						};
 					}
 					return {
-						...prevValid,
+						...prevIsValid,
 						manager_share: true,
 						manager_error_message: '',
 					};

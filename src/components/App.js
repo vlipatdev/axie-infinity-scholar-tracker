@@ -70,7 +70,7 @@ function App() {
 			usd_24h_change: 0,
 		},
 	});
-	const [fromDelete, setFromDelete] = useState(false);
+	const [fromDelete, setFromDelete] = useState(false); // prevents refetching of scholar data on delete
 	const [currency] = useState('php');
 
 	let sortedData;
@@ -190,7 +190,7 @@ function App() {
 		if (event.target.files[0]) {
 			fileReader.readAsText(event.target.files[0], 'UTF-8');
 			fileReader.onload = (event) => {
-				setFromDelete(false); // prevents refetching of scholar data
+				setFromDelete(false);
 				const JSONdata = JSON.parse(event.target.result);
 				// very simple JSON validation
 				if (JSONdata[0].name && JSONdata[0].ronin_address && JSONdata[0].manager_share) {
@@ -270,7 +270,7 @@ function App() {
 	}
 
 	return (
-		<Box sx={{ flexGrow: 1 }}>
+		<Box>
 			<Header />
 			<Container maxWidth="lg" sx={{ mb: 10 }}>
 				<Switch>
@@ -338,7 +338,7 @@ function App() {
 						<Form
 							localData={localData}
 							onUpdate={handleLocalDataUpdate}
-							scholars={addresses.length}
+							numScholars={addresses.length}
 						/>
 						{addresses.length !== 0 && (
 							<>
@@ -407,7 +407,9 @@ function App() {
 								}}
 							>
 								<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
-								<Typography sx={{ mb: 10 }}>No scholars added</Typography>
+								<Typography sx={{ mb: 10 }} color="text.secondary">
+									No scholars added
+								</Typography>
 								<Tooltip title="Upload list of scholars">
 									<label htmlFor="upload-button">
 										<Input

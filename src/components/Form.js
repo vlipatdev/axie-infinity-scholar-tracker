@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import SnackBar from './SnackBar';
 
 function Form(props) {
-	const { localData, onUpdate, scholars } = props;
+	const { localData, onUpdate, numScholars } = props;
 
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [profile, setProfile] = useState({
@@ -191,7 +191,7 @@ function Form(props) {
 								profile.ronin_address &&
 								profile.manager_share
 							) {
-								if (scholars >= 100) {
+								if (numScholars >= 100) {
 									alert('Only 100 scholars are allowed at the moment.');
 								} else {
 									onUpdate([...localData, profile], false);

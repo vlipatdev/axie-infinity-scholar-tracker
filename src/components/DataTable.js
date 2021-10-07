@@ -22,6 +22,8 @@ function createData(
 	name,
 	average,
 	unclaimed,
+	claimed,
+	total,
 	manager,
 	scholar,
 	lastClaim,
@@ -36,6 +38,8 @@ function createData(
 		name,
 		average,
 		unclaimed,
+		claimed,
+		total,
 		manager,
 		scholar,
 		lastClaim,
@@ -47,7 +51,7 @@ function createData(
 	};
 }
 
-export default function DataTable(props) {
+function DataTable(props) {
 	const { data, localData, onDelete, localSettings } = props;
 
 	let sortedData;
@@ -134,6 +138,8 @@ export default function DataTable(props) {
 			renderMarketplaceLink(item.name, item.ronin_address),
 			addCommaToNumber(item.average_slp),
 			addCommaToNumber(item.unclaimed_slp),
+			addCommaToNumber(item.claimed_slp),
+			addCommaToNumber(item.total_slp),
 			`${addCommaToNumber(item.manager_share)} (${item.manager_percent}%)`,
 			`${addCommaToNumber(item.scholar_share)} (${item.scholar_percent}%)`,
 			lastClaim,
@@ -156,6 +162,8 @@ export default function DataTable(props) {
 							<TableCell align="left">Name</TableCell>
 							<TableCell align="center">Daily Average</TableCell>
 							<TableCell align="center">Unclaimed</TableCell>
+							<TableCell align="center">Claimed</TableCell>
+							<TableCell align="center">Total</TableCell>
 							<TableCell align="center">Manager Share</TableCell>
 							<TableCell align="center">Scholar Share</TableCell>
 							<TableCell align="center">Last Claim</TableCell>
@@ -174,6 +182,8 @@ export default function DataTable(props) {
 								<TableCell align="left">{row.name}</TableCell>
 								<TableCell align="center">{row.average}</TableCell>
 								<TableCell align="center">{row.unclaimed}</TableCell>
+								<TableCell align="center">{row.claimed}</TableCell>
+								<TableCell align="center">{row.total}</TableCell>
 								<TableCell align="center">{row.manager}</TableCell>
 								<TableCell align="center">{row.scholar}</TableCell>
 								<TableCell align="center">{row.lastClaim}</TableCell>
@@ -202,3 +212,5 @@ export default function DataTable(props) {
 		</>
 	);
 }
+
+export default DataTable;

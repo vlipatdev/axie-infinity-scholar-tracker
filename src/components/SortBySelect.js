@@ -37,6 +37,8 @@ function SortBySelect(props) {
 					<MenuItem value={'name'}>Name</MenuItem>
 					<MenuItem value={'average_slp'}>Daily Average SLP</MenuItem>
 					<MenuItem value={'unclaimed_slp'}>Unclaimed SLP</MenuItem>
+					<MenuItem value={'claimed_slp'}>Claimed SLP</MenuItem>
+					<MenuItem value={'total_slp'}>Total SLP</MenuItem>
 					<MenuItem value={'manager_share'}>Manager Share</MenuItem>
 					<MenuItem value={'scholar_share'}>Scholar Share</MenuItem>
 					<MenuItem value={'last_claim_raw'}>Last Claim</MenuItem>

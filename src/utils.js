@@ -42,14 +42,6 @@ export const calcTotal = (array, property) => {
 	return sum;
 };
 
-export const limitString = (string) => {
-	if (string.length > 10) {
-		return `${string.substring(0, 10)}...`;
-	} else {
-		return string;
-	}
-};
-
 export const formatDate = (dateInMilliseconds) => {
 	return new Date(dateInMilliseconds).toLocaleDateString('en-US', {
 		month: 'long',
@@ -57,6 +49,14 @@ export const formatDate = (dateInMilliseconds) => {
 		hour: 'numeric',
 		minute: 'numeric',
 	});
+};
+
+export const limitString = (string) => {
+	if (string.length > 10) {
+		return `${string.substring(0, 10)}...`;
+	} else {
+		return string;
+	}
 };
 
 export const sortArray = (array, sortBy) => {

@@ -14,11 +14,9 @@ function SnackBar(props) {
 	const { onClose, open, type } = props;
 
 	const action = (
-		<React.Fragment>
-			<IconButton size="small" aria-label="close" color="inherit" onClick={onClose}>
-				<CloseIcon fontSize="small" />
-			</IconButton>
-		</React.Fragment>
+		<IconButton size="small" aria-label="close" color="inherit" onClick={onClose}>
+			<CloseIcon fontSize="small" />
+		</IconButton>
 	);
 
 	return (
