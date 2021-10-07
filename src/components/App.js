@@ -153,6 +153,14 @@ function App() {
 									item.total_slp,
 									calcScholarPercent(localData[index].manager_share)
 								),
+								manager_share_unclaimed: calcManagerShare(
+									item.in_game_slp,
+									localData[index].manager_share
+								),
+								scholar_share_unclaimed: calcScholarShare(
+									item.in_game_slp,
+									calcScholarPercent(localData[index].manager_share)
+								),
 								mmr: item.mmr,
 								rank: item.rank,
 							};
