@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
@@ -6,6 +6,7 @@ import FileSaver from 'file-saver';
 
 import styled from '@mui/material/styles/styled';
 
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
@@ -286,6 +287,9 @@ function App() {
 					</Route>
 					<Route exact path="/">
 						<CryptoBar data={cryptoData} currency={currency} />
+						<Alert sx={{ mb: 4 }} severity="info">
+							Only up to 100 scholars are supported at the moment.
+						</Alert>
 						<Grid
 							container
 							spacing={2}

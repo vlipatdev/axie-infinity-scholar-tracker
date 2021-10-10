@@ -51,9 +51,9 @@ export const formatDate = (dateInMilliseconds) => {
 	});
 };
 
-export const limitString = (string) => {
-	if (string.length > 10) {
-		return `${string.substring(0, 10)}...`;
+export const truncateString = (string, numCharacters) => {
+	if (string.length > numCharacters) {
+		return `${string.substring(0, numCharacters)}...`;
 	} else {
 		return string;
 	}

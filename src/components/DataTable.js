@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import { addCommaToNumber, limitString, sortArray, addDaysAgo } from '../utils';
+import { addCommaToNumber, truncateString, sortArray, addDaysAgo } from '../utils';
 
 import theme from '../theme';
 
@@ -107,7 +107,7 @@ function DataTable(props) {
 					rel="noreferrer"
 					style={{ textDecoration: 'none', color: theme.palette.primary.main }}
 				>
-					{limitString(name)}
+					{truncateString(name, 10)}
 				</a>
 			</Tooltip>
 		);

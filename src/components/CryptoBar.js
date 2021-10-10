@@ -20,7 +20,7 @@ function CryptoBar(props) {
 				display: 'flex',
 				flexWrap: 'wrap',
 				justifyContent: 'center',
-				mb: 6,
+				mb: 2,
 			}}
 		>
 			<Tooltip title="View on CoinGecko">
