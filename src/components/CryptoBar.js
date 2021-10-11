@@ -23,7 +23,7 @@ function CryptoBar(props) {
 				mb: 2,
 			}}
 		>
-			<Tooltip title="View on CoinGecko">
+			<Tooltip title="Ethereum">
 				<a
 					href={`https://www.coingecko.com/en/coins/ethereum/${currency}`}
 					target="blank"
@@ -83,7 +83,7 @@ function CryptoBar(props) {
 					</Box>
 				</a>
 			</Tooltip>
-			<Tooltip title="View on CoinGecko">
+			<Tooltip title="Axie Infinity">
 				<a
 					href={`https://www.coingecko.com/en/coins/axie-infinity/${currency}`}
 					target="blank"
@@ -143,7 +143,7 @@ function CryptoBar(props) {
 					</Box>
 				</a>
 			</Tooltip>
-			<Tooltip title="View on CoinGecko">
+			<Tooltip title="Smooth Love Potion">
 				<a
 					href={`https://www.coingecko.com/en/coins/smooth-love-potion/${currency}`}
 					target="blank"
