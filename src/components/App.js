@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
@@ -166,10 +166,11 @@ function App() {
 								rank: item.rank,
 							};
 						});
+
 						setData(finalData);
 					})
 					.catch(() => {
-						alert('Could not connect to server. Please try again later.');
+						alert('There seems to be a problem with Sky Mavis API. Please try again later.');
 					});
 			} else {
 				setData(data.filter((item) => addresses.includes(item.ronin_address)));
