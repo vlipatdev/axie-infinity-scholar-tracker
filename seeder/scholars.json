@@ -1,0 +1,52 @@
+[
+  {
+    "name": "Max",
+    "ronin_address": "ronin:1a3e1fd4ca1f268847324aa4e8fcfef6c5fef2f4",
+    "manager_share": "50"
+  },
+  {
+    "name": "Billy",
+    "ronin_address": "ronin:c40bbaa6c1b626945beb06cc73ffbb06e627fd18",
+    "manager_share": "60"
+  },
+  {
+    "name": "Bob",
+    "ronin_address": "ronin:bb5b3376837c76f48ab2888aadfcf18ac9d22ba7",
+    "manager_share": "40"
+  },
+  {
+    "name": "Dylan",
+    "ronin_address": "ronin:be6575eaec2a559e7f9ab5dee1549bda7f4fcac3",
+    "manager_share": "30"
+  },
+  {
+    "name": "Moogle",
+    "ronin_address": "ronin:99b3a832cddcfb121c0624684733ffaf80b1f99b",
+    "manager_share": "30"
+  },
+  {
+    "name": "B34t",
+    "ronin_address": "ronin:0f1e36c35b24cf4f9b81575144358cc5f21a7ffc",
+    "manager_share": "30"
+  },
+  {
+    "name": "Thaddeus#2668030",
+    "ronin_address": "ronin:c28b5bc8322ba5b617f74c897790548904c249f0",
+    "manager_share": "30"
+  },
+  {
+    "name": "KT20",
+    "ronin_address": "ronin:2ad2a0c13362634a74a0d0d5c665e31ab02378a6",
+    "manager_share": "35"
+  },
+  {
+    "name": "TamameMartin",
+    "ronin_address": "ronin:db18c7f2641b52efc642c43d4d35f7eba63e3884",
+    "manager_share": "55"
+  },
+  {
+    "name": "Liver 🥒",
+    "ronin_address": "ronin:43f43b5ac8e8575e7a4c125c867b569648b16faf",
+    "manager_share": "40"
+  }
+]

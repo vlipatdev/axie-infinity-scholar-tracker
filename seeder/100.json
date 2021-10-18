@@ -1,0 +1,502 @@
+[
+  {
+    "name": "1",
+    "ronin_address": "ronin:0000000000000000000000000000000000000001",
+    "manager_share": "50"
+  },
+  {
+    "name": "2",
+    "ronin_address": "ronin:0000000000000000000000000000000000000002",
+    "manager_share": "50"
+  },
+  {
+    "name": "3",
+    "ronin_address": "ronin:0000000000000000000000000000000000000003",
+    "manager_share": "50"
+  },
+  {
+    "name": "4",
+    "ronin_address": "ronin:0000000000000000000000000000000000000004",
+    "manager_share": "50"
+  },
+  {
+    "name": "5",
+    "ronin_address": "ronin:0000000000000000000000000000000000000005",
+    "manager_share": "50"
+  },
+  {
+    "name": "6",
+    "ronin_address": "ronin:0000000000000000000000000000000000000006",
+    "manager_share": "50"
+  },
+  {
+    "name": "7",
+    "ronin_address": "ronin:0000000000000000000000000000000000000007",
+    "manager_share": "50"
+  },
+  {
+    "name": "8",
+    "ronin_address": "ronin:0000000000000000000000000000000000000008",
+    "manager_share": "50"
+  },
+  {
+    "name": "9",
+    "ronin_address": "ronin:0000000000000000000000000000000000000009",
+    "manager_share": "50"
+  },
+  {
+    "name": "10",
+    "ronin_address": "ronin:0000000000000000000000000000000000000010",
+    "manager_share": "50"
+  },
+  {
+    "name": "11",
+    "ronin_address": "ronin:0000000000000000000000000000000000000011",
+    "manager_share": "50"
+  },
+  {
+    "name": "12",
+    "ronin_address": "ronin:0000000000000000000000000000000000000012",
+    "manager_share": "50"
+  },
+  {
+    "name": "13",
+    "ronin_address": "ronin:0000000000000000000000000000000000000013",
+    "manager_share": "50"
+  },
+  {
+    "name": "14",
+    "ronin_address": "ronin:0000000000000000000000000000000000000014",
+    "manager_share": "50"
+  },
+  {
+    "name": "15",
+    "ronin_address": "ronin:0000000000000000000000000000000000000015",
+    "manager_share": "50"
+  },
+  {
+    "name": "16",
+    "ronin_address": "ronin:0000000000000000000000000000000000000016",
+    "manager_share": "50"
+  },
+  {
+    "name": "17",
+    "ronin_address": "ronin:0000000000000000000000000000000000000017",
+    "manager_share": "50"
+  },
+  {
+    "name": "18",
+    "ronin_address": "ronin:0000000000000000000000000000000000000018",
+    "manager_share": "50"
+  },
+  {
+    "name": "19",
+    "ronin_address": "ronin:0000000000000000000000000000000000000019",
+    "manager_share": "50"
+  },
+  {
+    "name": "20",
+    "ronin_address": "ronin:0000000000000000000000000000000000000020",
+    "manager_share": "50"
+  },
+  {
+    "name": "21",
+    "ronin_address": "ronin:0000000000000000000000000000000000000021",
+    "manager_share": "50"
+  },
+  {
+    "name": "22",
+    "ronin_address": "ronin:0000000000000000000000000000000000000022",
+    "manager_share": "50"
+  },
+  {
+    "name": "23",
+    "ronin_address": "ronin:0000000000000000000000000000000000000023",
+    "manager_share": "50"
+  },
+  {
+    "name": "24",
+    "ronin_address": "ronin:0000000000000000000000000000000000000024",
+    "manager_share": "50"
+  },
+  {
+    "name": "25",
+    "ronin_address": "ronin:0000000000000000000000000000000000000025",
+    "manager_share": "50"
+  },
+  {
+    "name": "26",
+    "ronin_address": "ronin:0000000000000000000000000000000000000026",
+    "manager_share": "50"
+  },
+  {
+    "name": "27",
+    "ronin_address": "ronin:0000000000000000000000000000000000000027",
+    "manager_share": "50"
+  },
+  {
+    "name": "28",
+    "ronin_address": "ronin:0000000000000000000000000000000000000028",
+    "manager_share": "50"
+  },
+  {
+    "name": "29",
+    "ronin_address": "ronin:0000000000000000000000000000000000000029",
+    "manager_share": "50"
+  },
+  {
+    "name": "30",
+    "ronin_address": "ronin:0000000000000000000000000000000000000030",
+    "manager_share": "50"
+  },
+  {
+    "name": "31",
+    "ronin_address": "ronin:0000000000000000000000000000000000000031",
+    "manager_share": "50"
+  },
+  {
+    "name": "32",
+    "ronin_address": "ronin:0000000000000000000000000000000000000032",
+    "manager_share": "50"
+  },
+  {
+    "name": "33",
+    "ronin_address": "ronin:0000000000000000000000000000000000000033",
+    "manager_share": "50"
+  },
+  {
+    "name": "34",
+    "ronin_address": "ronin:0000000000000000000000000000000000000034",
+    "manager_share": "50"
+  },
+  {
+    "name": "35",
+    "ronin_address": "ronin:0000000000000000000000000000000000000035",
+    "manager_share": "50"
+  },
+  {
+    "name": "36",
+    "ronin_address": "ronin:0000000000000000000000000000000000000036",
+    "manager_share": "50"
+  },
+  {
+    "name": "37",
+    "ronin_address": "ronin:0000000000000000000000000000000000000037",
+    "manager_share": "50"
+  },
+  {
+    "name": "38",
+    "ronin_address": "ronin:0000000000000000000000000000000000000038",
+    "manager_share": "50"
+  },
+  {
+    "name": "39",
+    "ronin_address": "ronin:0000000000000000000000000000000000000039",
+    "manager_share": "50"
+  },
+  {
+    "name": "40",
+    "ronin_address": "ronin:0000000000000000000000000000000000000040",
+    "manager_share": "50"
+  },
+  {
+    "name": "41",
+    "ronin_address": "ronin:0000000000000000000000000000000000000041",
+    "manager_share": "50"
+  },
+  {
+    "name": "42",
+    "ronin_address": "ronin:0000000000000000000000000000000000000042",
+    "manager_share": "50"
+  },
+  {
+    "name": "43",
+    "ronin_address": "ronin:0000000000000000000000000000000000000043",
+    "manager_share": "50"
+  },
+  {
+    "name": "44",
+    "ronin_address": "ronin:0000000000000000000000000000000000000044",
+    "manager_share": "50"
+  },
+  {
+    "name": "45",
+    "ronin_address": "ronin:0000000000000000000000000000000000000045",
+    "manager_share": "50"
+  },
+  {
+    "name": "46",
+    "ronin_address": "ronin:0000000000000000000000000000000000000046",
+    "manager_share": "50"
+  },
+  {
+    "name": "47",
+    "ronin_address": "ronin:0000000000000000000000000000000000000047",
+    "manager_share": "50"
+  },
+  {
+    "name": "48",
+    "ronin_address": "ronin:0000000000000000000000000000000000000048",
+    "manager_share": "50"
+  },
+  {
+    "name": "49",
+    "ronin_address": "ronin:0000000000000000000000000000000000000049",
+    "manager_share": "50"
+  },
+  {
+    "name": "50",
+    "ronin_address": "ronin:0000000000000000000000000000000000000050",
+    "manager_share": "50"
+  },
+  {
+    "name": "51",
+    "ronin_address": "ronin:0000000000000000000000000000000000000051",
+    "manager_share": "50"
+  },
+  {
+    "name": "52",
+    "ronin_address": "ronin:0000000000000000000000000000000000000052",
+    "manager_share": "50"
+  },
+  {
+    "name": "53",
+    "ronin_address": "ronin:0000000000000000000000000000000000000053",
+    "manager_share": "50"
+  },
+  {
+    "name": "54",
+    "ronin_address": "ronin:0000000000000000000000000000000000000054",
+    "manager_share": "50"
+  },
+  {
+    "name": "55",
+    "ronin_address": "ronin:0000000000000000000000000000000000000055",
+    "manager_share": "50"
+  },
+  {
+    "name": "56",
+    "ronin_address": "ronin:0000000000000000000000000000000000000056",
+    "manager_share": "50"
+  },
+  {
+    "name": "57",
+    "ronin_address": "ronin:0000000000000000000000000000000000000057",
+    "manager_share": "50"
+  },
+  {
+    "name": "58",
+    "ronin_address": "ronin:0000000000000000000000000000000000000058",
+    "manager_share": "50"
+  },
+  {
+    "name": "59",
+    "ronin_address": "ronin:0000000000000000000000000000000000000059",
+    "manager_share": "50"
+  },
+  {
+    "name": "60",
+    "ronin_address": "ronin:0000000000000000000000000000000000000060",
+    "manager_share": "50"
+  },
+  {
+    "name": "61",
+    "ronin_address": "ronin:0000000000000000000000000000000000000061",
+    "manager_share": "50"
+  },
+  {
+    "name": "62",
+    "ronin_address": "ronin:0000000000000000000000000000000000000062",
+    "manager_share": "50"
+  },
+  {
+    "name": "63",
+    "ronin_address": "ronin:0000000000000000000000000000000000000063",
+    "manager_share": "50"
+  },
+  {
+    "name": "64",
+    "ronin_address": "ronin:0000000000000000000000000000000000000064",
+    "manager_share": "50"
+  },
+  {
+    "name": "65",
+    "ronin_address": "ronin:0000000000000000000000000000000000000065",
+    "manager_share": "50"
+  },
+  {
+    "name": "66",
+    "ronin_address": "ronin:0000000000000000000000000000000000000066",
+    "manager_share": "50"
+  },
+  {
+    "name": "67",
+    "ronin_address": "ronin:0000000000000000000000000000000000000067",
+    "manager_share": "50"
+  },
+  {
+    "name": "68",
+    "ronin_address": "ronin:0000000000000000000000000000000000000068",
+    "manager_share": "50"
+  },
+  {
+    "name": "69",
+    "ronin_address": "ronin:0000000000000000000000000000000000000069",
+    "manager_share": "50"
+  },
+  {
+    "name": "70",
+    "ronin_address": "ronin:0000000000000000000000000000000000000070",
+    "manager_share": "50"
+  },
+  {
+    "name": "71",
+    "ronin_address": "ronin:0000000000000000000000000000000000000071",
+    "manager_share": "50"
+  },
+  {
+    "name": "72",
+    "ronin_address": "ronin:0000000000000000000000000000000000000072",
+    "manager_share": "50"
+  },
+  {
+    "name": "73",
+    "ronin_address": "ronin:0000000000000000000000000000000000000073",
+    "manager_share": "50"
+  },
+  {
+    "name": "74",
+    "ronin_address": "ronin:0000000000000000000000000000000000000074",
+    "manager_share": "50"
+  },
+  {
+    "name": "75",
+    "ronin_address": "ronin:0000000000000000000000000000000000000075",
+    "manager_share": "50"
+  },
+  {
+    "name": "76",
+    "ronin_address": "ronin:0000000000000000000000000000000000000076",
+    "manager_share": "50"
+  },
+  {
+    "name": "77",
+    "ronin_address": "ronin:0000000000000000000000000000000000000077",
+    "manager_share": "50"
+  },
+  {
+    "name": "78",
+    "ronin_address": "ronin:0000000000000000000000000000000000000078",
+    "manager_share": "50"
+  },
+  {
+    "name": "79",
+    "ronin_address": "ronin:0000000000000000000000000000000000000079",
+    "manager_share": "50"
+  },
+  {
+    "name": "80",
+    "ronin_address": "ronin:0000000000000000000000000000000000000080",
+    "manager_share": "50"
+  },
+  {
+    "name": "81",
+    "ronin_address": "ronin:0000000000000000000000000000000000000081",
+    "manager_share": "50"
+  },
+  {
+    "name": "82",
+    "ronin_address": "ronin:0000000000000000000000000000000000000082",
+    "manager_share": "50"
+  },
+  {
+    "name": "83",
+    "ronin_address": "ronin:0000000000000000000000000000000000000083",
+    "manager_share": "50"
+  },
+  {
+    "name": "84",
+    "ronin_address": "ronin:0000000000000000000000000000000000000084",
+    "manager_share": "50"
+  },
+  {
+    "name": "85",
+    "ronin_address": "ronin:0000000000000000000000000000000000000085",
+    "manager_share": "50"
+  },
+  {
+    "name": "86",
+    "ronin_address": "ronin:0000000000000000000000000000000000000086",
+    "manager_share": "50"
+  },
+  {
+    "name": "87",
+    "ronin_address": "ronin:0000000000000000000000000000000000000087",
+    "manager_share": "50"
+  },
+  {
+    "name": "88",
+    "ronin_address": "ronin:0000000000000000000000000000000000000088",
+    "manager_share": "50"
+  },
+  {
+    "name": "89",
+    "ronin_address": "ronin:0000000000000000000000000000000000000089",
+    "manager_share": "50"
+  },
+  {
+    "name": "90",
+    "ronin_address": "ronin:0000000000000000000000000000000000000090",
+    "manager_share": "50"
+  },
+  {
+    "name": "91",
+    "ronin_address": "ronin:0000000000000000000000000000000000000091",
+    "manager_share": "50"
+  },
+  {
+    "name": "92",
+    "ronin_address": "ronin:0000000000000000000000000000000000000092",
+    "manager_share": "50"
+  },
+  {
+    "name": "93",
+    "ronin_address": "ronin:0000000000000000000000000000000000000093",
+    "manager_share": "50"
+  },
+  {
+    "name": "94",
+    "ronin_address": "ronin:0000000000000000000000000000000000000094",
+    "manager_share": "50"
+  },
+  {
+    "name": "95",
+    "ronin_address": "ronin:0000000000000000000000000000000000000095",
+    "manager_share": "50"
+  },
+  {
+    "name": "96",
+    "ronin_address": "ronin:0000000000000000000000000000000000000096",
+    "manager_share": "50"
+  },
+  {
+    "name": "97",
+    "ronin_address": "ronin:0000000000000000000000000000000000000097",
+    "manager_share": "50"
+  },
+  {
+    "name": "98",
+    "ronin_address": "ronin:0000000000000000000000000000000000000098",
+    "manager_share": "50"
+  },
+  {
+    "name": "99",
+    "ronin_address": "ronin:0000000000000000000000000000000000000099",
+    "manager_share": "50"
+  },
+  {
+    "name": "100",
+    "ronin_address": "ronin:0000000000000000000000000000000000000100",
+    "manager_share": "50"
+  }
+]
