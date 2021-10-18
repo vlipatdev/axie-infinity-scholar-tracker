@@ -9,6 +9,7 @@ import styled from '@mui/material/styles/styled';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Tooltip from '@mui/material/Tooltip';
@@ -51,28 +52,23 @@ function App() {
 	const [data, setData] = useState([]);
 	const [localData, setLocalData] = useState([]);
 	const [localSettings, setLocalSettings] = useState({ sort_by: 'name', sort_type: 'ascending' });
-	const [cryptoData, setCryptoData] = useState({
-		'smooth-love-potion': {
-			php: 0,
-			php_24h_change: 0,
-			usd: 0,
-			usd_24h_change: 0,
-		},
-		ethereum: {
-			php: 0,
-			php_24h_change: 0,
-			usd: 0,
-			usd_24h_change: 0,
-		},
-		'axie-infinity': {
-			php: 0,
-			php_24h_change: 0,
-			usd: 0,
-			usd_24h_change: 0,
-		},
-	});
 	const [fromDelete, setFromDelete] = useState(false); // prevents refetching of scholar data on delete
 	const [currency] = useState('php');
+	const [cryptoData, setCryptoData] = useState({
+		'smooth-love-potion': {
+			[currency]: 0,
+			[`${currency}_24h_change`]: 0,
+		},
+		ethereum: {
+			[currency]: 0,
+			[`${currency}_24h_change`]: 0,
+		},
+		'axie-infinity': {
+			[currency]: 0,
+			[`${currency}_24h_change`]: 0,
+		},
+	});
+	const [isLoading, setIsLoading] = useState(true);
 
 	let sortedData;
 	if (localSettings.sort_type === 'ascending') {
@@ -98,7 +94,7 @@ function App() {
 		// get crypto prices
 		axios
 			.get(
-				'https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Caxie-infinity%2Csmooth-love-potion&vs_currencies=php%2Cusd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false'
+				`https://api.coingecko.com/api/v3/simple/price?ids=ethereum%2Caxie-infinity%2Csmooth-love-potion&vs_currencies=${currency}&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=false`
 			)
 			.then((response) => {
 				setCryptoData(response.data);
@@ -120,6 +116,7 @@ function App() {
 	useEffect(() => {
 		if (addresses.length !== 0) {
 			if (!fromDelete) {
+				setIsLoading(true);
 				// get scholar data
 				axios
 					.get(`https://game-api.axie.technology/api/v1/${addresses.join('%2C')}`)
@@ -170,7 +167,10 @@ function App() {
 						setData(finalData);
 					})
 					.catch(() => {
-						alert('There seems to be a problem with Sky Mavis API. Please try again later.');
+						alert('Cannot connect to the server. Please try again later.');
+					})
+					.finally(() => {
+						setIsLoading(false);
 					});
 			} else {
 				setData(data.filter((item) => addresses.includes(item.ronin_address)));
@@ -354,59 +354,74 @@ function App() {
 						/>
 						{addresses.length !== 0 && (
 							<>
-								<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-									<Typography color="text.secondary">Sort by</Typography>
-									<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-										<SortBySelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-										<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-									</Box>
-								</Box>
-								<DataTable
-									data={data}
-									localData={localData}
-									localSettings={localSettings}
-									onDelete={handleLocalDataUpdate}
-									slpPrice={cryptoData['smooth-love-potion'][currency]}
-								/>
-								<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-									<Tooltip title="Download list of scholars in .json format">
-										<Button
-											sx={{ m: 1, minWidth: '200px' }}
-											onClick={() => {
-												handleJSONDownload(localData);
-											}}
-											startIcon={<DownloadIcon />}
-											variant="outlined"
-										>
-											Download list
-										</Button>
-									</Tooltip>
-									<Tooltip title="Upload list of scholars">
-										<label htmlFor="upload-button">
-											<Input
-												onChange={handleJSONUpload}
-												accept="application/JSON"
-												id="upload-button"
-												type="file"
-											/>
-											<Button
-												component="span"
-												startIcon={<UploadIcon />}
-												variant="outlined"
-												sx={{ m: 1, minWidth: '200px' }}
-											>
-												Upload List
-											</Button>
-										</label>
-									</Tooltip>
-									<CSVLink
-										filename={'scholars.csv'}
-										data={cleanData(sortedData)}
-										style={{ textDecoration: 'none' }}
+								{isLoading ? (
+									<Box
+										sx={{
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center',
+											height: '200px',
+										}}
 									>
-										<ExportCSVButton />
-									</CSVLink>
-								</Box>
+										<CircularProgress />
+									</Box>
+								) : (
+									<>
+										<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+											<Typography color="text.secondary">Sort by</Typography>
+											<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+												<SortBySelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+												<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+											</Box>
+										</Box>
+										<DataTable
+											data={data}
+											localData={localData}
+											localSettings={localSettings}
+											onDelete={handleLocalDataUpdate}
+											slpPrice={cryptoData['smooth-love-potion'][currency]}
+										/>
+										<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+											<Tooltip title="Download list of scholars in .json format">
+												<Button
+													sx={{ m: 1, minWidth: '200px' }}
+													onClick={() => {
+														handleJSONDownload(localData);
+													}}
+													startIcon={<DownloadIcon />}
+													variant="outlined"
+												>
+													Download list
+												</Button>
+											</Tooltip>
+											<Tooltip title="Upload list of scholars">
+												<label htmlFor="upload-button">
+													<Input
+														onChange={handleJSONUpload}
+														accept="application/JSON"
+														id="upload-button"
+														type="file"
+													/>
+													<Button
+														component="span"
+														startIcon={<UploadIcon />}
+														variant="outlined"
+														sx={{ m: 1, minWidth: '200px' }}
+													>
+														Upload List
+													</Button>
+												</label>
+											</Tooltip>
+											<CSVLink
+												filename={'scholars.csv'}
+												data={cleanData(sortedData)}
+												style={{ textDecoration: 'none' }}
+											>
+												<ExportCSVButton />
+											</CSVLink>
+										</Box>
+									</>
+								)}
 							</>
 						)}
 						{addresses.length === 0 && (
