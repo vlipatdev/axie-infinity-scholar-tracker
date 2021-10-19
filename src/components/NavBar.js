@@ -38,7 +38,6 @@ function NavBar() {
 				</Link>
 				<Typography
 					variant="h1"
-					component="div"
 					sx={{
 						flexGrow: 1,
 						fontSize: 24,

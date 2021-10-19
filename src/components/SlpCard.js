@@ -53,7 +53,6 @@ function SlpCard(props) {
 							fontWeight: 'bold',
 						}}
 						variant="h5"
-						component="div"
 					>
 						{addCommaToNumber(slp)}
 					</Typography>
