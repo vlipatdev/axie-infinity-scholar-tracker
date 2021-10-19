@@ -10,7 +10,7 @@ import { addCommaToNumber } from '../utils';
 
 import theme from '../theme';
 
-function BasicCard(props) {
+function SlpCard(props) {
 	const { label, slp, slpPrice, currency } = props;
 
 	return (
@@ -69,4 +69,4 @@ function BasicCard(props) {
 	);
 }
 
-export default BasicCard;
+export default SlpCard;

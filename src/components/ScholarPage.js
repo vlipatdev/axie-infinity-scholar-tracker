@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -10,9 +13,6 @@ import Typography from '@mui/material/Typography';
 import SnackBar from './SnackBar';
 
 function ScholarPage(props) {
-	const scholarName = useParams().name;
-	const history = useHistory();
-
 	const { localData, onUpdate } = props;
 
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -21,12 +21,9 @@ function ScholarPage(props) {
 		ronin_address: '',
 		manager_share: '',
 	});
-	const [isValid, setIsValid] = useState({
-		name: true,
-		manager_share: true,
-		name_error_message: '',
-		manager_error_message: '',
-	});
+
+	const scholarName = useParams().name;
+	const history = useHistory();
 
 	useEffect(() => {
 		// redirect if scholar name does not exist
@@ -45,6 +42,44 @@ function ScholarPage(props) {
 		}
 	}, [localData]);
 
+	const validationSchema = yup.object({
+		name: yup
+			.string()
+			.required('Name is required')
+			.test('isDuplicate', 'Scholar name already exists', (value) => {
+				if (value) {
+					if (value === scholarName) {
+						return true;
+					} else {
+						const index = localData.findIndex(
+							(scholar) => scholar.name.toLowerCase() === value.toLowerCase()
+						);
+						return index === -1;
+					}
+				}
+			}),
+		manager_share: yup
+			.number()
+			.required('Manager share is required')
+			.min(0, 'Manager share must be 0 - 100')
+			.max(100, 'Manager share must be 0 - 100'),
+	});
+
+	const formik = useFormik({
+		enableReinitialize: true,
+		initialValues: {
+			name: profile.name,
+			ronin_address: profile.ronin_address,
+			manager_share: profile.manager_share,
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values, { resetForm }) => {
+			const newValues = { ...values, manager_share: values.manager_share.toString() };
+			onUpdate([...localData.filter((scholar) => scholar.name !== scholarName), newValues], false);
+			history.goBack();
+		},
+	});
+
 	function handleSnackbarClose(_, reason) {
 		if (reason === 'clickaway') {
 			return;
@@ -52,164 +87,76 @@ function ScholarPage(props) {
 		setSnackbarOpen(false);
 	}
 
-	function handleChange(event) {
-		const { name, value } = event.target;
-
-		setProfile((prevProfile) => {
-			return {
-				...prevProfile,
-				[name]: value,
-			};
-		});
-	}
-
-	function handleBlur(event) {
-		const { name, value } = event.target;
-
-		setIsValid((prevIsValid) => {
-			if (name === 'name') {
-				if (!value) {
-					return {
-						...prevIsValid,
-						name: false,
-						name_error_message: 'Scholar name is required',
-					};
-				} else if (value === scholarName) {
-					return {
-						...prevIsValid,
-						name: true,
-						name_error_message: '',
-					};
-				} else {
-					const index = localData.findIndex(
-						(scholar) => scholar.name.toLowerCase() === value.toLowerCase()
-					);
-					if (index !== -1) {
-						return {
-							...prevIsValid,
-							name: false,
-							name_error_message: 'Scholar name already exists',
-						};
-					}
-					return {
-						...prevIsValid,
-						name: true,
-						name_error_message: '',
-					};
-				}
-			} else if (name === 'manager_share') {
-				if (!value) {
-					return {
-						...prevIsValid,
-						manager_share: false,
-						manager_error_message: `Manager share is required`,
-					};
-				} else {
-					if (value < 0 || value > 100) {
-						return {
-							...prevIsValid,
-							manager_share: false,
-							manager_error_message: `Manager share must be 0 - 100`,
-						};
-					}
-					return {
-						...prevIsValid,
-						manager_share: true,
-						manager_error_message: '',
-					};
-				}
-			}
-		});
-	}
-
 	return (
 		<Box>
 			<Typography variant="h6" sx={{ mb: 4 }}>
 				Edit details for "{scholarName}"
 			</Typography>
-			<Grid container spacing={2} sx={{ mb: 6 }}>
-				<Grid item xs={12}>
-					<TextField
-						autoFocus
-						fullWidth
-						error={!isValid.name}
-						helperText={isValid.name_error_message}
-						onChange={handleChange}
-						onBlur={handleBlur}
-						name="name"
-						id="name"
-						label="Scholar Name"
-						variant="outlined"
-						size="small"
-						value={profile.name}
-					/>
-				</Grid>
+			<form onSubmit={formik.handleSubmit}>
+				<Grid container spacing={2} sx={{ mb: 6 }}>
+					<Grid item xs={12}>
+						<TextField
+							autoFocus
+							fullWidth
+							name="name"
+							id="name"
+							label="Scholar Name"
+							variant="outlined"
+							size="small"
+							error={formik.touched.name && Boolean(formik.errors.name)}
+							helperText={formik.touched.name && formik.errors.name}
+							onChange={formik.handleChange}
+							value={formik.values.name}
+						/>
+					</Grid>
 
-				<Grid item xs={12}>
-					<TextField
-						fullWidth
-						error={!isValid.manager_share}
-						helperText={isValid.manager_error_message}
-						onChange={handleChange}
-						onBlur={handleBlur}
-						type="number"
-						name="manager_share"
-						id="manager-share"
-						label="Manager Share (%)"
-						variant="outlined"
-						size="small"
-						value={profile.manager_share}
-						inputProps={{ min: 0, max: 100 }}
-					/>
-				</Grid>
-				<Grid item xs={12}>
-					<TextField
-						fullWidth
-						name="ronin_address"
-						id="ronin-address"
-						label="Ronin Address"
-						variant="outlined"
-						size="small"
-						value={profile.ronin_address}
-						disabled
-					/>
-				</Grid>
-				<Grid item xs={6}>
-					<Button
-						fullWidth
-						onClick={() => {
-							history.goBack();
-						}}
-						size="medium"
-						variant="outlined"
-						disableElevation
-					>
-						Cancel
-					</Button>
-				</Grid>
-				<Grid item xs={6}>
-					<Button
-						fullWidth
-						onClick={() => {
-							if (isValid.name && isValid.manager_share && profile.name && profile.manager_share) {
-								onUpdate(
-									[...localData.filter((scholar) => scholar.name !== scholarName), profile],
-									false
-								);
+					<Grid item xs={12}>
+						<TextField
+							fullWidth
+							type="number"
+							name="manager_share"
+							id="manager-share"
+							label="Manager Share (%)"
+							variant="outlined"
+							size="small"
+							error={formik.touched.manager_share && Boolean(formik.errors.manager_share)}
+							helperText={formik.touched.manager_share && formik.errors.manager_share}
+							onChange={formik.handleChange}
+							value={formik.values.manager_share}
+						/>
+					</Grid>
+					<Grid item xs={12}>
+						<TextField
+							fullWidth
+							name="ronin_address"
+							id="ronin-address"
+							label="Ronin Address"
+							variant="outlined"
+							size="small"
+							value={formik.values.ronin_address}
+							disabled
+						/>
+					</Grid>
+					<Grid item xs={6}>
+						<Button
+							fullWidth
+							onClick={() => {
 								history.goBack();
-							} else {
-								// alert('Invalid form inputs');
-							}
-						}}
-						type="submit"
-						size="medium"
-						variant="contained"
-						disableElevation
-					>
-						Save
-					</Button>
+							}}
+							size="medium"
+							variant="outlined"
+							disableElevation
+						>
+							Cancel
+						</Button>
+					</Grid>
+					<Grid item xs={6}>
+						<Button fullWidth type="submit" size="medium" variant="contained" disableElevation>
+							Save
+						</Button>
+					</Grid>
 				</Grid>
-			</Grid>
+			</form>
 			<SnackBar onClose={handleSnackbarClose} open={snackbarOpen} type="update" />
 		</Box>
 	);

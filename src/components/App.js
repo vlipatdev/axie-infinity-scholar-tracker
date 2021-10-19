@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 import DownloadIcon from '@mui/icons-material/Download';
 import UploadIcon from '@mui/icons-material/Upload';
 
-import BasicCard from './BasicCard';
+import SlpCard from './SlpCard';
 import CryptoBar from './CryptoBar';
 import DataTable from './DataTable';
 import ExportCSVButton from './ExportCSVButton';
@@ -299,7 +299,7 @@ function App() {
 							}}
 						>
 							<Grid item xs={6} sm={4} lg={2}>
-								<BasicCard
+								<SlpCard
 									label="Total Daily Average"
 									slp={calcTotal(data, 'average_slp')}
 									slpPrice={cryptoData['smooth-love-potion'][currency]}
@@ -307,7 +307,7 @@ function App() {
 								/>
 							</Grid>
 							<Grid item xs={6} sm={4} lg={2}>
-								<BasicCard
+								<SlpCard
 									label="Total Unclaimed"
 									slp={calcTotal(data, 'unclaimed_slp')}
 									slpPrice={cryptoData['smooth-love-potion'][currency]}
@@ -315,7 +315,7 @@ function App() {
 								/>
 							</Grid>
 							<Grid item xs={6} sm={4} lg={2}>
-								<BasicCard
+								<SlpCard
 									label="Total Claimed"
 									slp={calcTotal(data, 'claimed_slp')}
 									slpPrice={cryptoData['smooth-love-potion'][currency]}
@@ -323,7 +323,7 @@ function App() {
 								/>
 							</Grid>
 							<Grid item xs={6} sm={4} lg={2}>
-								<BasicCard
+								<SlpCard
 									label="Total Farmed"
 									slp={calcTotal(data, 'total_slp')}
 									slpPrice={cryptoData['smooth-love-potion'][currency]}
@@ -331,7 +331,7 @@ function App() {
 								/>
 							</Grid>
 							<Grid item xs={6} sm={4} lg={2}>
-								<BasicCard
+								<SlpCard
 									label="Manager Total"
 									slp={calcTotal(data, 'manager_share')}
 									slpPrice={cryptoData['smooth-love-potion'][currency]}
@@ -339,7 +339,7 @@ function App() {
 								/>
 							</Grid>
 							<Grid item xs={6} sm={4} lg={2}>
-								<BasicCard
+								<SlpCard
 									label="Scholar Total"
 									slp={calcTotal(data, 'scholar_share')}
 									slpPrice={cryptoData['smooth-love-potion'][currency]}
