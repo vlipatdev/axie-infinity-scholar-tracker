@@ -165,12 +165,10 @@ function App() {
 						});
 
 						setData(finalData);
+						setIsLoading(false);
 					})
 					.catch(() => {
 						alert('Cannot connect to the server. Please try again later.');
-					})
-					.finally(() => {
-						setIsLoading(false);
 					});
 			} else {
 				setData(data.filter((item) => addresses.includes(item.ronin_address)));
