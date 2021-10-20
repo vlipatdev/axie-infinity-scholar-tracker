@@ -16,7 +16,7 @@ function SlpCard(props) {
 	return (
 		<Card
 			elevation={0}
-			variant={theme.palette.mode === 'dark' && 'outlined'}
+			// variant={theme.palette.mode === 'dark' && 'outlined'}
 			sx={{
 				display: 'flex',
 				flexDirection: 'column',

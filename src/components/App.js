@@ -288,180 +288,181 @@ function App() {
 						<ScholarPage localData={localData} onUpdate={handleLocalDataUpdate} />
 					</Route>
 					<Route exact path="/">
-						<MaintenancePage />
-					</Route>
-					<CryptoBar data={cryptoData} currency={currency} />
-					<Alert sx={{ mb: 4 }} severity="info">
-						Only up to 100 scholars are supported at the moment.
-					</Alert>
-					<Grid
-						container
-						spacing={2}
-						sx={{
-							mb: 6,
-						}}
-					>
-						<Grid item xs={6} sm={4} lg={2}>
-							<SlpCard
-								label="Total Daily Average"
-								slp={calcTotal(data, 'average_slp')}
-								slpPrice={cryptoData['smooth-love-potion'][currency]}
-								currency={currency}
-							/>
-						</Grid>
-						<Grid item xs={6} sm={4} lg={2}>
-							<SlpCard
-								label="Total Unclaimed"
-								slp={calcTotal(data, 'unclaimed_slp')}
-								slpPrice={cryptoData['smooth-love-potion'][currency]}
-								currency={currency}
-							/>
-						</Grid>
-						<Grid item xs={6} sm={4} lg={2}>
-							<SlpCard
-								label="Total Claimed"
-								slp={calcTotal(data, 'claimed_slp')}
-								slpPrice={cryptoData['smooth-love-potion'][currency]}
-								currency={currency}
-							/>
-						</Grid>
-						<Grid item xs={6} sm={4} lg={2}>
-							<SlpCard
-								label="Total Farmed"
-								slp={calcTotal(data, 'total_slp')}
-								slpPrice={cryptoData['smooth-love-potion'][currency]}
-								currency={currency}
-							/>
-						</Grid>
-						<Grid item xs={6} sm={4} lg={2}>
-							<SlpCard
-								label="Manager Total"
-								slp={calcTotal(data, 'manager_share')}
-								slpPrice={cryptoData['smooth-love-potion'][currency]}
-								currency={currency}
-							/>
-						</Grid>
-						<Grid item xs={6} sm={4} lg={2}>
-							<SlpCard
-								label="Scholar Total"
-								slp={calcTotal(data, 'scholar_share')}
-								slpPrice={cryptoData['smooth-love-potion'][currency]}
-								currency={currency}
-							/>
-						</Grid>
-					</Grid>
-					<Form
-						localData={localData}
-						onUpdate={handleLocalDataUpdate}
-						numScholars={addresses.length}
-					/>
-					{addresses.length !== 0 && (
-						<>
-							{isLoading ? (
-								<Box
-									sx={{
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										height: '200px',
-									}}
-								>
-									<CircularProgress />
-								</Box>
-							) : (
-								<>
-									<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-										<Typography color="text.secondary">Sort by</Typography>
-										<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-											<SortBySelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-											<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
-										</Box>
-									</Box>
-									<DataTable
-										data={data}
-										localData={localData}
-										localSettings={localSettings}
-										onDelete={handleLocalDataUpdate}
-										slpPrice={cryptoData['smooth-love-potion'][currency]}
-									/>
-									<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-										<Tooltip title="Download list of scholars in .json format">
-											<Button
-												sx={{ m: 1, minWidth: '200px' }}
-												onClick={() => {
-													handleJSONDownload(localData);
-												}}
-												startIcon={<DownloadIcon />}
-												variant="outlined"
-											>
-												Download list
-											</Button>
-										</Tooltip>
-										<Tooltip title="Upload list of scholars">
-											<label htmlFor="upload-button">
-												<Input
-													onChange={handleJSONUpload}
-													accept="application/JSON"
-													id="upload-button"
-													type="file"
-												/>
-												<Button
-													component="span"
-													startIcon={<UploadIcon />}
-													variant="outlined"
-													sx={{ m: 1, minWidth: '200px' }}
-												>
-													Upload List
-												</Button>
-											</label>
-										</Tooltip>
-										<CSVLink
-											filename={'scholars.csv'}
-											data={cleanData(sortedData)}
-											style={{ textDecoration: 'none' }}
-										>
-											<ExportCSVButton />
-										</CSVLink>
-									</Box>
-								</>
-							)}
-						</>
-					)}
-					{addresses.length === 0 && (
-						<Box
+						{/* <MaintenancePage />
+					</Route> */}
+						<CryptoBar data={cryptoData} currency={currency} />
+						<Alert sx={{ mb: 4 }} severity="info">
+							Only up to 100 scholars are supported at the moment.
+						</Alert>
+						<Grid
+							container
+							spacing={2}
 							sx={{
-								display: 'flex',
-								justifyContent: 'center',
-								alignItems: 'center',
-								flexDirection: 'column',
+								mb: 6,
 							}}
 						>
-							<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
-							<Typography sx={{ mb: 10 }} color="text.secondary">
-								No scholars added
-							</Typography>
-							<Tooltip title="Upload list of scholars">
-								<label htmlFor="upload-button">
-									<Input
-										onChange={handleJSONUpload}
-										accept="application/JSON"
-										id="upload-button"
-										type="file"
-									/>
-									<Button
-										onClick={null}
-										component="span"
-										startIcon={<UploadIcon />}
-										variant="outlined"
-										sx={{ m: 1 }}
-										disableElevation
+							<Grid item xs={6} sm={4} lg={2}>
+								<SlpCard
+									label="Total Daily Average"
+									slp={calcTotal(data, 'average_slp')}
+									slpPrice={cryptoData['smooth-love-potion'][currency]}
+									currency={currency}
+								/>
+							</Grid>
+							<Grid item xs={6} sm={4} lg={2}>
+								<SlpCard
+									label="Total Unclaimed"
+									slp={calcTotal(data, 'unclaimed_slp')}
+									slpPrice={cryptoData['smooth-love-potion'][currency]}
+									currency={currency}
+								/>
+							</Grid>
+							<Grid item xs={6} sm={4} lg={2}>
+								<SlpCard
+									label="Total Claimed"
+									slp={calcTotal(data, 'claimed_slp')}
+									slpPrice={cryptoData['smooth-love-potion'][currency]}
+									currency={currency}
+								/>
+							</Grid>
+							<Grid item xs={6} sm={4} lg={2}>
+								<SlpCard
+									label="Total Farmed"
+									slp={calcTotal(data, 'total_slp')}
+									slpPrice={cryptoData['smooth-love-potion'][currency]}
+									currency={currency}
+								/>
+							</Grid>
+							<Grid item xs={6} sm={4} lg={2}>
+								<SlpCard
+									label="Manager Total"
+									slp={calcTotal(data, 'manager_share')}
+									slpPrice={cryptoData['smooth-love-potion'][currency]}
+									currency={currency}
+								/>
+							</Grid>
+							<Grid item xs={6} sm={4} lg={2}>
+								<SlpCard
+									label="Scholar Total"
+									slp={calcTotal(data, 'scholar_share')}
+									slpPrice={cryptoData['smooth-love-potion'][currency]}
+									currency={currency}
+								/>
+							</Grid>
+						</Grid>
+						<Form
+							localData={localData}
+							onUpdate={handleLocalDataUpdate}
+							numScholars={addresses.length}
+						/>
+						{addresses.length !== 0 && (
+							<>
+								{isLoading ? (
+									<Box
+										sx={{
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center',
+											height: '200px',
+										}}
 									>
-										Upload list
-									</Button>
-								</label>
-							</Tooltip>
-						</Box>
-					)}
+										<CircularProgress />
+									</Box>
+								) : (
+									<>
+										<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+											<Typography color="text.secondary">Sort by</Typography>
+											<Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+												<SortBySelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+												<SortTypeSelect onUpdate={handleSortUpdate} localSettings={localSettings} />
+											</Box>
+										</Box>
+										<DataTable
+											data={data}
+											localData={localData}
+											localSettings={localSettings}
+											onDelete={handleLocalDataUpdate}
+											slpPrice={cryptoData['smooth-love-potion'][currency]}
+										/>
+										<Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+											<Tooltip title="Download list of scholars in .json format">
+												<Button
+													sx={{ m: 1, minWidth: '200px' }}
+													onClick={() => {
+														handleJSONDownload(localData);
+													}}
+													startIcon={<DownloadIcon />}
+													variant="outlined"
+												>
+													Download list
+												</Button>
+											</Tooltip>
+											<Tooltip title="Upload list of scholars">
+												<label htmlFor="upload-button">
+													<Input
+														onChange={handleJSONUpload}
+														accept="application/JSON"
+														id="upload-button"
+														type="file"
+													/>
+													<Button
+														component="span"
+														startIcon={<UploadIcon />}
+														variant="outlined"
+														sx={{ m: 1, minWidth: '200px' }}
+													>
+														Upload List
+													</Button>
+												</label>
+											</Tooltip>
+											<CSVLink
+												filename={'scholars.csv'}
+												data={cleanData(sortedData)}
+												style={{ textDecoration: 'none' }}
+											>
+												<ExportCSVButton />
+											</CSVLink>
+										</Box>
+									</>
+								)}
+							</>
+						)}
+						{addresses.length === 0 && (
+							<Box
+								sx={{
+									display: 'flex',
+									justifyContent: 'center',
+									alignItems: 'center',
+									flexDirection: 'column',
+								}}
+							>
+								<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
+								<Typography sx={{ mb: 10 }} color="text.secondary">
+									No scholars added
+								</Typography>
+								<Tooltip title="Upload list of scholars">
+									<label htmlFor="upload-button">
+										<Input
+											onChange={handleJSONUpload}
+											accept="application/JSON"
+											id="upload-button"
+											type="file"
+										/>
+										<Button
+											onClick={null}
+											component="span"
+											startIcon={<UploadIcon />}
+											variant="outlined"
+											sx={{ m: 1 }}
+											disableElevation
+										>
+											Upload list
+										</Button>
+									</label>
+								</Tooltip>
+							</Box>
+						)}
+					</Route>
 					<Route path="*">
 						<Redirect to="/" />
 					</Route>

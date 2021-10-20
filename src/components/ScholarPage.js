@@ -90,7 +90,7 @@ function ScholarPage(props) {
 	return (
 		<Box>
 			<Typography variant="h6" sx={{ mb: 4 }}>
-				Edit details for "{scholarName}"
+				Edit details of "{scholarName}"
 			</Typography>
 			<form onSubmit={formik.handleSubmit}>
 				<Grid container spacing={2} sx={{ mb: 6 }}>

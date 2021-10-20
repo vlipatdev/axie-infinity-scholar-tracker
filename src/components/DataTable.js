@@ -59,7 +59,7 @@ function DataTable(props) {
 
 	function renderDeleteButton(name) {
 		return (
-			<Tooltip title={`Remove ${name}`}>
+			<Tooltip title={`Delete ${name}`}>
 				<IconButton color="primary" size="small">
 					<DeleteIcon />
 				</IconButton>
@@ -77,7 +77,7 @@ function DataTable(props) {
 					},
 				}}
 			>
-				<Tooltip title={`Edit details for ${name}`}>
+				<Tooltip title={`Edit details of ${name}`}>
 					<IconButton color="primary" size="small">
 						<EditIcon />
 					</IconButton>

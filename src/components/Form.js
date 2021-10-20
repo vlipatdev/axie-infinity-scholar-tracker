@@ -56,7 +56,8 @@ function Form(props) {
 			if (numScholars >= 100) {
 				alert('Only 100 scholars are allowed at the moment.');
 			} else {
-				onUpdate([...localData, values], false);
+				const newValues = { ...values, manager_share: values.manager_share.toString() };
+				onUpdate([...localData, newValues], false);
 				setSnackbarOpen(true);
 				resetForm();
 			}
