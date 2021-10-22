@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+
+import { FromDeleteContext } from '../contexts/FromDeleteContext';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,6 +15,7 @@ function Form(props) {
 	const { localData, onUpdate, numScholars } = props;
 
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
+	const { setFromDelete } = useContext(FromDeleteContext);
 
 	const validationSchema = yup.object({
 		name: yup
@@ -57,7 +60,8 @@ function Form(props) {
 				alert('Only 100 scholars are allowed at the moment.');
 			} else {
 				const newValues = { ...values, manager_share: values.manager_share.toString() };
-				onUpdate([...localData, newValues], false);
+				setFromDelete(false);
+				onUpdate([...localData, newValues]);
 				setSnackbarOpen(true);
 				resetForm();
 			}

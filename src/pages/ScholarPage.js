@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+
+import { FromDeleteContext } from '../contexts/FromDeleteContext';
+import { LocalDataContext } from '../contexts/LocalDataContext';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -10,10 +13,11 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import SnackBar from './SnackBar';
+import SnackBar from '../components/SnackBar';
 
-function ScholarPage(props) {
-	const { localData, onUpdate } = props;
+function ScholarPage() {
+	const { setFromDelete } = useContext(FromDeleteContext);
+	const { localData, setLocalData } = useContext(LocalDataContext);
 
 	const [snackbarOpen, setSnackbarOpen] = useState(false);
 	const [profile, setProfile] = useState({
@@ -29,6 +33,7 @@ function ScholarPage(props) {
 		// redirect if scholar name does not exist
 		const scholarIndex = localData.findIndex((scholar) => scholar.name === scholarName);
 		if (localData.length > 0 && scholarIndex === -1) {
+			setFromDelete(false);
 			history.push('/');
 		}
 
@@ -73,9 +78,9 @@ function ScholarPage(props) {
 			manager_share: profile.manager_share,
 		},
 		validationSchema: validationSchema,
-		onSubmit: (values, { resetForm }) => {
+		onSubmit: async (values) => {
 			const newValues = { ...values, manager_share: values.manager_share.toString() };
-			onUpdate([...localData.filter((scholar) => scholar.name !== scholarName), newValues], false);
+			setLocalData([...localData.filter((scholar) => scholar.name !== scholarName), newValues]);
 			history.goBack();
 		},
 	});

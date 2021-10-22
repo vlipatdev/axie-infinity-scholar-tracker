@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { FromDeleteContext } from '../contexts/FromDeleteContext';
 
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
@@ -50,6 +53,8 @@ function createData(
 function DataTable(props) {
 	const { data, localData, onDelete, localSettings } = props;
 
+	const { setFromDelete } = useContext(FromDeleteContext);
+
 	let sortedData;
 	if (localSettings.sort_type === 'ascending') {
 		sortedData = sortArray(data, localSettings.sort_by);
@@ -87,10 +92,8 @@ function DataTable(props) {
 	}
 
 	function handleDelete(row) {
-		onDelete(
-			localData.filter((data) => data.ronin_address !== row.roninAddress),
-			true
-		);
+		setFromDelete(true);
+		onDelete(localData.filter((data) => data.ronin_address !== row.roninAddress));
 	}
 
 	function renderMarketplaceLink(name, roninAddress) {

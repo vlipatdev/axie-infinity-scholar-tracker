@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 
-import NavBar from './NavBar';
+import NavBar from '../components/NavBar';
 
 import axieLogo from '../images/axie_logo.png';
 import background from '../images/background.jpg';

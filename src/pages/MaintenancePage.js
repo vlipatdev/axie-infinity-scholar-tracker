@@ -16,7 +16,7 @@ function MaintenancePage() {
 			}}
 		>
 			<img src={axie} alt="axie" style={{ height: '150px', margin: '32px' }} />
-			<Typography sx={{ mb: 10 }} color="text.secondary">
+			<Typography sx={{ mb: 10, ml: 4, mr: 4, textAlign: 'center' }} color="text.secondary">
 				We're down for maintenance. We'll be back up shortly.
 			</Typography>
 		</Box>
