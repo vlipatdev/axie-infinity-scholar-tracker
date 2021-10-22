@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import axie from '../assets/images/axie.png';
+import axie from '../images/axie.png';
 
 function MaintenancePage() {
 	return (

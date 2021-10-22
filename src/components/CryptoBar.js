@@ -4,9 +4,9 @@ import Typography from '@mui/material/Typography';
 
 import { addCommaToNumber } from '../utils';
 
-import axsLogo from '../assets/images/axs_logo.png';
-import ethereumLogo from '../assets/images/ethereum_logo.png';
-import slpLogo from '../assets/images/slp_logo.png';
+import axsLogo from '../images/axs_logo.png';
+import ethereumLogo from '../images/ethereum_logo.png';
+import slpLogo from '../images/slp_logo.png';
 
 import theme from '../theme';
 

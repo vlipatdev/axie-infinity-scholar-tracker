@@ -4,7 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-import slpLogo from '../assets/images/slp_logo.png';
+import slpLogo from '../images/slp_logo.png';
 
 import { addCommaToNumber } from '../utils';
 

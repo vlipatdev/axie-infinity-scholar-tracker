@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 
 import NavBar from './NavBar';
 
-import axieLogo from '../assets/images/axie_logo.png';
-import background from '../assets/images/background.jpg';
+import axieLogo from '../images/axie_logo.png';
+import background from '../images/background.jpg';
 
 import theme from '../theme';
 

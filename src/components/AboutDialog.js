@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
 
-import profile from '../assets/images/profile.jpg';
+import profile from '../images/profile.jpg';
 
 import theme from '../theme';
 

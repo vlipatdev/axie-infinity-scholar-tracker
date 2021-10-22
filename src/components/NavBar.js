@@ -15,7 +15,7 @@ import AboutDialog from './AboutDialog';
 
 import theme from '../theme';
 
-import axsLogo from '../assets/images/axs_logo.png';
+import axsLogo from '../images/axs_logo.png';
 
 function NavBar() {
 	const [open, setOpen] = useState(false);
